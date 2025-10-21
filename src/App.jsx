@@ -10,7 +10,7 @@ function App() {
     <>
 
       <div>
-        <h2>Welcome to PetStar!</h2>
+        <h2>Welcome to starpet!</h2>
       </div>
 
       <div>

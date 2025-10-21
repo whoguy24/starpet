@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /Users/whoguy/Library/CloudStorage/Dropbox/OBSS/Projects/PetStar/App
+cd /Users/whoguy/Library/CloudStorage/Dropbox/OBSS/Projects/StarPet/App
 
 ProcessID=$(lsof -ti:5173)
 if [ -n "$ProcessID" ]; then
