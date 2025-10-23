@@ -48,9 +48,6 @@ function LoginForm() {
 
     return (
         <>
-            {/* Title */}
-            <h2>Welcome to StarPet</h2>
-
             {/* Web Form */}
             <form className={styles.loginForm} onSubmit={handleLogin}>
 

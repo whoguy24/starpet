@@ -1,8 +1,8 @@
 // Import Modules
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./auth/ProtectedRoute";
-import Landing from "./pages/LandingTest";
-import Login from "./pages/LoginTest";
+import Landing from "./pages/Landing";
+import UserLogin from "./pages/UserLogin";
 
 // Import CSS
 import './App.css'
@@ -13,7 +13,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<UserLogin />} />
           <Route path="/" element={
             <ProtectedRoute>
               <Landing /> 

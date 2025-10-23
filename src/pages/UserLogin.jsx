@@ -2,7 +2,7 @@
 import LoginForm from "../auth/LoginForm.jsx";
 
 // Component Function
-const Login = () => {
+function UserLogin() {
   return (
     <>
       <h2>Welcome to StarPet</h2>
@@ -11,4 +11,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default UserLogin;
