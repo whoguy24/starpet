@@ -1,6 +1,3 @@
-import React from "react";
-import { Link } from "react-router-dom"; // if using React Router
-
 const Landing = () => {
   return (
     <div>
