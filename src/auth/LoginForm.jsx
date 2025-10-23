@@ -139,7 +139,7 @@ function LoginForm() {
 }
 
 // Export
-export default LoginForm
+export default LoginForm;
 
 
 
