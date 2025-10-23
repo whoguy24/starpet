@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import dumbDog from './assets/golden-retriever-tongue-out.jpg'
+import dumbDog from './assets/images/golden-retriever-tongue-out.jpg'
 import './App.css'
 
 function App() {
