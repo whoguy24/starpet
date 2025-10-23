@@ -1,10 +1,6 @@
 // Import Modules
 import { useState } from "react";
-import { auth } from "../firebase";
-import { signOut } from "firebase/auth";
-
-// Import Scripts
-import loginUser from "../scripts/loginUser.js";
+import { useAuth } from "../auth/AuthProvider";
 
 //Import CSS
 import styles from "./LoginForm.module.css";
@@ -12,41 +8,46 @@ import styles from "./LoginForm.module.css";
 // Component Function
 function LoginForm() {
 
+    // Define User State from AuthProvider
+    const { user, login, logOut } = useAuth();
+
+    // Define Local State
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
 
+    // Log In Button Handler
     const handleLogin = async (e) => {
         e.preventDefault();
-        setError("");
         try {
-            await loginUser(email, password);
+            const userCredential = await login(email, password);
+            console.log(`Logged in successfully: ${userCredential.user.email}`)
         } catch (err) {
-            setError(err.message);
+            console.log("There was an issue.", err)
         }
     };
 
-    function checkLogin() {
-        const user = auth.currentUser;
-        if (user) {
-            console.log(`${user.email} is logged in.`);
-        } else {
-            console.log("No user is logged in.");
+    // Check Authentication Status Button Handler
+    const handleStatus = () => {
+        if (user?.email) {
+            console.log("Current username:", user.email);
         }
-    }
+        else {
+            console.log("No users are logged in.");
+        }
+    };
 
-    const logOut = async () => {
-    try {
-        await signOut(auth);
+    // Log User Out Button Handler
+    const handleLogout = async () => {
+        try {
+           await logOut();
             console.log("User logged out successfully.");
-        } catch (error) {
-            console.error("Error logging out:", error);
+        } catch (err) {
+            console.error("Logout failed:", err);
         }
     };
 
     return (
         <>
-        
             {/* Title */}
             <h2>Welcome to StarPet</h2>
 
@@ -84,20 +85,19 @@ function LoginForm() {
 
                 {/* (Authentication) Status Button */}
                 <div>
-                    <button onClick={checkLogin}>
+                    <button type="button" onClick={handleStatus}>
                         Status
                     </button>
                 </div>
 
                 {/* Log Out Button */}
                 <div>
-                    <button onClick={logOut}>
+                    <button type="button" onClick={handleLogout}>
                         Log Out
                     </button>
                 </div>
 
             </form>
-            
         </>
     )
 
