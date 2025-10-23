@@ -5,6 +5,7 @@ import LoginForm from "../auth/LoginForm.jsx";
 const Login = () => {
   return (
     <>
+      <h2>Welcome to StarPet</h2>
       <LoginForm/>
     </>
   );

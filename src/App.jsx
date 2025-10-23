@@ -1,13 +1,11 @@
 // Import Modules
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./auth/ProtectedRoute";
-import Landing from "./pages/landing";
-import Login from "./pages/login";
+import Landing from "./pages/Landing";
+import Login from "./pages/Login";
 
 // Import CSS
 import './App.css'
-
-// Test Commit
 
 // Component Function
 function App() {
