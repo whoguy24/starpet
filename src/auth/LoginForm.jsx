@@ -50,6 +50,8 @@ function LoginForm() {
         try {
            await logOut();
             setMessage("User logged out successfully.");
+            setEmail("");
+            setPassword("");
             console.log(message);
         } catch (err) {
             setMessage("Log out failed.");
@@ -64,7 +66,7 @@ function LoginForm() {
 
     return (
         <>
-        
+
             {/* Web Form */}
             <form className={styles.loginForm} onSubmit={handleLogin}>
 
