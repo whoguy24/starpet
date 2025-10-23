@@ -1,6 +1,7 @@
 // Import Modules
 import { useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 //Import CSS
 import styles from "./LoginForm.module.css";
@@ -8,12 +9,16 @@ import styles from "./LoginForm.module.css";
 // Component Function
 function LoginForm() {
 
+    // Define React Router Functions
+    const navigate = useNavigate();
+
     // Define User State from AuthProvider
     const { user, login, logOut } = useAuth();
 
     // Define Local State
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [message, setMessage] = useState(user?.email ? `Currently logged in as: ${user.email}` : "" );
 
     // Log In Button Handler
     const handleLogin = async (e) => {
@@ -21,18 +26,22 @@ function LoginForm() {
         try {
             const userCredential = await login(email, password);
             console.log(`Logged in successfully: ${userCredential.user.email}`)
+            navigate("/");
         } catch (err) {
-            console.log("There was an issue.", err)
+            setMessage("Log in Failed.");
+            console.log(message, err);
         }
     };
 
     // Check Authentication Status Button Handler
     const handleStatus = () => {
         if (user?.email) {
-            console.log("Current username:", user.email);
+            setMessage(`Currently logged in as: ${user.email}`);
+            console.log(message);
         }
         else {
-            console.log("No users are logged in.");
+            setMessage("No users are logged in.");
+            console.log(message);
         }
     };
 
@@ -40,14 +49,22 @@ function LoginForm() {
     const handleLogout = async () => {
         try {
            await logOut();
-            console.log("User logged out successfully.");
+            setMessage("User logged out successfully.");
+            console.log(message);
         } catch (err) {
-            console.error("Logout failed:", err);
+            setMessage("Log out failed.");
+            console.error(message, err);
         }
     };
 
+    // Log User Out Button Handler
+    function handleNavigateToHome() {
+        navigate("/");
+    }
+
     return (
         <>
+        
             {/* Web Form */}
             <form className={styles.loginForm} onSubmit={handleLogin}>
 
@@ -87,11 +104,30 @@ function LoginForm() {
                     </button>
                 </div>
 
-                {/* Log Out Button */}
+                {/* Only Show if Logged In */}
+                { user &&
+                    <>
+
+                        {/* Log Out Button */}
+                        <div>
+                            <button type="button" onClick={handleLogout}>
+                                Log Out
+                            </button>
+                        </div>
+
+                        {/* Go to Home Page Button */}
+                        <div>
+                            <button type="button" onClick={handleNavigateToHome}>
+                                Home Page
+                            </button>
+                        </div>
+
+                    </>
+                }
+
+                {/* Authentication Status Message */}
                 <div>
-                    <button type="button" onClick={handleLogout}>
-                        Log Out
-                    </button>
+                    <p>{message}</p>
                 </div>
 
             </form>
