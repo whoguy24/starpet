@@ -1,0 +1,5 @@
+.registrationForm {
+    display: grid;
+    grid-template-rows: 1fr;
+    gap: 1rem;  
+}

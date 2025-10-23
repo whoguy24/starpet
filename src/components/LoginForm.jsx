@@ -60,8 +60,8 @@ function LoginForm() {
     };
 
     // Log User Out Button Handler
-    function handleNavigateToHome() {
-        navigate("/");
+    function handleNavigate(path) {
+        navigate(path);
     }
 
     return (
@@ -119,7 +119,7 @@ function LoginForm() {
 
                         {/* Go to Home Page Button */}
                         <div>
-                            <button type="button" onClick={handleNavigateToHome}>
+                            <button type="button" onClick={()=>(handleNavigate("/"))}>
                                 Home Page
                             </button>
                         </div>
@@ -127,12 +127,20 @@ function LoginForm() {
                     </>
                 }
 
+                {/* Go to Registration Button */}
+                <div>
+                    <button type="button" onClick={()=>(handleNavigate("/register"))}>
+                        Register
+                    </button>
+                </div>
+
                 {/* Authentication Status Message */}
                 <div>
                     <p>{message}</p>
                 </div>
 
             </form>
+            
         </>
     )
 

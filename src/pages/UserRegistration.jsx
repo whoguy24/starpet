@@ -1,5 +1,5 @@
 // Import Modules
-import RegistrationForm from "../auth/RegistrationForm.jsx";
+import RegistrationForm from "../components/RegistrationForm";
 
 // Component Function
 function UserRegistration() {
