@@ -1,35 +1,25 @@
-import { useState } from 'react'
-import dumbDog from './assets/images/golden-retriever-tongue-out.jpg'
+// Import Modules
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Landing from "./pages/landing.jsx";
+
+// Import CSS
 import './App.css'
 
+// Component Function
 function App() {
-
-  var [broke, setBroke] = useState(0)
 
   return (
     <>
 
-      <div>
-        <h2>Welcome to starpet!</h2>
-      </div>
-
-      <div>
-        <img src={dumbDog} className="logo" alt="Vite logo" />
-      </div>
-
-      <div>
-        <button onClick={ () => setBroke(1) }>Make the Silly Dog Jump!</button>
-      </div>
-
-      { broke == 1 && 
-        <div>
-          <p>You broke it.</p>
-          <p>Good going, Stupid.</p>
-        </div>
-      }
+      <Router>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+        </Routes>
+      </Router>
 
     </>
   )
 }
 
+// Export Component
 export default App
