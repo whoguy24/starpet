@@ -1,8 +1,8 @@
 // Import Modules
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./auth/ProtectedRoute";
-import Landing from "./pages/Landing";
-import Login from "./pages/Login";
+import Landing from "./pages/LandingTest";
+import Login from "./pages/LoginTest";
 
 // Import CSS
 import './App.css'
