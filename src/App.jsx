@@ -1,6 +1,7 @@
 // Import Modules
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Landing from "./pages/landing.jsx";
+import Landing from "./pages/landing";
+import Login from "./pages/login";
 
 // Import CSS
 import './App.css'
@@ -13,7 +14,8 @@ function App() {
 
       <Router>
         <Routes>
-          <Route path="/" element={<Landing />} />
+          <Route path="/" element={<Landing /> } />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
 
@@ -21,5 +23,5 @@ function App() {
   )
 }
 
-// Export Component
+// Export
 export default App
