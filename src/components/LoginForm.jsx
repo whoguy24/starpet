@@ -1,7 +1,7 @@
 // Import Modules
 import { useState, useEffect } from "react";
 import { useAuth } from "../auth/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 //Import CSS
 import styles from "./LoginForm.module.css";
@@ -94,6 +94,10 @@ function LoginForm() {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
+                </div>
+
+                <div>
+                    <Link to="/" className={styles.forgotPasswordLink}>Forgot your Password?</Link>
                 </div>
 
                 {/* Log In Button */}

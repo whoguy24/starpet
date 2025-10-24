@@ -1,7 +1,7 @@
 // Import Modules
 import { useState, useEffect } from "react";
 import { useAuth } from "../auth/AuthProvider";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //Import CSS
 import styles from "./RegistrationForm.module.css";
