@@ -1,7 +1,7 @@
 // Import Modules
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../auth/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 //Import CSS
 import styles from "./RegistrationForm.module.css";
@@ -11,22 +11,37 @@ function RegistrationForm() {
 
     // Define React Router Functions
     const navigate = useNavigate();
+    const auth = useAuth();
 
     // Define User State from AuthProvider
-    const { user, login } = useAuth();
+    const { register } = useAuth();
 
     // Define Local State
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
     const [registerPasswordConfirm, setRegisterPasswordConfirm] = useState("");
+    const [message, setMessage] = useState("");
 
-    function handleRegister() {
-        console.log("Yay");
-        navigate("/");
+    // Add Event Listener for Message
+    // We do this so console.log doesn't fire before the async function resolves.
+    useEffect(() => {
+        if (message) console.log(message);
+    }, [message]);
+
+    const handleRegister = async () => {
+        try {
+            const newUser = await register(registerEmail, registerPassword);
+            setRegisterEmail("");
+            setRegisterPassword("");
+            setRegisterPasswordConfirm("");
+            setMessage(`Registered User: ${newUser.user.email}`);
+        } catch (err) {
+            setMessage("New User Registration Failed.");
+        };
     };
 
     function handleNavigate(path) {
-        navigate(path);
+        navigate(path)
     };
 
     return (
@@ -70,7 +85,7 @@ function RegistrationForm() {
 
                 {/* Register Button */}
                 <div>
-                    <button type="submit" onClick={handleRegister} >
+                    <button type="button" onClick={handleRegister} >
                         Register
                     </button>
                 </div>
@@ -83,6 +98,12 @@ function RegistrationForm() {
                 </div>
 
             </form>
+
+            {/* Authentication Status Message */}
+            <div>
+                <p>{message}</p>
+            </div>
+
         </>
     );
 
@@ -90,6 +111,3 @@ function RegistrationForm() {
 
 // Export
 export default RegistrationForm;
-
-
-
