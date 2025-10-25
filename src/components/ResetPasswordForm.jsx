@@ -1,54 +1,78 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../auth/AuthProvider";
+import { Link } from "react-router-dom";
 
 //Import CSS
-import styles from "./RegistrationForm.module.css";
+import styles from "./ResetPasswordForm.module.css";
 
 export default function ResetPassword() {
 
+  // Define Local State
   const [resetEmail, setResetEmail] = useState("");
   const [message, setMessage] = useState("");
 
-    // Define User State from AuthProvider
-    const { resetPassword } = useAuth();
+  // Define User State from AuthProvider
+  const { resetPassword } = useAuth();
 
-    const handleResetPassword = async (e) => {
-        e.preventDefault();
-        console.log("Hi")
-        try {
-            await resetPassword( resetEmail );
-            console.log("Success")
-        } catch (err) {
-            console.log("Failure")
-        };
+  // Add Event Listener for Message
+  // We do this so console.log doesn't fire before the async function resolves.
+  useEffect(() => {
+    if (message) ;
+  }, [message]);
+
+  // Reset Password Button Handler
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    try {
+      await resetPassword( resetEmail );
+      setMessage(`Reset password email was sent to ${resetEmail}. (Please check your spam folder)`)
+    } catch (err) {
+      setMessage("There was a problem resetting password:", err)
     };
+  };
 
-    // Add Event Listener for Message
-    // We do this so console.log doesn't fire before the async function resolves.
-    useEffect(() => {
-        if (message) console.log(message);
-    }, [message]);
-
+    // Render DOM
   return (
+
     <div>
+
+      {/* Web Form */}
       <form className={styles.resetPasswordForm} onSubmit={handleResetPassword}>
 
+        {/* Reset Email Field */}
         <div>
-            <input
-            type="email"
-            placeholder="Enter your email"
-            value={resetEmail}
-            onChange={(e) => setResetEmail(e.target.value)}
-            required
-            />
+          <input
+          type="email"
+          placeholder="Enter your email"
+          value={resetEmail}
+          onChange={(e) => setResetEmail(e.target.value)}
+          required
+          />
         </div>
 
+        {/* Reset Button */}
         <div>
-            <button type="submit">Send Reset Link</button>
+          <button type="button">Send Reset Link</button>
         </div>
 
       </form>
-      {message && <p>{message}</p>}
+
+      <div>
+
+        {/* Status Message */}
+        {message && <p>{message}</p>}
+
+      </div>
+
+      <div>
+
+        {/* Back to Login Link */}
+        <Link className={styles.backToLogin} to="/login">Back to Login</Link>
+
+      </div> 
+
+
     </div>
+
   );
 }

@@ -97,7 +97,7 @@ function LoginForm() {
                 </div>
 
                 <div>
-                    <Link to="/" className={styles.forgotPasswordLink}>Forgot your Password?</Link>
+                    <Link to="/forgot_password" className={styles.forgotPasswordLink}>Forgot your Password?</Link>
                 </div>
 
                 {/* Log In Button */}

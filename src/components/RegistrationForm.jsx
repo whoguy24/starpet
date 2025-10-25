@@ -28,6 +28,7 @@ function RegistrationForm() {
         if (message) console.log(message);
     }, [message]);
 
+    // Register Button Handler
     const handleRegister = async () => {
         try {
             const newUser = await register(registerEmail, registerPassword);
@@ -40,6 +41,7 @@ function RegistrationForm() {
         };
     };
 
+    // Navigation Handler
     function handleNavigate(path) {
         navigate(path)
     };
@@ -109,5 +111,5 @@ function RegistrationForm() {
 
 };
 
-// Export
+// Export Component
 export default RegistrationForm;
