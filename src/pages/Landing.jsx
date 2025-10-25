@@ -16,17 +16,6 @@ function Landing() {
     navigate("/login");
   }
 
-  // Redux Variables
-  const dispatch = useDispatch();
-
-  // Redux Store Variables
-  const users = useSelector(store => store.user);
-
-  // Fetch Users
-  useEffect(() => {
-    dispatch({ type: "FETCH_USERS" });
-  }, [dispatch]);
-
   // Render DOM
   return (
     <div>
