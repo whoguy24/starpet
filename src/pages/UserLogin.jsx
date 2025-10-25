@@ -1,5 +1,5 @@
 // Import Modules
-import LoginForm from "../auth/LoginForm.jsx";
+import LoginForm from "../components/LoginForm";
 
 // Component Function
 function UserLogin() {

@@ -1,7 +1,7 @@
 // Import Modules
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../auth/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 //Import CSS
 import styles from "./LoginForm.module.css";
@@ -20,16 +20,22 @@ function LoginForm() {
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState(user?.email ? `Currently logged in as: ${user.email}` : "" );
 
+    // Add Event Listener for Message
+    // We do this so console.log doesn't fire before the async function resolves.
+    useEffect(() => {
+        if (message) console.log(message);
+    }, [message]);
+
     // Log In Button Handler
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
             const userCredential = await login(email, password);
-            console.log(`Logged in successfully: ${userCredential.user.email}`)
+            setMessage(`Logged in successfully: ${userCredential.user.email}`);
             navigate("/");
         } catch (err) {
             setMessage("Log in Failed.");
-            console.log(message, err);
+            console.log(err);
         }
     };
 
@@ -37,11 +43,9 @@ function LoginForm() {
     const handleStatus = () => {
         if (user?.email) {
             setMessage(`Currently logged in as: ${user.email}`);
-            console.log(message);
         }
         else {
             setMessage("No users are logged in.");
-            console.log(message);
         }
     };
 
@@ -52,18 +56,18 @@ function LoginForm() {
             setMessage("User logged out successfully.");
             setEmail("");
             setPassword("");
-            console.log(message);
         } catch (err) {
             setMessage("Log out failed.");
-            console.error(message, err);
+            console.log(err);
         }
     };
 
     // Log User Out Button Handler
-    function handleNavigateToHome() {
-        navigate("/");
+    function handleNavigate(path) {
+        navigate(path);
     }
 
+    // Render DOM
     return (
         <>
 
@@ -90,6 +94,10 @@ function LoginForm() {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
+                </div>
+
+                <div>
+                    <Link to="/forgot_password" className={styles.forgotPasswordLink}>Forgot your Password?</Link>
                 </div>
 
                 {/* Log In Button */}
@@ -119,7 +127,7 @@ function LoginForm() {
 
                         {/* Go to Home Page Button */}
                         <div>
-                            <button type="button" onClick={handleNavigateToHome}>
+                            <button type="button" onClick={()=>(handleNavigate("/"))}>
                                 Home Page
                             </button>
                         </div>
@@ -127,19 +135,27 @@ function LoginForm() {
                     </>
                 }
 
+                {/* Go to Registration Button */}
+                <div>
+                    <button type="button" onClick={()=>(handleNavigate("/register"))}>
+                        Register
+                    </button>
+                </div>
+
                 {/* Authentication Status Message */}
                 <div>
                     <p>{message}</p>
                 </div>
 
             </form>
+            
         </>
     )
 
 }
 
 // Export
-export default LoginForm
+export default LoginForm;
 
 
 

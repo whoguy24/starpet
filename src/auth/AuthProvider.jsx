@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
-import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "firebase/auth";
 
 // Create Auth Context
 const Auth = createContext();
@@ -26,6 +26,17 @@ export function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
+  // Register function
+  const register = async (email, password) => {
+      try {
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          await signOut(auth);
+          return userCredential;
+      } catch (error) {
+          throw error;
+      }
+  };
+
   // Login function
   const login = async (email, password) => {
     try {
@@ -44,8 +55,17 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // Reset Password function
+  const resetPassword = async (email) => {
+      try {
+        await sendPasswordResetEmail(auth, email);
+      } catch (error) {
+        console.log(error)
+      }
+  };
+
   return (
-    <Auth.Provider value={{ user, login, logOut }}>
+    <Auth.Provider value={{ user, login, logOut, register, resetPassword }}>
       {!loading && children}
     </Auth.Provider>
   );
