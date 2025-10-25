@@ -7,6 +7,7 @@ import Landing from "./pages/Landing";
 import UserLogin from "./pages/UserLogin";
 import UserRegistration from "./pages/UserRegistration";
 import UserResetPassword from "./pages/UserResetPassword";
+import { useAuth } from "./auth/AuthProvider";
 
 // Import CSS
 import './App.css'
@@ -14,16 +15,19 @@ import './App.css'
 // Component Function
 function App() {
 
-    // Redux Variables
-    const dispatch = useDispatch();
+  // Redux Variables
+  const dispatch = useDispatch();
 
-    // Redux Store Variables
-    const users = useSelector(store => store.user);
+  // Redux Store Variables
+  const users = useSelector(store => store.users);
 
-    // Fetch Users
-    useEffect(() => {
+  const { user, loading } = useAuth();
+
+  useEffect(() => {
+    if (!loading) {
       dispatch({ type: "FETCH_USERS" });
-    }, [dispatch]);
+    }
+  }, [dispatch, loading]);
 
   // Render DOM
   return (

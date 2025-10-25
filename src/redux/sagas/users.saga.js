@@ -1,15 +1,22 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 
 // import { select } from 'redux-saga/effects';
 // import { serverStore } from '../reducers/server.reducer.js'
 
 // Define template payload for testing purposes
-const response = [];
+
+import { firestoreFetchUsers } from '../../firebase/firestore';
 
 function* fetchUsers(action) {
+
     try {
-        yield put({ type: 'LOAD_USERS', payload: response });
-        console.log("TODO: Fetch Users");
+
+        const users = yield call(firestoreFetchUsers);
+
+
+        yield put({ type: 'LOAD_USERS', payload: users });
+
+
     } catch(err) {
         console.error('ERROR:', err)
     }
