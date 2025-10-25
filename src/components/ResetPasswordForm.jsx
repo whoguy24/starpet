@@ -52,7 +52,7 @@ export default function ResetPassword() {
 
         {/* Reset Button */}
         <div>
-          <button type="button">Send Reset Link</button>
+          <button type="form">Send Reset Link</button>
         </div>
 
       </form>
