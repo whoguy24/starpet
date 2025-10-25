@@ -11,11 +11,15 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.9.2",
     "firebase": "^12.4.0",
     "node": "^22.21.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.9.4"
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.9.4",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^1.4.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",

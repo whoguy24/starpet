@@ -1,5 +1,7 @@
 // Import Modules
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import Landing from "./pages/Landing";
 import UserLogin from "./pages/UserLogin";
@@ -11,6 +13,19 @@ import './App.css'
 
 // Component Function
 function App() {
+
+    // Redux Variables
+    const dispatch = useDispatch();
+
+    // Redux Store Variables
+    const users = useSelector(store => store.user);
+
+    // Fetch Users
+    useEffect(() => {
+      dispatch({ type: "FETCH_USERS" });
+    }, [dispatch]);
+
+  // Render DOM
   return (
     <>
       <Router>
@@ -27,7 +42,8 @@ function App() {
       </Router>
     </>
   )
+
 }
 
-// Export
+// Export Component Function
 export default App
