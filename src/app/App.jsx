@@ -24,14 +24,15 @@ function App() {
 
   const { user, loading } = useAuth();
 
+  // Print Configuration Log to Console
+  // (VITE_VERBOSE_LOG = true/false) in src/.env
   useEffect(() => {
-    console.log(`Welcome to StarPet! 
-    App Name: ${config.app_name}
-    `);
-
-
+    if (config.app_verbose_log === 'true') {
+      console.log(config.log())
+    }
   }, []);
 
+  // Fetch Firestore Collections
   useEffect(() => {
     if (!loading) {
       dispatch({ type: "FETCH_USERS" });
