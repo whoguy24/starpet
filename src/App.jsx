@@ -1,16 +1,35 @@
 // Import Modules
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import Landing from "./pages/Landing";
 import UserLogin from "./pages/UserLogin";
 import UserRegistration from "./pages/UserRegistration";
 import UserResetPassword from "./pages/UserResetPassword";
+import { useAuth } from "./auth/AuthProvider";
 
 // Import CSS
 import './App.css'
 
 // Component Function
 function App() {
+
+  // Redux Variables
+  const dispatch = useDispatch();
+
+  // Redux Store Variables
+  const users = useSelector(store => store.users);
+
+  const { user, loading } = useAuth();
+
+  useEffect(() => {
+    if (!loading) {
+      dispatch({ type: "FETCH_USERS" });
+    }
+  }, [dispatch, loading]);
+
+  // Render DOM
   return (
     <>
       <Router>
@@ -27,7 +46,8 @@ function App() {
       </Router>
     </>
   )
+
 }
 
-// Export
+// Export Component Function
 export default App
