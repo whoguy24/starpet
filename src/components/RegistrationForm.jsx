@@ -22,12 +22,6 @@ function RegistrationForm() {
     const [registerPasswordConfirm, setRegisterPasswordConfirm] = useState("");
     const [message, setMessage] = useState("");
 
-    // Add Event Listener for Message
-    // We do this so console.log doesn't fire before the async function resolves.
-    useEffect(() => {
-        if (message) console.log(message);
-    }, [message]);
-
     // Register Button Handler
     const handleRegister = async () => {
         try {

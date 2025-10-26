@@ -1,5 +1,5 @@
 // Import Modules
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -18,13 +18,7 @@ function LoginForm() {
     // Define Local State
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [message, setMessage] = useState(user?.email ? `Currently logged in as: ${user.email}` : "" );
-
-    // Add Event Listener for Message
-    // We do this so console.log doesn't fire before the async function resolves.
-    useEffect(() => {
-        if (message) console.log(message);
-    }, [message]);
+    const [message, setMessage] = useState("");
 
     // Log In Button Handler
     const handleLogin = async (e) => {

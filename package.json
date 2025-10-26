@@ -1,8 +1,11 @@
 {
   "name": "starpet",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "description":"CRM App for Tracking and Coordinating Animal Actors",
+  "author_name":"Warren O'Brien",
+  "author_email":"whoguy24@gmail.com",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

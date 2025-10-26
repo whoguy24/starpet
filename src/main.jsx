@@ -5,7 +5,7 @@ import { AuthProvider } from "./auth/AuthProvider";
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import './index.css'
-import App from './App.jsx'
+import App from './app/App.jsx'
 
 // Render Core Application to DOM
 createRoot(document.getElementById('root')).render(

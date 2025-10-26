@@ -2,12 +2,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import ProtectedRoute from "./auth/ProtectedRoute";
-import Landing from "./pages/Landing";
-import UserLogin from "./pages/UserLogin";
-import UserRegistration from "./pages/UserRegistration";
-import UserResetPassword from "./pages/UserResetPassword";
-import { useAuth } from "./auth/AuthProvider";
+import ProtectedRoute from "../auth/ProtectedRoute";
+import Landing from "../pages/Landing";
+import UserLogin from "../pages/UserLogin";
+import UserRegistration from "../pages/UserRegistration";
+import UserResetPassword from "../pages/UserResetPassword";
+import { useAuth } from "../auth/AuthProvider";
+import config from "./config";
 
 // Import CSS
 import './App.css'
@@ -22,6 +23,14 @@ function App() {
   const users = useSelector(store => store.users);
 
   const { user, loading } = useAuth();
+
+  useEffect(() => {
+    console.log(`Welcome to StarPet! 
+    App Name: ${config.app_name}
+    `);
+
+
+  }, []);
 
   useEffect(() => {
     if (!loading) {

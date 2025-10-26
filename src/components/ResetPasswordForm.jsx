@@ -14,12 +14,6 @@ export default function ResetPassword() {
   // Define User State from AuthProvider
   const { resetPassword } = useAuth();
 
-  // Add Event Listener for Message
-  // We do this so console.log doesn't fire before the async function resolves.
-  useEffect(() => {
-    if (message) ;
-  }, [message]);
-
   // Reset Password Button Handler
   const handleResetPassword = async (e) => {
     e.preventDefault();
