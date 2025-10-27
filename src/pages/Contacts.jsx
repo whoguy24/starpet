@@ -2,6 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { listenToContacts } from "../firebase/contacts";
+import styles from "./Contacts.module.css";
 
 // Component Function
 function Contacts() {
@@ -45,9 +46,9 @@ function Contacts() {
 
     // Render DOM
     return (
-        <div>
+        <div className={styles.contactsContainer}>
 
-            <form onSubmit={handleCreateContact}>
+            <form onSubmit={handleCreateContact} className={styles.newContactForm}>
                 <input
                     placeholder="First Name"
                     value={firstName}
@@ -68,18 +69,17 @@ function Contacts() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                 />
-                <button type="submit" onClick={handleCreateContact}>Add</button>
+                <button type="submit" onClick={handleCreateContact}>Add Contact</button>
             </form>
 
-
-
-            <table border="1" cellPadding="8" cellSpacing="0">
+            <table border="1" cellPadding="8" cellSpacing="0" className={styles.contactsTable}>
                 <thead>
                     <tr>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Phone</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -90,6 +90,7 @@ function Contacts() {
                                 <td>{contact.last_name}</td>
                                 <td>{contact.email}</td>
                                 <td>{contact.phone}</td>
+                                <td>Del</td>
                             </tr>
                         ))
                     }
