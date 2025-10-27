@@ -25,10 +25,12 @@ function NavigationBar() {
                     </div>
                 }
 
-                <div className={styles.navigationMenuAccount}>
-                    <Link to="/login" className={styles.navigationLink}>Log In</Link>
-                    <Link to="/register" className={styles.navigationLink}>Register</Link>
-                </div>
+                { !user && 
+                    <div className={styles.navigationMenuAccount}>
+                        <Link to="/login" className={styles.navigationLink}>Log In</Link>
+                        <Link to="/register" className={styles.navigationLink}>Register</Link>
+                    </div>
+                }
 
             </div>
 
