@@ -1,6 +1,6 @@
 // Import Modules
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { firestoreFetchUsers } from '../../firebase/firestore';
+import { firestoreFetchUsers, firestoreCreateUser } from '../../firebase/users';
 
 // Fetch Users Collection Request
 function* fetchUsers(action) {
@@ -12,9 +12,35 @@ function* fetchUsers(action) {
   };
 };
 
+// Create User Request
+function* createUser(action) {
+  try {
+
+    const object = action.payload;
+
+    const user = { email: object.email };
+    const contact = { first_name: object.first_name, last_name: object.last_name };
+
+    console.log(user, contact);
+
+    yield call(firestoreCreateUser, user, contact);
+
+
+
+
+
+
+
+
+  } catch (error) {
+    console.error("Error creating user document:", error);
+  }
+}
+
 // Combine Saga Functions
 function* usersSaga() {
   yield takeLatest('FETCH_USERS', fetchUsers);
+  yield takeLatest('CREATE_USER', createUser);
 };
 
 // Export Module

@@ -1,6 +1,7 @@
 // Import Modules
 import { useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
+import { useDispatch } from "react-redux";
 
 //Import CSS
 import styles from "./RegistrationForm.module.css";
@@ -11,7 +12,12 @@ function RegistrationForm() {
     // Define User State from AuthProvider
     const { register } = useAuth();
 
+    // Redux Variables
+    const dispatch = useDispatch();
+
     // Define Local State
+    const [registerFirstName, setRegisterFirstName] = useState("");
+    const [registerLastName, setRegisterLastName] = useState("");
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
     const [registerPasswordConfirm, setRegisterPasswordConfirm] = useState("");
@@ -20,7 +26,17 @@ function RegistrationForm() {
     // Register Button Handler
     const handleRegister = async () => {
         try {
-            const newUser = await register(registerEmail, registerPassword);
+
+            // Register Authentication
+            // const newUser = await register( registerEmail, registerPassword );
+
+            // Create User Record in Firestore
+            dispatch({ type: "CREATE_USER", 
+                payload: { email: registerEmail, first_name: registerFirstName, last_name: registerLastName } 
+            });
+
+            setRegisterFirstName("");
+            setRegisterLastName("");
             setRegisterEmail("");
             setRegisterPassword("");
             setRegisterPasswordConfirm("");
@@ -36,7 +52,29 @@ function RegistrationForm() {
             {/* Web Form */}
             <form className={styles.registrationForm} onSubmit={handleRegister}>
 
-                {/* Email Field */}
+                {/* First Name */}
+                <div>
+                    <input
+                        type="first_name"
+                        placeholder="First Name"
+                        value={registerFirstName}
+                        onChange={(e) => setRegisterFirstName(e.target.value)}
+                        required
+                    />
+                </div>
+
+                {/* Last Name */}
+                <div>
+                    <input
+                        type="last_name"
+                        placeholder="Last Name"
+                        value={registerLastName}
+                        onChange={(e) => setRegisterLastName(e.target.value)}
+                        required
+                    />
+                </div>
+
+                {/* Email */}
                 <div>
                     <input
                         type="email"
@@ -47,7 +85,7 @@ function RegistrationForm() {
                     />
                 </div>
 
-                {/* Password Field */}
+                {/* Password */}
                 <div>
                     <input
                         type="password"
@@ -58,7 +96,7 @@ function RegistrationForm() {
                     />
                 </div>
 
-                {/* Confirm Password Field */}
+                {/* Confirm Password */}
                 <div>
                     <input
                         type="password"
