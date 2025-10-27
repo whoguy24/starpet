@@ -33,9 +33,20 @@ function RegistrationForm() {
             await register( registerEmail, registerPassword );
 
             // Create User Record in Firestore
+            dispatch({ type: "CREATE_CONTACT", 
+                payload: { email: registerEmail, first_name: registerFirstName, last_name: registerLastName } 
+            });
+
             dispatch({ type: "CREATE_USER", 
                 payload: { email: registerEmail, first_name: registerFirstName, last_name: registerLastName } 
             });
+
+
+
+
+
+
+
 
             // Log Out (New user was logged in when their account was created.)
             await logOut();

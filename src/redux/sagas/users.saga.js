@@ -15,22 +15,11 @@ function* fetchUsers(action) {
 // Create User Request
 function* createUser(action) {
   try {
-
     const object = action.payload;
-
     const user = { email: object.email };
     const contact = { first_name: object.first_name, last_name: object.last_name };
-
     console.log(user, contact);
-
     yield call(firestoreCreateUser, user, contact);
-
-
-
-
-
-
-
 
   } catch (error) {
     console.error("Error creating document:", error);
