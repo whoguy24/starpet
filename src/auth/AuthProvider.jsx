@@ -30,7 +30,6 @@ export function AuthProvider({ children }) {
   const register = async (email, password) => {
       try {
           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-          await signOut(auth);
           return userCredential;
       } catch (error) {
           throw error;

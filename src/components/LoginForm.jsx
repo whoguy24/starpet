@@ -33,6 +33,34 @@ function LoginForm() {
         }
     };
 
+    // Check Authentication Status Button Handler
+    const handleStatus = () => {
+        if (user?.email) {
+            setMessage(`Currently logged in as: ${user.email}`);
+        }
+        else {
+            setMessage("No users are logged in.");
+        }
+    };
+
+    // Log User Out Button Handler
+    const handleLogout = async () => {
+        try {
+           await logOut();
+            setMessage("User logged out successfully.");
+            setEmail("");
+            setPassword("");
+        } catch (err) {
+            setMessage("Log out failed.");
+            console.log(err);
+        }
+    };
+
+    // Log User Out Button Handler
+    function handleNavigate(path) {
+        navigate(path);
+    }
+
     // Render DOM
     return (
         <>

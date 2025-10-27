@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 //Import CSS
 import styles from "./RegistrationForm.module.css";
@@ -10,7 +11,9 @@ import styles from "./RegistrationForm.module.css";
 function RegistrationForm() {
 
     // Define User State from AuthProvider
-    const { register } = useAuth();
+    const { register, logOut } = useAuth();
+
+    const navigate = useNavigate();
 
     // Redux Variables
     const dispatch = useDispatch();
@@ -21,28 +24,30 @@ function RegistrationForm() {
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
     const [registerPasswordConfirm, setRegisterPasswordConfirm] = useState("");
-    const [message, setMessage] = useState("");
 
     // Register Button Handler
     const handleRegister = async () => {
         try {
 
             // Register Authentication
-            // const newUser = await register( registerEmail, registerPassword );
+            await register( registerEmail, registerPassword );
 
             // Create User Record in Firestore
             dispatch({ type: "CREATE_USER", 
                 payload: { email: registerEmail, first_name: registerFirstName, last_name: registerLastName } 
             });
 
-            setRegisterFirstName("");
-            setRegisterLastName("");
-            setRegisterEmail("");
-            setRegisterPassword("");
-            setRegisterPasswordConfirm("");
-            setMessage(`Registered User: ${newUser.user.email}`);
+            // Log Out (New user was logged in when their account was created.)
+            await logOut();
+
+            // Send generic browser message instructing user to log back in
+            alert("Your account has been created. Please log in to access your account.");
+
+            // Go to login page
+            navigate("/login")
+
         } catch (err) {
-            setMessage("New User Registration Failed.");
+            console.log(err)
         };
     };
 
@@ -115,11 +120,6 @@ function RegistrationForm() {
                 </div>
 
             </form>
-
-            {/* Authentication Status Message */}
-            <div>
-                <p>{message}</p>
-            </div>
 
         </>
     );
