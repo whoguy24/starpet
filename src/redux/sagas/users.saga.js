@@ -2,7 +2,7 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { firestoreFetchUsers, firestoreCreateUser } from '../../firebase/users';
 
-// Fetch Users Collection Request
+// Fetch Collection Request
 function* fetchUsers(action) {
   try {
       const users = yield call(firestoreFetchUsers);
@@ -33,7 +33,7 @@ function* createUser(action) {
 
 
   } catch (error) {
-    console.error("Error creating user document:", error);
+    console.error("Error creating document:", error);
   }
 }
 
