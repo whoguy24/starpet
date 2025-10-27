@@ -1,5 +1,5 @@
 // Import Modules
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import ProtectedRoute from "../auth/ProtectedRoute";
@@ -9,6 +9,7 @@ import UserRegistration from "../pages/UserRegistration";
 import UserResetPassword from "../pages/UserResetPassword";
 import NavigationBar from "../components/NavigationBar";
 import NotFound from "../pages/NotFound";
+import Contacts from "../pages/Contacts";
 import { useAuth } from "../auth/AuthProvider";
 import config from "./config";
 
@@ -33,11 +34,11 @@ function App() {
   }, []);
 
   // Fetch Firestore Collections
-  useEffect(() => {
-    if (user && !loading) {
-      dispatch({ type: "FETCH_USERS" });
-    }
-  }, [dispatch, loading]);
+  // useEffect(() => {
+  //   if (user && !loading) {
+  //     dispatch({ type: "FETCH_USERS" });
+  //   }
+  // }, [dispatch, user, loading]);
 
   // Render DOM
   return (
@@ -54,6 +55,11 @@ function App() {
           <Route path="/dashboard" element={
             <ProtectedRoute>
               <Dashboard /> 
+            </ProtectedRoute>
+          } />
+          <Route path="/contacts" element={
+            <ProtectedRoute>
+              <Contacts /> 
             </ProtectedRoute>
           } />
         </Routes>
