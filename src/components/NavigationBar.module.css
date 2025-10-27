@@ -1,0 +1,43 @@
+.navigation {
+    background-color: #0B2037;
+    color: white;
+    padding: 0.75rem 1rem; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+}
+
+.navigationContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 100%;
+    gap: 1rem;
+}
+
+.navigationLogo {
+    color: white;
+}
+
+.navigationMenuPages {
+    display: flex;
+    flex-grow: 1;
+    gap: 1rem;
+}
+
+.navigationMenuAccount {
+    display: flexbox;
+    gap: 1rem;
+}
+
+.navigationLink {
+    color: white;
+    text-decoration: none;
+    transition: text-decoration 0.2s;
+    padding-inline: 0.5rem;
+}
+
+.navigationLink:hover {
+    text-decoration: underline;
+}

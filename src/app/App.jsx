@@ -1,12 +1,14 @@
 // Import Modules
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import ProtectedRoute from "../auth/ProtectedRoute";
-import Landing from "../pages/Landing";
+import Dashboard from "../pages/Dashboard";
 import UserLogin from "../pages/UserLogin";
 import UserRegistration from "../pages/UserRegistration";
 import UserResetPassword from "../pages/UserResetPassword";
+import NavigationBar from "../components/NavigationBar";
+import NotFound from "../pages/NotFound";
 import { useAuth } from "../auth/AuthProvider";
 import config from "./config";
 
@@ -19,9 +21,7 @@ function App() {
   // Redux Variables
   const dispatch = useDispatch();
 
-  // Redux Store Variables
-  const users = useSelector(store => store.users);
-
+// Define User State from AuthProvider
   const { user, loading } = useAuth();
 
   // Print Configuration Log to Console
@@ -34,7 +34,7 @@ function App() {
 
   // Fetch Firestore Collections
   useEffect(() => {
-    if (!loading) {
+    if (user && !loading) {
       dispatch({ type: "FETCH_USERS" });
     }
   }, [dispatch, loading]);
@@ -42,18 +42,22 @@ function App() {
   // Render DOM
   return (
     <>
-      <Router>
+      <NavigationBar />
+      <div className="page">
         <Routes>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={<Navigate to="/NotFound" replace />} />
           <Route path="/login" element={<UserLogin />} />
           <Route path="/register" element={<UserRegistration />} />
           <Route path="/forgot_password" element={<UserResetPassword />} />
-          <Route path="/" element={
+          <Route path="/NotFound" element={<NotFound />} />
+          <Route path="/dashboard" element={
             <ProtectedRoute>
-              <Landing /> 
+              <Dashboard /> 
             </ProtectedRoute>
           } />
         </Routes>
-      </Router>
+      </div>
     </>
   )
 

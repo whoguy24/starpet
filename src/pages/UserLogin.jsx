@@ -5,7 +5,7 @@ import LoginForm from "../components/LoginForm";
 function UserLogin() {
   return (
     <>
-      <h2>Welcome to StarPet</h2>
+      <h2>Welcome to StarPet!</h2>
       <LoginForm/>
     </>
   );

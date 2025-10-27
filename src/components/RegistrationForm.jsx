@@ -1,17 +1,12 @@
 // Import Modules
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
-import { useNavigate } from "react-router-dom";
 
 //Import CSS
 import styles from "./RegistrationForm.module.css";
 
 // Component Function
 function RegistrationForm() {
-
-    // Define React Router Functions
-    const navigate = useNavigate();
-    const auth = useAuth();
 
     // Define User State from AuthProvider
     const { register } = useAuth();
@@ -33,11 +28,6 @@ function RegistrationForm() {
         } catch (err) {
             setMessage("New User Registration Failed.");
         };
-    };
-
-    // Navigation Handler
-    function handleNavigate(path) {
-        navigate(path)
     };
 
     return (
@@ -83,13 +73,6 @@ function RegistrationForm() {
                 <div>
                     <button type="button" onClick={handleRegister} >
                         Register
-                    </button>
-                </div>
-
-                {/* Go to Login Button */}
-                <div>
-                    <button type="button" onClick={()=>(handleNavigate("/login"))} >
-                        Back to Login
                     </button>
                 </div>
 
