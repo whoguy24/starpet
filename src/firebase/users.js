@@ -18,37 +18,61 @@ export async function firestoreFetchUsers() {
   });
 };
 
-export const firestoreCreateUser = async (user, contact) => {
+export async function firestoreCreateUser(user) {
+  try {
+    const users = collection(db, "users");
+    await addDoc(users, {
+      ...contactData,
+      date_created: serverTimestamp(),
+      date_updated: serverTimestamp(),
+    });
+  } catch (error) {
+    console.error("Error adding contact:", error);
+    throw error;
+  }
+}
 
-  const batch = writeBatch(db);
 
-  const userRef = doc(collection(db, "users"));
-  const contactRef = doc(collection(db, "contacts"));
 
-   const contactPayload = {
-    ...contact,
-    active: true,
-    date_created: serverTimestamp(),
-    date_updated: serverTimestamp(),
-  };
 
-   const userPayload = {
-    ...user,
-    contactID: contactRef.id,
-    active: true,
-    role: "User",
-    date_created: serverTimestamp(),
-    date_updated: serverTimestamp(),
-  };
 
-  batch.set(userRef, userPayload);
-  batch.set(contactRef, contactPayload);
 
-  await batch.commit();
 
-  return {
-    userId: userRef.id,
-    contactId: contactRef.id,
-  };
 
-};
+
+
+
+// export const firestoreCreateUser = async (user, contact) => {
+
+//   const batch = writeBatch(db);
+
+//   const userRef = doc(collection(db, "users"));
+//   const contactRef = doc(collection(db, "contacts"));
+
+//    const contactPayload = {
+//     ...contact,
+//     active: true,
+//     date_created: serverTimestamp(),
+//     date_updated: serverTimestamp(),
+//   };
+
+//    const userPayload = {
+//     ...user,
+//     contactID: contactRef.id,
+//     active: true,
+//     role: "User",
+//     date_created: serverTimestamp(),
+//     date_updated: serverTimestamp(),
+//   };
+
+//   batch.set(userRef, userPayload);
+//   batch.set(contactRef, contactPayload);
+
+//   await batch.commit();
+
+//   return {
+//     userId: userRef.id,
+//     contactId: contactRef.id,
+//   };
+
+// };

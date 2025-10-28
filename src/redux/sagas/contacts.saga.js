@@ -1,6 +1,6 @@
 // Import Modules
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { firestoreFetchContacts, firestoreCreateContact } from '../../firebase/contacts';
+import { firestoreFetchContacts, firestoreCreateContact } from '../../firebase/firestore';
 
 // Fetch Collection Request
 function* fetchContacts(action) {
