@@ -1,31 +1,93 @@
 // Import Modules
-import { put, takeLatest, call } from 'redux-saga/effects';
-import { firestoreFetchContacts, firestoreCreateContact } from '../../firebase/firestore';
+import { put, takeLatest, call, fork, take } from "redux-saga/effects";
+import { eventChannel } from "redux-saga";
+import {
+  firestoreListener,
+  firestoreCreateDocument,
+  firestoreUpdateDocument,
+  firestoreDeleteDocument,
+} from "../../firebase/firestore";
 
-// Fetch Collection Request
-function* fetchContacts(action) {
+// Action types
+const CREATE_CONTACT = "CREATE_CONTACT";
+const CREATE_CONTACT_SUCCESS = "CREATE_CONTACT_SUCCESS";
+const CREATE_CONTACT_FAILURE = "CREATE_CONTACT_FAILURE";
+
+const UPDATE_CONTACT = "UPDATE_CONTACT";
+const UPDATE_CONTACT_SUCCESS = "UPDATE_CONTACT_SUCCESS";
+const UPDATE_CONTACT_FAILURE = "UPDATE_CONTACT_FAILURE";
+
+const DELETE_CONTACT = "DELETE_CONTACT";
+const DELETE_CONTACT_SUCCESS = "DELETE_CONTACT_SUCCESS";
+const DELETE_CONTACT_FAILURE = "DELETE_CONTACT_FAILURE";
+
+// Create Listener Channel
+function createContactsChannel() {
+  return eventChannel((emit) => {
+    const unsubscribe = firestoreListener("contacts", emit);
+    return () => unsubscribe();
+  });
+}
+
+// Initialize Listener
+function* contactsListener() {
+  const channel = yield call(createContactsChannel);
   try {
-      const contacts = yield call(firestoreFetchContacts);
-      yield put({ type: 'LOAD_CONTACTS', payload: contacts });
-  } catch(err) {
-      console.error('ERROR:', err);
-  };
-};
+    while (true) {
+      const contacts = yield take(channel);
+      yield put({ type: "FETCH_CONTACTS_SUCCESS", payload: contacts });
+    }
+  } finally {
+    channel.close();
+  }
+}
 
-// Create Document Request
+// Create contact
 function* createContact(action) {
   try {
-    yield call(firestoreCreateContact, action.payload);
+    const documentID = yield call(
+      firestoreCreateDocument,
+      "contacts",
+      action.payload
+    );
+    yield put({
+      type: CREATE_CONTACT_SUCCESS,
+      payload: { id: documentID, ...action.payload },
+    });
   } catch (error) {
-    console.error("Error creating document:", error);
+    console.log("Fail");
+    yield put({ type: CREATE_CONTACT_FAILURE, payload: error.message });
+  }
+}
+
+// Update contact
+function* updateContact(action) {
+  try {
+    const { documentID, ...data } = action.payload;
+    yield call(firestoreUpdateDocument, "contacts", documentID, data);
+    yield put({ type: UPDATE_CONTACT_SUCCESS, payload: action.payload });
+  } catch (error) {
+    yield put({ type: UPDATE_CONTACT_FAILURE, payload: error.message });
+  }
+}
+
+// Delete contact
+function* deleteContact(action) {
+  try {
+    yield call(firestoreDeleteDocument, "contacts", action.payload.id);
+    yield put({ type: DELETE_CONTACT_SUCCESS, payload: action.payload });
+  } catch (error) {
+    yield put({ type: DELETE_CONTACT_FAILURE, payload: error.message });
   }
 }
 
 // Combine Saga Functions
 function* contactsSaga() {
-  yield takeLatest('FETCH_CONTACTS', fetchContacts);
-  yield takeLatest('CREATE_CONTACT', createContact);
-};
+  yield fork(contactsListener);
+  yield takeLatest(CREATE_CONTACT, createContact);
+  yield takeLatest(UPDATE_CONTACT, updateContact);
+  yield takeLatest(DELETE_CONTACT, deleteContact);
+}
 
 // Export Module
 export default contactsSaga;
