@@ -5,6 +5,7 @@ import styles from "./Contacts.module.css";
 import {
   CREATE_CONTACT,
   DELETE_CONTACT,
+  UPDATE_CONTACT,
 } from "../redux/reducers/contacts.reducer";
 
 // Component Function
@@ -16,10 +17,15 @@ function Contacts() {
   const { data: contacts, loading } = useSelector((state) => state.contacts);
 
   // Define Local State
+  const [contactsTable, setContactsTable] = useState([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+
+  useEffect(() => {
+    setContactsTable(contacts);
+  }, [contacts]);
 
   // Create Contact Handler
   function handleCreateContact(e) {
@@ -41,9 +47,23 @@ function Contacts() {
     }
   }
 
+  function handleFieldChange(contactID, field, value) {
+    setContactsTable((prev) =>
+      prev.map((contact) =>
+        contact.id === contactID ? { ...contact, [field]: value } : contact
+      )
+    );
+  }
+
+  // Save Contact Handler
+  const handleSaveContact = (contact) => {
+    dispatch({ type: UPDATE_CONTACT, payload: contact });
+    alert("Record was successfully saved!");
+  };
+
   // Delete Contact Handler
-  const handleDeleteContact = (id) => {
-    dispatch({ type: DELETE_CONTACT, payload: { id } });
+  const handleDeleteContact = (contact) => {
+    dispatch({ type: DELETE_CONTACT, payload: contact });
   };
 
   // Render DOM
@@ -86,17 +106,57 @@ function Contacts() {
             <th>Email</th>
             <th>Phone</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          {contacts?.map((contact) => (
+          {contactsTable?.map((contact) => (
             <tr key={contact.id}>
-              <td>{contact.first_name}</td>
-              <td>{contact.last_name}</td>
-              <td>{contact.email}</td>
-              <td>{contact.phone}</td>
               <td>
-                <button onClick={() => handleDeleteContact(contact.id)}>
+                <input
+                  value={contact.first_name || ""}
+                  onChange={(e) =>
+                    handleFieldChange(contact.id, "first_name", e.target.value)
+                  }
+                />
+              </td>
+              <td>
+                <input
+                  value={contact.last_name || ""}
+                  onChange={(e) =>
+                    handleFieldChange(contact.id, "last_name", e.target.value)
+                  }
+                />
+              </td>
+              <td>
+                <input
+                  value={contact.email || ""}
+                  onChange={(e) =>
+                    handleFieldChange(contact.id, "email", e.target.value)
+                  }
+                />
+              </td>
+              <td>
+                <input
+                  value={contact.phone || ""}
+                  onChange={(e) =>
+                    handleFieldChange(contact.id, "phone", e.target.value)
+                  }
+                />
+              </td>
+              <td>
+                <button
+                  type="button"
+                  onClick={() => handleSaveContact(contact)}
+                >
+                  Save
+                </button>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  onClick={() => handleDeleteContact(contact)}
+                >
                   Delete
                 </button>
               </td>

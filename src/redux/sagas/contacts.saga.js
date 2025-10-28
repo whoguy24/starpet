@@ -45,14 +45,10 @@ function* contactsListener() {
 // Create contact
 function* createContact(action) {
   try {
-    const documentID = yield call(
-      firestoreCreateDocument,
-      "contacts",
-      action.payload
-    );
+    const id = yield call(firestoreCreateDocument, "contacts", action.payload);
     yield put({
       type: CREATE_CONTACT_SUCCESS,
-      payload: { id: documentID, ...action.payload },
+      payload: { id: id, ...action.payload },
     });
   } catch (error) {
     console.log("Fail");
@@ -63,8 +59,8 @@ function* createContact(action) {
 // Update contact
 function* updateContact(action) {
   try {
-    const { documentID, ...data } = action.payload;
-    yield call(firestoreUpdateDocument, "contacts", documentID, data);
+    const { id, date_created, ...data } = action.payload;
+    yield call(firestoreUpdateDocument, "contacts", id, data);
     yield put({ type: UPDATE_CONTACT_SUCCESS, payload: action.payload });
   } catch (error) {
     yield put({ type: UPDATE_CONTACT_FAILURE, payload: error.message });
