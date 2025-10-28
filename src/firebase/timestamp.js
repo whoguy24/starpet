@@ -1,5 +1,5 @@
 export function serializeTimestamp(timestamp) {
-  return timestamp?.toMillis();
+  return timestamp.toMillis();
 }
 
 export default serializeTimestamp;

@@ -1,0 +1,20 @@
+.newContactForm{
+    display: grid;
+    grid-template-rows: 1fr;
+    gap: 1rem;  
+    max-width: 200px;
+}
+
+.contactsContainer {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    width: 100%;
+}
+
+.contactsTable {
+    width: 100%;
+    border: 1rem;
+    border-collapse: collapse;
+    border-color: black;
+}

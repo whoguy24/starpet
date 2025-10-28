@@ -22,6 +22,7 @@ function NavigationBar() {
                 { user &&
                     <div className={styles.navigationMenuPages}>
                         <Link to="/dashboard" className={styles.navigationLink}>Dashboard</Link>
+                        <Link to="/contacts" className={styles.navigationLink}>Contacts</Link>
                     </div>
                 }
 
