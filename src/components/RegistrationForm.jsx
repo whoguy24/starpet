@@ -1,7 +1,7 @@
 // Import Modules
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../auth/AuthProvider";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 
 //Import CSS
@@ -10,11 +10,13 @@ import styles from "./RegistrationForm.module.css";
 // Component Function
 function RegistrationForm() {
   // Define User State from AuthProvider
-  const { register, logOut } = useAuth();
+  const { register } = useAuth();
 
   // Initialize Hooks
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const authStatus = useSelector((state) => state.auth.status);
 
   // Define Local State
   const [registerFirstName, setRegisterFirstName] = useState("");
@@ -22,6 +24,13 @@ function RegistrationForm() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerPasswordConfirm, setRegisterPasswordConfirm] = useState("");
+
+  useEffect(() => {
+    if (authStatus === "authenticated") {
+      alert("Your account has been created.");
+      navigate("/", { replace: true });
+    }
+  }, [authStatus]);
 
   // Register Button Handler
   const handleRegister = async () => {

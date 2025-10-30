@@ -17,6 +17,8 @@ import {
   firestoreDeleteDocument,
 } from "../../firebase/firestore";
 
+import { logout } from "../../firebase/auth.js";
+
 // Initialize Listener
 function* usersListener() {
   while (true) {
@@ -85,12 +87,6 @@ function* createUser(action) {
       active: true,
     });
     console.log("Successfully created document:", userID);
-    if (action.meta?.logout) {
-      //   yield call(logOut);
-      //   alert(
-      //     "Your account has been created. Please log in to access your account."
-      //   );
-    }
     return userID;
   } catch (error) {
     console.log("Error creating document: ", error);
