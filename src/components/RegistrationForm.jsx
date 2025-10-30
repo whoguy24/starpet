@@ -49,7 +49,6 @@ function RegistrationForm() {
           email: registerEmail,
           role: "User",
         },
-        meta: { logout: true },
       });
     } catch (error) {
       console.log(error);

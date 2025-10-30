@@ -73,7 +73,7 @@ function LoginForm() {
 
         <div>
           <Link to="/register" className={styles.textLink}>
-            Register New User
+            Register a User
           </Link>
         </div>
       </form>
