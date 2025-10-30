@@ -1,5 +1,14 @@
 // Import Modules
-import { put, takeLatest, call, fork, take } from "redux-saga/effects";
+import {
+  put,
+  takeLatest,
+  call,
+  fork,
+  take,
+  select,
+  cancel,
+  cancelled,
+} from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
 import {
   firestoreListener,
@@ -8,81 +17,87 @@ import {
   firestoreDeleteDocument,
 } from "../../firebase/firestore";
 
-// Action types
-const CREATE_CONTACT = "CREATE_CONTACT";
-const CREATE_CONTACT_SUCCESS = "CREATE_CONTACT_SUCCESS";
-const CREATE_CONTACT_FAILURE = "CREATE_CONTACT_FAILURE";
-
-const UPDATE_CONTACT = "UPDATE_CONTACT";
-const UPDATE_CONTACT_SUCCESS = "UPDATE_CONTACT_SUCCESS";
-const UPDATE_CONTACT_FAILURE = "UPDATE_CONTACT_FAILURE";
-
-const DELETE_CONTACT = "DELETE_CONTACT";
-const DELETE_CONTACT_SUCCESS = "DELETE_CONTACT_SUCCESS";
-const DELETE_CONTACT_FAILURE = "DELETE_CONTACT_FAILURE";
-
-// Create Listener Channel
-function createContactsChannel() {
-  return eventChannel((emit) => {
-    const unsubscribe = firestoreListener("contacts", emit);
-    return () => unsubscribe();
-  });
-}
-
 // Initialize Listener
 function* contactsListener() {
-  const channel = yield call(createContactsChannel);
-  try {
-    while (true) {
-      const contacts = yield take(channel);
-      yield put({ type: "FETCH_CONTACTS_SUCCESS", payload: contacts });
+  while (true) {
+    const { currentUser } = yield select((state) => state.auth);
+    if (currentUser) {
+      const channel = yield call(() =>
+        eventChannel((emit) => {
+          const unsubscribe = firestoreListener("contacts", emit);
+          return () => unsubscribe();
+        })
+      );
+      let lastIds = new Set();
+      const listenerTask = yield fork(function* () {
+        try {
+          while (true) {
+            const contacts = yield take(channel);
+            const ids = new Set(contacts.map((c) => c.id));
+            if (
+              ![...ids].every((id) => lastIds.has(id)) ||
+              ids.size !== lastIds.size
+            ) {
+              yield put({ type: "LOAD_CONTACTS", payload: contacts });
+              lastIds = ids;
+            }
+          }
+        } finally {
+          if (yield cancelled()) {
+            channel.close();
+          }
+        }
+      });
+      yield take("AUTH_CLEAR");
+      yield cancel(listenerTask);
+    } else {
+      yield take("AUTH_LOAD");
     }
-  } finally {
-    channel.close();
   }
 }
 
-// Create contact
+// Create Document
 function* createContact(action) {
   try {
-    const id = yield call(firestoreCreateDocument, "contacts", action.payload);
-    yield put({
-      type: CREATE_CONTACT_SUCCESS,
-      payload: { id: id, ...action.payload },
-    });
+    const contactID = yield call(
+      firestoreCreateDocument,
+      "contacts",
+      action.payload
+    );
+    return contactID;
   } catch (error) {
-    console.log("Fail");
-    yield put({ type: CREATE_CONTACT_FAILURE, payload: error.message });
+    console.log("Error creating document: ", error);
+    throw error;
   }
 }
 
-// Update contact
+// Update Document
 function* updateContact(action) {
   try {
     const { id, date_created, ...data } = action.payload;
     yield call(firestoreUpdateDocument, "contacts", id, data);
-    yield put({ type: UPDATE_CONTACT_SUCCESS, payload: action.payload });
   } catch (error) {
-    yield put({ type: UPDATE_CONTACT_FAILURE, payload: error.message });
+    console.log("Error updating document: ", error);
+    throw error;
   }
 }
 
-// Delete contact
+// Delete Document
 function* deleteContact(action) {
   try {
     yield call(firestoreDeleteDocument, "contacts", action.payload.id);
-    yield put({ type: DELETE_CONTACT_SUCCESS, payload: action.payload });
   } catch (error) {
-    yield put({ type: DELETE_CONTACT_FAILURE, payload: error.message });
+    console.log("Error deleting document: ", error);
+    throw error;
   }
 }
 
 // Combine Saga Functions
 function* contactsSaga() {
   yield fork(contactsListener);
-  yield takeLatest(CREATE_CONTACT, createContact);
-  yield takeLatest(UPDATE_CONTACT, updateContact);
-  yield takeLatest(DELETE_CONTACT, deleteContact);
+  yield takeLatest("CREATE_CONTACT", createContact);
+  yield takeLatest("UPDATE_CONTACT", updateContact);
+  yield takeLatest("DELETE_CONTACT", deleteContact);
 }
 
 // Export Module

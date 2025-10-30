@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 //Import CSS
 import styles from "./RegistrationForm.module.css";
@@ -12,9 +12,8 @@ function RegistrationForm() {
   // Define User State from AuthProvider
   const { register, logOut } = useAuth();
 
+  // Initialize Hooks
   const navigate = useNavigate();
-
-  // Redux Variables
   const dispatch = useDispatch();
 
   // Define Local State
@@ -27,31 +26,28 @@ function RegistrationForm() {
   // Register Button Handler
   const handleRegister = async () => {
     try {
-      await register(registerEmail, registerPassword);
+      // Register User in Firebase
+      const registeredUser = await register(registerEmail, registerPassword);
+      const authUserID = registeredUser.user.uid;
+
+      // Create User Record
       dispatch({
         type: "CREATE_USER",
         payload: {
-          email: registerEmail,
+          authUserID: authUserID,
           first_name: registerFirstName,
           last_name: registerLastName,
+          email: registerEmail,
+          role: "User",
         },
+        meta: { logout: true },
       });
-
-      // Log Out (New user was logged in when their account was created.)
-      await logOut();
-
-      // Send generic browser message instructing user to log back in
-      alert(
-        "Your account has been created. Please log in to access your account."
-      );
-
-      // Go to login page
-      navigate("/login");
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
 
+  // Render DOM
   return (
     <>
       {/* Web Form */}
@@ -116,6 +112,13 @@ function RegistrationForm() {
           <button type="button" onClick={handleRegister}>
             Register
           </button>
+        </div>
+
+        {/* Login Page Link */}
+        <div>
+          <Link to="/login" className={styles.textLink}>
+            Back to Login
+          </Link>
         </div>
       </form>
     </>

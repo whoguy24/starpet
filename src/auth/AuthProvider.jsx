@@ -1,71 +1,39 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { auth } from "../firebase/config";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
+import { register, login, logout, resetPassword } from "../firebase/auth.js";
 
 // Create Auth Context
-const Auth = createContext();
+const firebaseAuth = createContext();
 
 // Custom Hook
-export const useAuth = () => {
-  const context = useContext(Auth);
-  return context;
-};
+export const useAuth = () => useContext(firebaseAuth);
 
 // Component Function
 export function AuthProvider({ children }) {
-
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
+  const dispatch = useDispatch();
   // Subscribe to Firebase Authorization State Changes
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setLoading(false);
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        dispatch({
+          type: "AUTH_LOAD",
+          payload: {
+            authUserID: firebaseUser.uid,
+            email: firebaseUser.email,
+          },
+        });
+      } else {
+        dispatch({ type: "AUTH_CLEAR" });
+      }
     });
     return unsubscribe;
-  }, [auth]);
-
-  // Register function
-  const register = async (email, password) => {
-      try {
-          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-          return userCredential;
-      } catch (error) {
-          throw error;
-      }
-  };
-
-  // Login function
-  const login = async (email, password) => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      return userCredential;
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  // Logout function
-  const logOut = async () => {
-    try {
-      await signOut(auth);
-    } catch (error) {
-    }
-  };
-
-  // Reset Password function
-  const resetPassword = async (email) => {
-      try {
-        await sendPasswordResetEmail(auth, email);
-      } catch (error) {
-        console.log(error)
-      }
-  };
+  }, [dispatch]);
 
   return (
-    <Auth.Provider value={{ user, login, logOut, register, resetPassword }}>
-      {!loading && children}
-    </Auth.Provider>
+    <firebaseAuth.Provider value={{ register, login, logout, resetPassword }}>
+      {children}
+    </firebaseAuth.Provider>
   );
 }

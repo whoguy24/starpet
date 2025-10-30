@@ -2,11 +2,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import styles from "./Contacts.module.css";
-import {
-  CREATE_CONTACT,
-  DELETE_CONTACT,
-  UPDATE_CONTACT,
-} from "../redux/reducers/contacts.reducer";
 
 // Component Function
 function Contacts() {
@@ -14,7 +9,7 @@ function Contacts() {
   const dispatch = useDispatch();
 
   // Define Redux State
-  const { data: contacts, loading } = useSelector((state) => state.contacts);
+  const contacts = useSelector((state) => state.contacts);
 
   // Define Local State
   const [contactsTable, setContactsTable] = useState([]);
@@ -32,7 +27,7 @@ function Contacts() {
     e.preventDefault();
     if (firstName && lastName && email && phone) {
       dispatch({
-        type: CREATE_CONTACT,
+        type: "CREATE_CONTACT",
         payload: {
           first_name: firstName,
           last_name: lastName,
@@ -57,13 +52,13 @@ function Contacts() {
 
   // Save Contact Handler
   const handleSaveContact = (contact) => {
-    dispatch({ type: UPDATE_CONTACT, payload: contact });
+    dispatch({ type: "UPDATE_CONTACT", payload: contact });
     alert("Record was successfully saved!");
   };
 
   // Delete Contact Handler
   const handleDeleteContact = (contact) => {
-    dispatch({ type: DELETE_CONTACT, payload: contact });
+    dispatch({ type: "DELETE_CONTACT", payload: contact });
   };
 
   // Render DOM

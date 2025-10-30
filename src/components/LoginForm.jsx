@@ -1,132 +1,85 @@
 // Import Modules
-import { useState } from "react";
-import { useAuth } from "../auth/AuthProvider";
-import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 //Import CSS
 import styles from "./LoginForm.module.css";
 
 // Component Function
 function LoginForm() {
+  // Define Local State
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    // Define React Router Functions
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    // Define User State from AuthProvider
-    const { user, login, logOut } = useAuth();
+  const authStatus = useSelector((state) => state.auth.status);
 
-    // Define Local State
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
-
-    // Log In Button Handler
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        try {
-            const userCredential = await login(email, password);
-            setMessage(`Logged in successfully: ${userCredential.user.email}`);
-            navigate("/");
-        } catch (err) {
-            setMessage("Log in Failed.");
-            console.log(err);
-        }
-    };
-
-    // Check Authentication Status Button Handler
-    const handleStatus = () => {
-        if (user?.email) {
-            setMessage(`Currently logged in as: ${user.email}`);
-        }
-        else {
-            setMessage("No users are logged in.");
-        }
-    };
-
-    // Log User Out Button Handler
-    const handleLogout = async () => {
-        try {
-           await logOut();
-            setMessage("User logged out successfully.");
-            setEmail("");
-            setPassword("");
-        } catch (err) {
-            setMessage("Log out failed.");
-            console.log(err);
-        }
-    };
-
-    // Log User Out Button Handler
-    function handleNavigate(path) {
-        navigate(path);
+  useEffect(() => {
+    if (authStatus === "authenticated") {
+      navigate("/", { replace: true });
     }
+  }, [authStatus]);
 
-    // Render DOM
-    return (
-        <>
+  // Log In Button Handler
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    dispatch({
+      type: "AUTH_LOGIN",
+      payload: { email, password },
+    });
+    navigate("/", { replace: true });
+  };
 
-            {/* Web Form */}
-            <form className={styles.loginForm} onSubmit={handleLogin}>
+  // Render DOM
+  return (
+    <>
+      {/* Web Form */}
+      <form className={styles.loginForm} onSubmit={handleLogin}>
+        {/* Email Field */}
+        <div>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
 
-                {/* Email Field */}
-                <div>
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
+        {/* Password Field */}
+        <div>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
 
-                {/* Password Field */}
-                <div>
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
+        {/* Log In Button */}
+        <div>
+          <button type="submit">Log In</button>
+        </div>
 
-                <div>
-                    <Link to="/forgot_password" className={styles.forgotPasswordLink}>Forgot your Password?</Link>
-                </div>
+        <div>
+          <Link to="/forgot_password" className={styles.textLink}>
+            Forgot your Password?
+          </Link>
+        </div>
 
-                {/* Log In Button */}
-                <div>
-                    <button type="submit" >
-                        Log In
-                    </button>
-                </div>
-
-                {/* Authentication Status Message */}
-                <div>
-                    <p>{message}</p>
-                </div>
-
-            </form>
-            
-        </>
-    )
-
+        <div>
+          <Link to="/register" className={styles.textLink}>
+            Register New User
+          </Link>
+        </div>
+      </form>
+    </>
+  );
 }
 
 // Export
 export default LoginForm;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

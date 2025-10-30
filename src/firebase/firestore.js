@@ -44,7 +44,6 @@ export async function firestoreCreateDocument(collectionName, data) {
     });
     return document.id;
   } catch (error) {
-    console.error("Error adding contact:", error);
     throw error;
   }
 }

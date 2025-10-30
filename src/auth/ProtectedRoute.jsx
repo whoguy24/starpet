@@ -1,15 +1,15 @@
 // Import Modules
 import { Navigate } from "react-router-dom";
-import { useAuth } from "./AuthProvider";
+import { useSelector } from "react-redux";
 
 // Component Function
 export default function ProtectedRoute({ children }) {
-
-  // Query User State from AuthProvider
-  const { user } = useAuth();
-
-  // Allow Access to App, if User is Logged In
-  if (!user) return <Navigate to="/login" replace />;
-  return children;
-
+  const { status } = useSelector((state) => state.auth);
+  if (status === "idle" || status === "loading") {
+    return null;
+  } else if (status !== "authenticated") {
+    return <Navigate to="/login" replace />;
+  } else {
+    return children;
+  }
 }

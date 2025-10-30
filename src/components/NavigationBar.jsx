@@ -1,46 +1,44 @@
 // Import Modules
-import { Link } from "react-router-dom";
 import styles from "./NavigationBar.module.css";
-import { useAuth } from "../auth/AuthProvider";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 // Component Function
 function NavigationBar() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    // Define User State from AuthProvider
-    const { user } = useAuth();
+  const authStatus = useSelector((state) => state.auth.status);
 
-    // Render DOM
-    return (
+  function handleLogout() {
+    dispatch({ type: "AUTH_LOGOUT" });
+    navigate("login");
+  }
 
-        <nav className={styles.navigation}>
-
-            <div className={styles.navigationContainer}>
-
-                <div className={styles.navigationLogo}>
-                </div>
-
-                { user &&
-                    <div className={styles.navigationMenuPages}>
-                        <Link to="/dashboard" className={styles.navigationLink}>Dashboard</Link>
-                        <Link to="/contacts" className={styles.navigationLink}>Contacts</Link>
-                    </div>
-                }
-
-                { !user && 
-                    <div className={styles.navigationMenuAccount}>
-                        <Link to="/login" className={styles.navigationLink}>Log In</Link>
-                        <Link to="/register" className={styles.navigationLink}>Register</Link>
-                    </div>
-                }
-
+  // Render DOM
+  return (
+    <nav className={styles.navigation}>
+      <div className={styles.navigationContainer}>
+        <div className={styles.navigationLogo}></div>
+        {authStatus === "authenticated" && (
+          <>
+            <div className={styles.navigationMenuPages}>
+              <Link to="/dashboard" className={styles.navigationLink}>
+                Dashboard
+              </Link>
+              <Link to="/contacts" className={styles.navigationLink}>
+                Contacts
+              </Link>
             </div>
-
-
-        </nav>
-
-    );
-
-};
+            <div className={styles.navigationMenuAccount}>
+              <button onClick={handleLogout}>Log Out</button>
+            </div>
+          </>
+        )}
+      </div>
+    </nav>
+  );
+}
 
 // Export Component Function
 export default NavigationBar;
