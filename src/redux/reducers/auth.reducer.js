@@ -24,7 +24,7 @@ export default function authReducer(state = initialState, action) {
     case "AUTH_ERROR":
       return {
         ...state,
-        status: "unauthenticated",
+        status: "error",
         error: action.payload,
       };
     default:

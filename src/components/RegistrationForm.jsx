@@ -1,6 +1,5 @@
 // Import Modules
 import { useState, useEffect } from "react";
-import { useAuth } from "../auth/AuthProvider";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -9,9 +8,6 @@ import styles from "./RegistrationForm.module.css";
 
 // Component Function
 function RegistrationForm() {
-  // Define User State from AuthProvider
-  const { register } = useAuth();
-
   // Initialize Hooks
   const navigate = useNavigate();
   const dispatch = useDispatch();

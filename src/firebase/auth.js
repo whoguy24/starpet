@@ -1,10 +1,17 @@
-import { auth } from "../firebase/config";
+// Import Modules
+import { auth } from "./config";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
+  onAuthStateChanged,
 } from "firebase/auth";
+
+// Authorization State
+export const authState = (onUserChange, onError) => {
+  return onAuthStateChanged(auth, onUserChange, onError);
+};
 
 // Register
 export const register = async (email, password) => {
