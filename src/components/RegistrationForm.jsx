@@ -33,19 +33,13 @@ function RegistrationForm() {
   // Register Button Handler
   const handleRegister = async () => {
     try {
-      // Register User in Firebase
-      const account = await register(registerEmail, registerPassword);
-      const firebaseID = account.user.uid;
-
-      // Create User Record
       dispatch({
-        type: "CREATE_USER",
+        type: "AUTH_REGISTER",
         payload: {
-          firebaseID: firebaseID,
           first_name: registerFirstName,
           last_name: registerLastName,
           email: registerEmail,
-          role: "User",
+          password: registerPassword,
         },
       });
     } catch (error) {
