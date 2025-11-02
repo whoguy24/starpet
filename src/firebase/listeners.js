@@ -24,9 +24,9 @@ export function createAuthChannel() {
   });
 }
 
+// Initialize Firestore Listener by Collection
 export function* subscribeToCollection(collection, loadActionType) {
   const channel = yield call(createChannel, collection);
-
   try {
     while (true) {
       const data = yield take(channel);
