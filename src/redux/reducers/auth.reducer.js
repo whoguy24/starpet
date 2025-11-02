@@ -1,6 +1,7 @@
 const initialState = {
-  currentUser: null,
-  status: "idle",
+  account: null,
+  firebaseID: null,
+  status: "LOADING",
   error: null,
 };
 
@@ -10,21 +11,25 @@ export default function authReducer(state = initialState, action) {
     case "AUTH_LOAD":
       return {
         ...state,
-        currentUser: action.payload,
-        status: "authenticated",
+        account: action.payload.account,
+        firebaseID: action.payload.firebaseID,
+        status: "AUTHENTICATED",
         error: null,
       };
     case "AUTH_CLEAR":
       return {
         ...state,
-        currentUser: null,
-        status: "unauthenticated",
+        account: null,
+        firebaseID: null,
+        status: "UNAUTHENTICATED",
         error: null,
       };
     case "AUTH_ERROR":
       return {
         ...state,
-        status: "error",
+        account: null,
+        firebaseID: null,
+        status: "ERROR",
         error: action.payload,
       };
     default:

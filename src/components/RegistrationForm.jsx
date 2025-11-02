@@ -12,7 +12,8 @@ function RegistrationForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const authStatus = useSelector((state) => state.auth.status);
+  // Initialize Global State
+  const { status } = useSelector((state) => state.auth);
 
   // Define Local State
   const [registerFirstName, setRegisterFirstName] = useState("");
@@ -21,25 +22,26 @@ function RegistrationForm() {
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerPasswordConfirm, setRegisterPasswordConfirm] = useState("");
 
+  // Automatically Navigate to Dashboard if Authenticated
   useEffect(() => {
-    if (authStatus === "authenticated") {
+    if (status === "AUTHENTICATED") {
       alert("Your account has been created.");
       navigate("/", { replace: true });
     }
-  }, [authStatus]);
+  }, [status]);
 
   // Register Button Handler
   const handleRegister = async () => {
     try {
       // Register User in Firebase
-      const registeredUser = await register(registerEmail, registerPassword);
-      const authUserID = registeredUser.user.uid;
+      const account = await register(registerEmail, registerPassword);
+      const firebaseID = account.user.uid;
 
       // Create User Record
       dispatch({
         type: "CREATE_USER",
         payload: {
-          authUserID: authUserID,
+          firebaseID: firebaseID,
           first_name: registerFirstName,
           last_name: registerLastName,
           email: registerEmail,

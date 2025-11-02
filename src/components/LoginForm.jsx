@@ -8,20 +8,23 @@ import styles from "./LoginForm.module.css";
 
 // Component Function
 function LoginForm() {
-  // Define Local State
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  // Initialize Hooks
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const authStatus = useSelector((state) => state.auth.status);
+  // Initialize Local State
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  //Initialize Global State
+  const { status } = useSelector((state) => state.auth);
+
+  // Automatically Navigate to Dashboard if Authenticated
   useEffect(() => {
-    if (authStatus === "authenticated") {
+    if (status === "AUTHENTICATED") {
       navigate("/", { replace: true });
     }
-  }, [authStatus]);
+  }, [status]);
 
   // Log In Button Handler
   const handleLogin = async (e) => {
@@ -65,15 +68,17 @@ function LoginForm() {
           <button type="submit">Log In</button>
         </div>
 
+        {/* Forgot Password Link */}
         <div>
           <Link to="/forgot_password" className={styles.textLink}>
             Forgot your Password?
           </Link>
         </div>
 
+        {/* Register Link */}
         <div>
           <Link to="/register" className={styles.textLink}>
-            Register a User
+            Register New Account
           </Link>
         </div>
       </form>
@@ -81,5 +86,5 @@ function LoginForm() {
   );
 }
 
-// Export
+// Export Component
 export default LoginForm;

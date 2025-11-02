@@ -1,26 +1,27 @@
 // Import Modules
 import styles from "./NavigationBar.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // Component Function
 function NavigationBar() {
-  const navigate = useNavigate();
+  // Initialize Hooks
   const dispatch = useDispatch();
 
-  const authStatus = useSelector((state) => state.auth.status);
+  // Initialize Global State
+  const { status } = useSelector((state) => state.auth);
 
+  // Log Out Button Handler
   function handleLogout() {
     dispatch({ type: "AUTH_LOGOUT" });
-    navigate("login");
   }
 
   // Render DOM
   return (
     <nav className={styles.navigation}>
       <div className={styles.navigationContainer}>
-        <div className={styles.navigationLogo}></div>
-        {authStatus === "authenticated" && (
+        <div className={styles.navigationLogo}>Logo</div>
+        {status === "AUTHENTICATED" && (
           <>
             <div className={styles.navigationMenuPages}>
               <Link to="/dashboard" className={styles.navigationLink}>

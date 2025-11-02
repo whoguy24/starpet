@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 
 // Component Function
 function Dashboard() {
-  const { currentUser } = useSelector((state) => state.auth);
+  // Initialize Global State
+  const { account } = useSelector((state) => state.auth);
 
   // Render DOM
   return (
@@ -14,7 +15,7 @@ function Dashboard() {
       <img src={logo} alt="StarPet Logo" className={styles.logo} />
       <div>
         <p>You are currently logged in as:</p>
-        <p>{currentUser?.email}</p>
+        <p>{account}</p>
       </div>
     </div>
   );

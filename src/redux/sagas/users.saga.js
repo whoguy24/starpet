@@ -17,32 +17,25 @@ import {
   firestoreDeleteDocument,
 } from "../../firebase/firestore";
 
-import { logout } from "../../firebase/auth.js";
+// Initialize Saga Channel to Subscribe to Firebase Events
+export function usersChannel() {
+  return eventChannel((emit) => {
+    const unsubscribe = firestoreListener("users", emit);
+    return () => unsubscribe();
+  });
+}
 
-// Initialize Listener
-function* usersListener() {
+// Initialize Firebase Listener
+export function* usersListener() {
   while (true) {
-    const { currentUser } = yield select((state) => state.auth);
-    if (currentUser) {
-      const channel = yield call(() =>
-        eventChannel((emit) => {
-          const unsubscribe = firestoreListener("users", emit);
-          return () => unsubscribe();
-        })
-      );
-      let lastIds = new Set();
-      const listenerTask = yield fork(function* () {
+    const { status } = yield select((state) => state.auth);
+    if (status === "AUTHENTICATED") {
+      const channel = yield call(usersChannel);
+      const subscribeUsers = yield fork(function* () {
         try {
           while (true) {
             const users = yield take(channel);
-            const ids = new Set(users.map((c) => c.id));
-            if (
-              ![...ids].every((id) => lastIds.has(id)) ||
-              ids.size !== lastIds.size
-            ) {
-              yield put({ type: "LOAD_USERS", payload: users });
-              lastIds = ids;
-            }
+            yield put({ type: "LOAD_USERS", payload: users });
           }
         } finally {
           if (yield cancelled()) {
@@ -51,9 +44,9 @@ function* usersListener() {
         }
       });
       yield take("AUTH_CLEAR");
-      yield cancel(listenerTask);
+      yield cancel(subscribeUsers);
     } else {
-      yield take("AUTH_LOAD");
+      yield take(["AUTH_LOAD", "AUTH_ERROR"]);
     }
   }
 }

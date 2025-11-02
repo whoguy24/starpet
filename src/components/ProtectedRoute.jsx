@@ -5,11 +5,13 @@ import { useSelector } from "react-redux";
 // Component Function
 export default function ProtectedRoute({ children }) {
   const { status } = useSelector((state) => state.auth);
-  if (status === "idle" || status === "loading") {
-    return null;
-  } else if (status !== "authenticated") {
-    return <Navigate to="/login" replace />;
-  } else {
+  if (status === "LOADING") {
+    <h2>Loading...</h2>;
+  }
+  if (status === "AUTHENTICATED") {
     return children;
+  }
+  if (status === "UNAUTHENTICATED") {
+    return <Navigate to="/login" replace />;
   }
 }
