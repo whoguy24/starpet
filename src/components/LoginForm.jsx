@@ -33,7 +33,6 @@ function LoginForm() {
       type: "AUTH_LOGIN",
       payload: { email, password },
     });
-    navigate("/", { replace: true });
   };
 
   // Render DOM

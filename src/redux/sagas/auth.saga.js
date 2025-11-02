@@ -1,4 +1,11 @@
-import { takeEvery, put, call, fork, take } from "redux-saga/effects";
+import {
+  takeEvery,
+  put,
+  call,
+  fork,
+  take,
+  cancelled,
+} from "redux-saga/effects";
 import { login, logout, register } from "../../firebase/auth.js";
 import { createAuthChannel } from "../../firebase/listeners";
 import { firestoreCreateDocument } from "../../firebase/firestore";
@@ -47,39 +54,24 @@ function* authLogout() {
 }
 
 // REGISTER
+// 1. Register New User Account in Firebase - Get firebaseID
+// 2. Create New User Document in Firestore with firebaseID
 function* authRegister(action) {
   const { first_name, last_name, email, password } = action.payload;
   try {
     const authUser = yield call(register, email, password);
     const firebaseID = authUser.user.uid;
-    const contact = {
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      //   phone: "",
-      //   address: {
-      //     street: "",
-      //     unit: "",
-      //     po_box: "",
-      //     city: "",
-      //     state: "",
-      //     zip_code: "",
-      //   },
-      active: true,
-    };
-    const contactID = yield call(firestoreCreateDocument, "contacts", contact);
     const user = {
       firebase_ID: firebaseID,
-      contact_ID: contactID,
       account: email,
-      display_name: `${first_name} ${last_name}`,
+      first_name: first_name,
+      last_name: last_name,
       role: "User",
       active: true,
     };
     const userID = yield call(firestoreCreateDocument, "users", user);
-    if (firebaseID && contactID && userID) {
-      console.log("New User Registered: ", firebaseID);
-      console.log("Contact Created: ", contactID);
+    if (firebaseID && userID) {
+      console.log("New Account Registered: ", firebaseID);
       console.log("User Created: ", userID);
     }
   } catch (error) {

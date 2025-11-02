@@ -59,10 +59,12 @@ export async function firestoreUpdateDocument(
     ...data,
     date_updated: serverTimestamp(),
   });
+  return documentID;
 }
 
 // DELETE
 export async function firestoreDeleteDocument(collectionName, documentID) {
   const documentReference = doc(db, collectionName, documentID);
   await deleteDoc(documentReference);
+  return documentID;
 }

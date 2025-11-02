@@ -1,69 +1,58 @@
 // Import Modules
 import {
-  put,
   takeLatest,
   call,
   fork,
   take,
   select,
   cancel,
-  cancelled,
 } from "redux-saga/effects";
-import { eventChannel } from "redux-saga";
 import {
-  firestoreListener,
   firestoreCreateDocument,
   firestoreUpdateDocument,
   firestoreDeleteDocument,
 } from "../../firebase/firestore";
+import { subscribeToCollection } from "../../firebase/listeners";
 
-// Initialize Listener
-function* contactsListener() {
+// READ / FETCH (Initialize Firestore Listener)
+export function* contactsListener() {
   while (true) {
-    const { currentUser } = yield select((state) => state.auth);
-    if (currentUser) {
-      const channel = yield call(() =>
-        eventChannel((emit) => {
-          const unsubscribe = firestoreListener("contacts", emit);
-          return () => unsubscribe();
-        })
+    const { status } = yield select((state) => state.auth);
+    if (status === "AUTHENTICATED") {
+      const task = yield fork(
+        subscribeToCollection,
+        "contacts",
+        "LOAD_CONTACTS"
       );
-      let lastIds = new Set();
-      const listenerTask = yield fork(function* () {
-        try {
-          while (true) {
-            const contacts = yield take(channel);
-            const ids = new Set(contacts.map((c) => c.id));
-            if (
-              ![...ids].every((id) => lastIds.has(id)) ||
-              ids.size !== lastIds.size
-            ) {
-              yield put({ type: "LOAD_CONTACTS", payload: contacts });
-              lastIds = ids;
-            }
-          }
-        } finally {
-          if (yield cancelled()) {
-            channel.close();
-          }
-        }
-      });
       yield take("AUTH_CLEAR");
-      yield cancel(listenerTask);
+      yield cancel(task);
     } else {
-      yield take("AUTH_LOAD");
+      yield take(["AUTH_LOAD", "AUTH_ERROR"]);
     }
   }
 }
 
-// Create Document
+// CREATE
 function* createContact(action) {
+  const { first_name, last_name, email, phone } = action.payload;
+  const contact = {
+    first_name: first_name,
+    last_name: last_name,
+    email: email,
+    phone: phone,
+    //   address: {
+    //     street: "",
+    //     unit: "",
+    //     po_box: "",
+    //     city: "",
+    //     state: "",
+    //     zip_code: "",
+    //   },
+    active: true,
+  };
   try {
-    const contactID = yield call(
-      firestoreCreateDocument,
-      "contacts",
-      action.payload
-    );
+    const contactID = yield call(firestoreCreateDocument, "contacts", contact);
+    console.log("Created Contact: ", contactID);
     return contactID;
   } catch (error) {
     console.log("Error creating document: ", error);
@@ -71,21 +60,26 @@ function* createContact(action) {
   }
 }
 
-// Update Document
+// UPDATE
 function* updateContact(action) {
   try {
+    // Don't update ID, date_created, these should be immutable
     const { id, date_created, ...data } = action.payload;
-    yield call(firestoreUpdateDocument, "contacts", id, data);
+    const contactID = yield call(firestoreUpdateDocument, "contacts", id, data);
+    console.log("Updated Contact: ", contactID);
+    return contactID;
   } catch (error) {
     console.log("Error updating document: ", error);
     throw error;
   }
 }
 
-// Delete Document
+// DELETE
 function* deleteContact(action) {
+  const { id } = action.payload;
   try {
-    yield call(firestoreDeleteDocument, "contacts", action.payload.id);
+    const contactID = yield call(firestoreDeleteDocument, "contacts", id);
+    console.log("Deleted Contact: ", contactID);
   } catch (error) {
     console.log("Error deleting document: ", error);
     throw error;
