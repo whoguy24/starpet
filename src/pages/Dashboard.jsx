@@ -12,8 +12,9 @@ function Dashboard() {
   // Render DOM
   return (
     <div>
-      <img src={logo} alt="StarPet Logo" className={styles.logo} />
+      {/* <img src={logo} alt="StarPet Logo" className={styles.logo} /> */}
       <div>
+        <h2>Welcome to StarPet!</h2>
         <p>You are currently logged in as:</p>
         <p>{account}</p>
       </div>

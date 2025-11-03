@@ -31,11 +31,11 @@ function App() {
       <div className="page">
         <Routes>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="*" element={<Navigate to="/NotFound" replace />} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
           <Route path="/login" element={<UserLogin />} />
           <Route path="/register" element={<UserRegistration />} />
           <Route path="/forgot_password" element={<UserResetPassword />} />
-          <Route path="/NotFound" element={<NotFound />} />
+          <Route path="/404" element={<NotFound />} />
           <Route
             path="/dashboard"
             element={
