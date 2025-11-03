@@ -1,11 +1,11 @@
 // Import Modules
-import styles from "./NavigationBar.module.css";
+import styles from "./Navigation.module.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import logo from "../assets/logos/logo_nav.svg";
+import logo from "../../assets/logos/logo_nav.svg";
 
 // Component Function
-function NavigationBar() {
+function Navigation() {
   // Initialize Hooks
   const dispatch = useDispatch();
 
@@ -57,4 +57,4 @@ function NavigationBar() {
 }
 
 // Export Component Function
-export default NavigationBar;
+export default Navigation;

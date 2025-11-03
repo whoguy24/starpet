@@ -1,14 +1,14 @@
 // Import Modules
-import LoginForm from "../components/LoginForm";
+import LoginForm from "./LoginForm";
 
 // Component Function
 function UserLogin() {
   return (
     <>
       <h2>Welcome to StarPet!</h2>
-      <LoginForm/>
+      <LoginForm />
     </>
   );
-};
+}
 
 export default UserLogin;

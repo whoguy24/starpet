@@ -1,14 +1,14 @@
 // Import Modules
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
-import ProtectedRoute from "../components/ProtectedRoute";
-import Dashboard from "../pages/Dashboard";
-import UserLogin from "../pages/UserLogin";
-import UserRegistration from "../pages/UserRegistration";
-import UserResetPassword from "../pages/UserResetPassword";
-import NavigationBar from "../components/NavigationBar";
-import NotFound from "../pages/NotFound";
-import Contacts from "../pages/Contacts";
+import ProtectedRoute from "../components/Navigation/ProtectedRoute";
+import Dashboard from "../components/Dashboard/Dashboard";
+import UserLogin from "../components/User/UserLogin";
+import UserRegistration from "../components/User/UserRegistration";
+import UserResetPassword from "../components/User/UserResetPassword";
+import Navigation from "../components/Navigation/Navigation";
+import NotFound from "../components/Navigation/NotFound";
+import Contacts from "../components/Contacts/Contacts";
 import config from "./config";
 
 // Import CSS
@@ -27,7 +27,7 @@ function App() {
   // Render DOM
   return (
     <>
-      <NavigationBar />
+      <Navigation />
       <div className="page">
         <Routes>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
