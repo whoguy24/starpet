@@ -1,4 +1,5 @@
 // Import Modules
+import styles from "./Template.module.css";
 
 // Component Function
 function Template() {

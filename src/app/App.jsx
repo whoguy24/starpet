@@ -8,6 +8,8 @@ import UserRegistration from "../components/User/UserRegistration";
 import UserResetPassword from "../components/User/UserResetPassword";
 import Navigation from "../components/Navigation/Navigation";
 import NotFound from "../components/Navigation/NotFound";
+import Footer from "../components/Navigation/Footer";
+import Animals from "../components/Animals/Animals";
 import Contacts from "../components/Contacts/Contacts";
 import config from "./config";
 
@@ -27,32 +29,47 @@ function App() {
   // Render DOM
   return (
     <>
-      <Navigation />
-      <div className="page">
-        <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="*" element={<Navigate to="/404" replace />} />
-          <Route path="/login" element={<UserLogin />} />
-          <Route path="/register" element={<UserRegistration />} />
-          <Route path="/forgot_password" element={<UserResetPassword />} />
-          <Route path="/404" element={<NotFound />} />
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/contacts"
-            element={
-              <ProtectedRoute>
-                <Contacts />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
+      <div className="app">
+        <header>
+          <Navigation />
+        </header>
+        <main className="app-content">
+          <Routes>
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="*" element={<Navigate to="/404" replace />} />
+            <Route path="/login" element={<UserLogin />} />
+            <Route path="/register" element={<UserRegistration />} />
+            <Route path="/forgot_password" element={<UserResetPassword />} />
+            <Route path="/404" element={<NotFound />} />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/animals"
+              element={
+                <ProtectedRoute>
+                  <Animals />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/contacts"
+              element={
+                <ProtectedRoute>
+                  <Contacts />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </main>
+        <footer>
+          <Footer />
+        </footer>
       </div>
     </>
   );

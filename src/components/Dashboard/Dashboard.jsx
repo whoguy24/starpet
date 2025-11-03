@@ -8,7 +8,7 @@ function Dashboard() {
   return (
     <div className={styles.dashboardPage}>
       <div>
-        <h2>Welcome to StarPet!</h2>
+        <h2 className={styles.dashboardHeader}>Welcome to StarPet!</h2>
         <p>Click one of the links below to begin:</p>
         <div className={styles.dashboardLinks}>
           <Link to="/animals">Animals</Link>

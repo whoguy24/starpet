@@ -1,7 +1,8 @@
 // Import Modules
+import styles from "./Animals.module.css";
 
 // Component Function
-function Template() {
+function Animals() {
   // Initialize Hooks
 
   // Initialize Global State
@@ -9,8 +10,8 @@ function Template() {
   // Handler Functions
 
   // Render DOM
-  return <div>Template</div>;
+  return <div>Animals</div>;
 }
 
 // Export Component Function
-export default Template;
+export default Animals;

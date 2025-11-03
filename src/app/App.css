@@ -1,21 +1,13 @@
-#root {
-  text-align: center;
-  background-color: white;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
+.app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 30px;     
-  width: 100%;
-  margin-inline: auto;
+.app-content {
+  flex: 1;
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  transition: none;
 }
