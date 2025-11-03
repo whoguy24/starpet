@@ -35,36 +35,20 @@ function App() {
         </header>
         <main className="app-content">
           <Routes>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="*" element={<Navigate to="/404" replace />} />
+            {/* Public Routes */}
             <Route path="/login" element={<UserLogin />} />
             <Route path="/register" element={<UserRegistration />} />
             <Route path="/forgot_password" element={<UserResetPassword />} />
             <Route path="/404" element={<NotFound />} />
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/animals"
-              element={
-                <ProtectedRoute>
-                  <Animals />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/contacts"
-              element={
-                <ProtectedRoute>
-                  <Contacts />
-                </ProtectedRoute>
-              }
-            />
+            {/* Redirects */}
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="*" element={<Navigate to="/404" replace />} />
+            {/* Protected Routes */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/animals" element={<Animals />} />
+              <Route path="/contacts" element={<Contacts />} />
+            </Route>
           </Routes>
         </main>
         <footer>

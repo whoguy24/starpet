@@ -1,17 +1,18 @@
 // Import Modules
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 // Component Function
-export default function ProtectedRoute({ children }) {
+export default function ProtectedRoute() {
   const { status } = useSelector((state) => state.auth);
-  if (status === "LOADING") {
-    <h2>Loading...</h2>;
-  }
+
   if (status === "AUTHENTICATED") {
-    return children;
+    return <Outlet />;
   }
+
   if (status === "UNAUTHENTICATED") {
     return <Navigate to="/login" replace />;
   }
+
+  return <Outlet />;
 }
