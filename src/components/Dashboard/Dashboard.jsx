@@ -1,22 +1,20 @@
 //Import Modules
-// import logo from "../assets/logo_large.png";
+import { Link } from "react-router-dom";
 import styles from "./Dashboard.module.css";
-
-import { useSelector } from "react-redux";
 
 // Component Function
 function Dashboard() {
-  // Initialize Global State
-  const { account } = useSelector((state) => state.auth);
-
   // Render DOM
   return (
-    <div>
-      {/* <img src={logo} alt="StarPet Logo" className={styles.logo} /> */}
+    <div className={styles.dashboardPage}>
       <div>
         <h2>Welcome to StarPet!</h2>
-        <p>You are currently logged in as:</p>
-        <p>{account}</p>
+        <p>Click one of the links below to begin:</p>
+        <div className={styles.dashboardLinks}>
+          <Link to="/animals">Animals</Link>
+          <Link to="/contacts">Contacts</Link>
+          <Link to="/projects">Projects</Link>
+        </div>
       </div>
     </div>
   );
