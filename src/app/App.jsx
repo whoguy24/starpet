@@ -1,6 +1,5 @@
 // Import Modules
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect } from "react";
 import ProtectedRoute from "../components/Navigation/ProtectedRoute";
 import Dashboard from "../components/Dashboard/Dashboard";
 import UserLogin from "../components/User/UserLogin";
@@ -10,22 +9,16 @@ import Navigation from "../components/Navigation/Navigation";
 import NotFound from "../components/Navigation/NotFound";
 import Footer from "../components/Navigation/Footer";
 import Animals from "../components/Animals/Animals";
+import AnimalsCategory from "../components/Animals/AnimalsCategory";
+import AnimalsGallery from "../components/Animals/AnimalsGallery";
+import AnimalsDetail from "../components/Animals/AnimalsDetail";
 import Contacts from "../components/Contacts/Contacts";
-import config from "./config";
 
 // Import CSS
 import "./App.css";
 
 // Component Function
 function App() {
-  // Print Configuration Log to Console
-  // (VITE_VERBOSE_LOG = true/false) in src/.env
-  useEffect(() => {
-    if (config.app_verbose_log === "true") {
-      console.log(config.log());
-    }
-  }, []);
-
   // Render DOM
   return (
     <>
@@ -46,7 +39,12 @@ function App() {
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/animals" element={<Animals />} />
+              <Route path="/animals" element={<Animals />}>
+                <Route index element={<Navigate to="categories" replace />} />
+                <Route path="categories" element={<AnimalsCategory />} />
+                <Route path=":category" element={<AnimalsGallery />} />
+                <Route path=":category/:id" element={<AnimalsDetail />} />
+              </Route>
               <Route path="/contacts" element={<Contacts />} />
             </Route>
           </Routes>
