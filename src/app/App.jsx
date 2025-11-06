@@ -18,6 +18,8 @@ import Contacts from "../components/Contacts/Contacts";
 // Import CSS
 import "./App.css";
 
+// Routes: Dogs, Cats, Horses, Livestock, Small Pets, Other
+
 // Component Function
 function App() {
   // Render DOM

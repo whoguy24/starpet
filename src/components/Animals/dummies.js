@@ -37,7 +37,7 @@ export const dummyAnimals = {
     { id: 29, name: "Rusty" },
     { id: 30, name: "Maple" },
   ],
-  wildlife: [
+  small_animals: [
     { id: 31, name: "Fox" },
     { id: 32, name: "Deer" },
     { id: 33, name: "Raven" },
@@ -45,7 +45,7 @@ export const dummyAnimals = {
     { id: 35, name: "Hawk" },
     { id: 36, name: "Badger" },
   ],
-  exotic: [
+  other: [
     { id: 37, name: "Zara the Zebra" },
     { id: 38, name: "Kumo the Koala" },
     { id: 39, name: "Rafi the Giraffe" },

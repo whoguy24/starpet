@@ -10,8 +10,8 @@ function AnimalsCategory() {
     { name: "Cats", route: "cats" },
     { name: "Horses", route: "horses" },
     { name: "Livestock", route: "livestock" },
-    { name: "Wildlife", route: "wildlife" },
-    { name: "Exotic", route: "exotic" },
+    { name: "Small Animals", route: "small_animals" },
+    { name: "Other", route: "other" },
   ];
   // Render DOM
   return (
