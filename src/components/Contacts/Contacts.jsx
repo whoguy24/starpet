@@ -65,7 +65,7 @@ function Contacts() {
   return (
     <div className={styles.contactsContainer}>
       {/* Hide for now */}
-      {/* <form onSubmit={handleCreateContact} className={styles.newContactForm}>
+      <form onSubmit={handleCreateContact} className={styles.newContactForm}>
         <input
           placeholder="First Name"
           value={firstName}
@@ -159,7 +159,7 @@ function Contacts() {
             </tr>
           ))}
         </tbody>
-      </table> */}
+      </table>
     </div>
   );
 }

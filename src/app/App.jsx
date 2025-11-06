@@ -6,6 +6,7 @@ import UserLogin from "../components/User/UserLogin";
 import UserRegistration from "../components/User/UserRegistration";
 import UserResetPassword from "../components/User/UserResetPassword";
 import Navigation from "../components/Navigation/Navigation";
+import Breadcrumb from "../components/Navigation/Breadcrumb";
 import NotFound from "../components/Navigation/NotFound";
 import Footer from "../components/Navigation/Footer";
 import Animals from "../components/Animals/Animals";
@@ -25,6 +26,7 @@ function App() {
       <div className="app">
         <header>
           <Navigation />
+          <Breadcrumb />
         </header>
         <main className="app-content">
           <Routes>
