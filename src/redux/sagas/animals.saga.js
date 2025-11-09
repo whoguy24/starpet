@@ -19,11 +19,7 @@ export function* animalsListener() {
   while (true) {
     const { status } = yield select((state) => state.auth);
     if (status === "AUTHENTICATED") {
-      const task = yield fork(
-        subscribeToCollection,
-        "animals",
-        "LOAD_ANIMALS"
-      );
+      const task = yield fork(subscribeToCollection, "animals", "LOAD_ANIMALS");
       yield take("AUTH_CLEAR");
       yield cancel(task);
     } else {
@@ -33,27 +29,15 @@ export function* animalsListener() {
 }
 
 // CREATE
-function* createContact(action) {
-  const { first_name, last_name, email, phone } = action.payload;
-  const contact = {
-    first_name: first_name,
-    last_name: last_name,
-    email: email,
-    phone: phone,
-    //   address: {
-    //     street: "",
-    //     unit: "",
-    //     po_box: "",
-    //     city: "",
-    //     state: "",
-    //     zip_code: "",
-    //   },
-    active: true,
-  };
+function* createAnimal(action) {
   try {
-    const contactID = yield call(firestoreCreateDocument, "contacts", contact);
-    console.log("Created Contact: ", contactID);
-    return contactID;
+    const animalID = yield call(
+      firestoreCreateDocument,
+      "animals",
+      action.payload
+    );
+    console.log("Created Animal: ", animalID);
+    return animalID;
   } catch (error) {
     console.log("Error creating document: ", error);
     throw error;
@@ -61,13 +45,13 @@ function* createContact(action) {
 }
 
 // UPDATE
-function* updateContact(action) {
+function* updateAnimal(action) {
   try {
     // Don't update ID, date_created, these should be immutable
     const { id, date_created, ...data } = action.payload;
-    const contactID = yield call(firestoreUpdateDocument, "contacts", id, data);
-    console.log("Updated Contact: ", contactID);
-    return contactID;
+    const animalID = yield call(firestoreUpdateDocument, "animals", id, data);
+    console.log("Updated Animal: ", animalID);
+    return animalID;
   } catch (error) {
     console.log("Error updating document: ", error);
     throw error;
@@ -75,11 +59,11 @@ function* updateContact(action) {
 }
 
 // DELETE
-function* deleteContact(action) {
+function* deleteAnimal(action) {
   const { id } = action.payload;
   try {
-    const contactID = yield call(firestoreDeleteDocument, "contacts", id);
-    console.log("Deleted Contact: ", contactID);
+    const animalID = yield call(firestoreDeleteDocument, "animals", id);
+    console.log("Deleted Animal: ", animalID);
   } catch (error) {
     console.log("Error deleting document: ", error);
     throw error;
@@ -87,12 +71,12 @@ function* deleteContact(action) {
 }
 
 // Combine Saga Functions
-function* contactsSaga() {
-  yield fork(contactsListener);
-  yield takeLatest("CREATE_CONTACT", createContact);
-  yield takeLatest("UPDATE_CONTACT", updateContact);
-  yield takeLatest("DELETE_CONTACT", deleteContact);
+function* animalsSaga() {
+  yield fork(animalsListener);
+  yield takeLatest("CREATE_ANIMAL", createAnimal);
+  yield takeLatest("UPDATE_ANIMAL", updateAnimal);
+  yield takeLatest("DELETE_ANIMAL", deleteAnimal);
 }
 
 // Export Module
-export default contactsSaga;
+export default animalsSaga;
