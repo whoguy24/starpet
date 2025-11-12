@@ -15,6 +15,7 @@ export const animalCategories = {
     medium_hair: "Medium Hair",
     long_hair: "Long Hair",
     hairless: "Hairless",
+    other: "Other",
   },
   horse: {
     riding: "Riding",
@@ -28,6 +29,7 @@ export const animalCategories = {
     sheep: "Sheep",
     pig: "Pig",
     goat: "Goat",
+    llama_alpaca: "Llama/Alpaca",
     poultry: "Poultry",
     other: "Other",
   },
