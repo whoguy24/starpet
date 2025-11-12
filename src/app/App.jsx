@@ -21,40 +21,58 @@ import "./App.css";
 
 // Component Function
 function App() {
-  // Render DOM
-  return (
-    <>
-      <div className="app">
-        <header>
-          <Navigation />
-          <Breadcrumb />
-        </header>
-        <main className="app-content">
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/login" element={<UserLogin />} />
-            <Route path="/register" element={<UserRegistration />} />
-            <Route path="/forgot_password" element={<UserResetPassword />} />
-            <Route path="/404" element={<NotFound />} />
-            {/* Redirects */}
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="*" element={<Navigate to="/404" replace />} />
-            {/* Protected Routes */}
-            <Route element={<ProtectedRoute />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/animals" element={<Animals />} />
-              <Route path="/animals/:type" element={<AnimalsGallery />} />
-              <Route path="/animals/:type/:id" element={<AnimalsDetail />} />
-              <Route path="/contacts" element={<Contacts />} />
-            </Route>
-          </Routes>
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </div>
-    </>
-  );
+    // Render DOM
+    return (
+        <>
+            <div className="app">
+                <header>
+                    <Navigation />
+                    <Breadcrumb />
+                </header>
+                <main className="app-content">
+                    <Routes>
+                        {/* Public Routes */}
+                        <Route path="/login" element={<UserLogin />} />
+                        <Route
+                            path="/register"
+                            element={<UserRegistration />}
+                        />
+                        <Route
+                            path="/forgot_password"
+                            element={<UserResetPassword />}
+                        />
+                        <Route path="/404" element={<NotFound />} />
+                        {/* Redirects */}
+                        <Route
+                            path="/"
+                            element={<Navigate to="/dashboard" replace />}
+                        />
+                        <Route
+                            path="*"
+                            element={<Navigate to="/404" replace />}
+                        />
+                        {/* Protected Routes */}
+                        <Route element={<ProtectedRoute />}>
+                            <Route path="/dashboard" element={<Dashboard />} />
+                            <Route path="/animals" element={<Animals />} />
+                            <Route
+                                path="/animals/:type"
+                                element={<AnimalsGallery />}
+                            />
+                            <Route
+                                path="/animals/:type/:id"
+                                element={<AnimalsDetail />}
+                            />
+                            <Route path="/contacts" element={<Contacts />} />
+                        </Route>
+                    </Routes>
+                </main>
+                <footer>
+                    <Footer />
+                </footer>
+            </div>
+        </>
+    );
 }
 
 // Export Component Function

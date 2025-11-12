@@ -1,5 +1,5 @@
 // Animal Types Module
-export const animalTypes = [
+export const types = [
     {
         key: "dog",
         singular: "Dog",

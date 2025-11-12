@@ -1,30 +1,49 @@
 // Import Modules
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styles from "./AnimalsGallery.module.css";
-
-import dogs from "../../../db_desc/dogs_dummy" with { type: "json" };
+import { types } from "../../enums/animals/types";
 
 // Component Function
 function AnimalsGallery() {
+    // Define Redux State
+    const animals = useSelector((state) => state.animals);
 
-  const { category } = useParams();
-  const [animals, setAnimals] = useState([]);
+    // Filter Animals Based on Type From URL
+    const { type } = useParams();
+    const typeKey = types.find((types) => types.navigation === type)?.key;
 
-  useEffect(() => {
-    setAnimals(dogs[category] || []);
-  }, [category]);
+    // Define Local State
+    const [animalsTable, setAnimalsTable] = useState([]);
 
-  // Render DOM
-  return (
-    <div>
-      {dogs.map((animal) => (
-        <Link key={animal.id} to={`/animals/${category}/${animal.id}`}>
-          <h3>{animal.name}</h3>
-        </Link>
-      ))}
-    </div>
-  );
+    useEffect(() => {
+        setAnimalsTable(
+            animals.filter((animal) => animal.enum_type === typeKey),
+        );
+    }, [animals, typeKey]);
+
+    // Render DOM
+    return (
+        <div>
+            <table border="1" cellPadding="8" cellSpacing="0">
+                <thead>
+                    <tr>
+                        <th>Animal Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {animalsTable?.map((animal) => (
+                        <tr key={animal.id}>
+                            <td>
+                                <span>{animal.name}</span>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
 }
 
 // Export Component Function

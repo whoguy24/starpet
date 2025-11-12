@@ -1,5 +1,5 @@
 // Animal Categories Module
-export const animalCategories = {
+export const categories = {
     dog: [
         { key: "sporting", label: "Sporting" },
         { key: "hound", label: "Hound" },
