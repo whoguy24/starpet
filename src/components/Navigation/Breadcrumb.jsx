@@ -1,21 +1,23 @@
 // Import Modules
 import styles from "./Breadcrumb.module.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
+// import { useSelector } from "react-redux";
+// import { types } from "../../enums/animals/types";
 
 // Component Function
 function Breadcrumb() {
+    // Define Route Labels
+    const routes = [
+        { key: "dashboard", label: "Dashboard" },
+        { key: "animals", label: "Animals" },
+        { key: "contacts", label: "Contacts" },
+        { key: "users", label: "Users" },
+        { key: "projects", label: "Projects" },
+    ];
 
-  // Render DOM
-  return <div className={styles.container}>
-      <Link to={"/dashboard"}>Home</Link>
-      <span>/</span>
-      <Link to={"/animals"}>Animals</Link>
-      <span>/</span>
-      <Link to={"/animals/dogs"}>Dogs</Link>
-      <span>/</span>
-      <Link to={"/animals/dogs/1"}>Buddy</Link>
-    </div>;
-
+    // Render DOM
+    return <></>;
 }
 
 // Export Component Function

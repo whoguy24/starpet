@@ -18,15 +18,15 @@ function AnimalsDetail() {
     // Render DOM
     return (
         <div>
-            <h4>Name: {animalData.name}</h4>
-            <p>Description: {animalData.description}</p>
-            <p>Type: {animalData.enum_type}</p>
-            <p>Category: {animalData.enum_category}</p>
-            <p>Breed: {animalData.enum_breed}</p>
-            <p>Sex: {animalData.enum_sex}</p>
-            <p>Flag: {animalData.enum_flag}</p>
-            <p>Color: {animalData.color}</p>
-            <p>Notes: {animalData.notes}</p>
+            <h4>Name: {animalData?.name}</h4>
+            <p>Description: {animalData?.description}</p>
+            <p>Type: {animalData?.enum_type}</p>
+            <p>Category: {animalData?.enum_category}</p>
+            <p>Breed: {animalData?.enum_breed}</p>
+            <p>Sex: {animalData?.enum_sex}</p>
+            <p>Flag: {animalData?.enum_flag}</p>
+            <p>Color: {animalData?.color}</p>
+            <p>Notes: {animalData?.notes}</p>
         </div>
     );
 }
