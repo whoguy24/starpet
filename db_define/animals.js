@@ -1,7 +1,8 @@
 // Data Structure - Animals
-const animals = {
+export const animals = {
     animal_ID: String,
     contact_ID: String,
+    url_image: String,
     date_created: Date,
     date_updated: Date,
     name: String,
@@ -11,7 +12,7 @@ const animals = {
     enum_sex: String,
     enum_size: String,
     enum_flag: String,
-    breed_optional: String,
+    description: String,
     color: String,
     birth_year: Int,
     height: Int,
