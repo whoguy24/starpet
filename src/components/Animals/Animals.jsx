@@ -8,7 +8,7 @@ function Animals() {
   // Render DOM
   return (
     <div>
-      <Outlet />
+      <AnimalsCategory />
     </div>
   );
 }

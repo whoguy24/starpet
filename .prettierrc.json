@@ -1,0 +1,14 @@
+{
+  "printWidth": 80,
+  "tabWidth": 4,
+  "useTabs": false,
+  "singleQuote": false,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "semi": true,
+  "arrayBracketNewline": "always",
+  "objectCurlyNewline": "always",
+  "proseWrap": "always",
+  "endOfLine": "lf"
+}

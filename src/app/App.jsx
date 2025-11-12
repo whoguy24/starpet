@@ -10,7 +10,6 @@ import Breadcrumb from "../components/Navigation/Breadcrumb";
 import NotFound from "../components/Navigation/NotFound";
 import Footer from "../components/Navigation/Footer";
 import Animals from "../components/Animals/Animals";
-import AnimalsCategory from "../components/Animals/AnimalsCategory";
 import AnimalsGallery from "../components/Animals/AnimalsGallery";
 import AnimalsDetail from "../components/Animals/AnimalsDetail";
 import Contacts from "../components/Contacts/Contacts";
@@ -43,12 +42,9 @@ function App() {
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/animals" element={<Animals />}>
-                <Route index element={<Navigate to="categories" replace />} />
-                <Route path="categories" element={<AnimalsCategory />} />
-                <Route path=":category" element={<AnimalsGallery />} />
-                <Route path=":category/:id" element={<AnimalsDetail />} />
-              </Route>
+              <Route path="/animals" element={<Animals />} />
+              <Route path="/animals/:type" element={<AnimalsGallery />} />
+              <Route path="/animals/:type/:id" element={<AnimalsDetail />} />
               <Route path="/contacts" element={<Contacts />} />
             </Route>
           </Routes>
