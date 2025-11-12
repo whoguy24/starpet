@@ -1,0 +1,49 @@
+// Animal Categories Module
+export const animalCategories = {
+  dog: {
+    sporting: "Sporting",
+    hound: "Hound",
+    working: "Working",
+    terrier: "Terrier",
+    toy: "Toy",
+    non_sporting: "Non-Sporting",
+    herding: "Herding",
+    other: "Other",
+  },
+  cat: {
+    short_hair: "Short Hair",
+    medium_hair: "Medium Hair",
+    long_hair: "Long Hair",
+    hairless: "Hairless",
+  },
+  horse: {
+    riding: "Riding",
+    working: "Working",
+    pony: "Pony",
+    miniature: "Miniature",
+    other: "Other",
+  },
+  livestock: {
+    cattle: "Cattle",
+    sheep: "Sheep",
+    pig: "Pig",
+    goat: "Goat",
+    poultry: "Poultry",
+    other: "Other",
+  },
+  small_pet: {
+    bird: "Bird",
+    hamster: "Hamster",
+    bunny: "Bunny",
+    guinea_pig: "Guinea Pig",
+    mouse: "Mouse",
+    rat: "Rat",
+    ferret: "Ferret",
+    other: "Other",
+  },
+  other: {
+    wildlife: "Wildlife",
+    exotic: "Exotic",
+    other: "Other",
+  },
+};
