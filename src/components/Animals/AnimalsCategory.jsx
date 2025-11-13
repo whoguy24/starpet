@@ -14,7 +14,7 @@ function AnimalsCategory() {
                     {types.map((type) => (
                         <Link
                             key={type.navigation}
-                            to={`/animals/${type.navigation}`}
+                            to={`/home/animals/${type.navigation}`}
                         >
                             {type.plural}
                         </Link>

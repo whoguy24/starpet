@@ -1,7 +1,8 @@
 // Import Modules
 import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "../components/Navigation/ProtectedRoute";
-import Dashboard from "../components/Dashboard/Dashboard";
+import Home from "../components/Home/Home";
+import UnderConstruction from "../components/Navigation/UnderConstruction";
 import UserLogin from "../components/User/UserLogin";
 import UserRegistration from "../components/User/UserRegistration";
 import UserResetPassword from "../components/User/UserResetPassword";
@@ -31,6 +32,16 @@ function App() {
                 </header>
                 <main className="app-content">
                     <Routes>
+                        {/* Redirects */}
+                        <Route
+                            path="/"
+                            element={<Navigate to="/home" replace />}
+                        />
+                        <Route
+                            path="*"
+                            element={<Navigate to="/404" replace />}
+                        />
+
                         {/* Public Routes */}
                         <Route path="/login" element={<UserLogin />} />
                         <Route
@@ -42,28 +53,28 @@ function App() {
                             element={<UserResetPassword />}
                         />
                         <Route path="/404" element={<NotFound />} />
-                        {/* Redirects */}
-                        <Route
-                            path="/"
-                            element={<Navigate to="/dashboard" replace />}
-                        />
-                        <Route
-                            path="*"
-                            element={<Navigate to="/404" replace />}
-                        />
+
                         {/* Protected Routes */}
+
                         <Route element={<ProtectedRoute />}>
-                            <Route path="/dashboard" element={<Dashboard />} />
-                            <Route path="/animals" element={<Animals />} />
+                            <Route path="/home" element={<Home />} />
+                            <Route path="/home/animals" element={<Animals />} />
                             <Route
-                                path="/animals/:type"
+                                path="/home/animals/:type"
                                 element={<AnimalsGallery />}
                             />
                             <Route
-                                path="/animals/:type/:id"
+                                path="/home/animals/:type/:id"
                                 element={<AnimalsDetail />}
                             />
-                            <Route path="/contacts" element={<Contacts />} />
+                            <Route
+                                path="/home/contacts"
+                                element={<Contacts />}
+                            />
+                            <Route
+                                path="/home/projects"
+                                element={<UnderConstruction />}
+                            />
                         </Route>
                     </Routes>
                 </main>

@@ -7,15 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 
 // Component Function
 function Breadcrumb() {
-    // Define Route Labels
-    const routes = [
-        { key: "dashboard", label: "Dashboard" },
-        { key: "animals", label: "Animals" },
-        { key: "contacts", label: "Contacts" },
-        { key: "users", label: "Users" },
-        { key: "projects", label: "Projects" },
-    ];
-
+    const { pathname } = useLocation();
     // Render DOM
     return <></>;
 }

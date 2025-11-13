@@ -36,7 +36,7 @@ function AnimalsGallery() {
                     {animalsTable?.map((animal) => (
                         <tr key={animal.id}>
                             <td>
-                                <Link to={`/animals/${type}/${animal.id}`}>
+                                <Link to={`/home/animals/${type}/${animal.id}`}>
                                     {animal.name}
                                 </Link>
                             </td>
