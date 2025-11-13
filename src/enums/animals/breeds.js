@@ -2,10 +2,7 @@
 export const breeds = {
     dog: {
         sporting: [
-            {
-                key: "american_water_spaniel",
-                label: "American Water Spaniel",
-            },
+            { key: "american_water_spaniel", label: "American Water Spaniel" },
             { key: "barbet", label: "Barbet" },
             { key: "boykin_spaniel", label: "Boykin Spaniel" },
             { key: "bracco_italiano", label: "Bracco Italiano" },

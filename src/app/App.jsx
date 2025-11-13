@@ -18,8 +18,6 @@ import Contacts from "../components/Contacts/Contacts";
 // Import CSS
 import "./App.css";
 
-// Routes: Dogs, Cats, Horses, Livestock, Small Pets, Other
-
 // Component Function
 function App() {
     // Render DOM
@@ -33,25 +31,13 @@ function App() {
                 <main className="app-content">
                     <Routes>
                         {/* Redirects */}
-                        <Route
-                            path="/"
-                            element={<Navigate to="/home" replace />}
-                        />
-                        <Route
-                            path="*"
-                            element={<Navigate to="/404" replace />}
-                        />
+                        <Route path="/" element={<Navigate to="/home" replace />} />
+                        <Route path="*" element={<Navigate to="/404" replace />} />
 
                         {/* Public Routes */}
                         <Route path="/login" element={<UserLogin />} />
-                        <Route
-                            path="/register"
-                            element={<UserRegistration />}
-                        />
-                        <Route
-                            path="/forgot_password"
-                            element={<UserResetPassword />}
-                        />
+                        <Route path="/register" element={<UserRegistration />} />
+                        <Route path="/forgot_password" element={<UserResetPassword />} />
                         <Route path="/404" element={<NotFound />} />
 
                         {/* Protected Routes */}
@@ -59,22 +45,10 @@ function App() {
                         <Route element={<ProtectedRoute />}>
                             <Route path="/home" element={<Home />} />
                             <Route path="/home/animals" element={<Animals />} />
-                            <Route
-                                path="/home/animals/:type"
-                                element={<AnimalsGallery />}
-                            />
-                            <Route
-                                path="/home/animals/:type/:id"
-                                element={<AnimalsDetail />}
-                            />
-                            <Route
-                                path="/home/contacts"
-                                element={<Contacts />}
-                            />
-                            <Route
-                                path="/home/projects"
-                                element={<UnderConstruction />}
-                            />
+                            <Route path="/home/animals/:type" element={<AnimalsGallery />} />
+                            <Route path="/home/animals/:type/:id" element={<AnimalsDetail />} />
+                            <Route path="/home/contacts" element={<Contacts />} />
+                            <Route path="/home/projects" element={<UnderConstruction />} />
                         </Route>
                     </Routes>
                 </main>

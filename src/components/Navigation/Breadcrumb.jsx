@@ -21,9 +21,7 @@ function Breadcrumb() {
         let path = "/" + pathArray.slice(0, index + 1).join("/");
 
         // Human Readable Label
-        let label = segment
-            .replace(/-/g, " ")
-            .replace(/\b\w/g, (c) => c.toUpperCase());
+        let label = segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
         // If Path Object is Firestore ID, Find Name From Redux Store
         if (/^[A-Za-z0-9]{20,}$/.test(segment)) {
@@ -43,12 +41,16 @@ function Breadcrumb() {
     // Render DOM
     return (
         <>
-            {breadcrumbs.map((breadcrumb, idx) => (
-                <span key={breadcrumb.path}>
-                    {idx > 0 && <span>/</span>}
-                    <Link to={breadcrumb.path}>{breadcrumb.label}</Link>
-                </span>
-            ))}
+            {pathname !== "/home" && (
+                <>
+                    {breadcrumbs.map((breadcrumb, idx) => (
+                        <span key={breadcrumb.path}>
+                            {idx > 0 && <span>/</span>}
+                            <Link to={breadcrumb.path}>{breadcrumb.label}</Link>
+                        </span>
+                    ))}
+                </>
+            )}
         </>
     );
 }

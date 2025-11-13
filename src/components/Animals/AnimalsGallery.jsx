@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "./AnimalsGallery.module.css";
 import { types } from "../../enums/animals/types";
+import Card from "../Navigation/Card";
 
 // Component Function
 function AnimalsGallery() {
@@ -12,38 +13,30 @@ function AnimalsGallery() {
 
     // Filter Animals Based on Type From URL
     const { type } = useParams();
-    const typeKey = types.find((types) => types.navigation === type)?.key;
+
+    const key = types.find((types) => types.route === type)?.key;
+    const title = types.find((types) => types.route === type)?.plural;
 
     // Define Local State
     const [animalsTable, setAnimalsTable] = useState([]);
 
     useEffect(() => {
-        setAnimalsTable(
-            animals.filter((animal) => animal.enum_type === typeKey),
-        );
-    }, [animals, typeKey]);
+        setAnimalsTable(animals.filter((animal) => animal.enum_type === key));
+    }, [animals, key]);
 
     // Render DOM
     return (
-        <div>
-            <table border="1" cellPadding="8" cellSpacing="0">
-                <thead>
-                    <tr>
-                        <th>Animal Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {animalsTable?.map((animal) => (
-                        <tr key={animal.id}>
-                            <td>
-                                <Link to={`/home/animals/${type}/${animal.id}`}>
-                                    {animal.name}
-                                </Link>
-                            </td>
-                        </tr>
+        <div className={styles.container}>
+            <div>
+                <div className={styles.header}>
+                    <h2>{title}</h2>
+                </div>
+                <div className={styles.links}>
+                    {animalsTable.map((animal) => (
+                        <Card key={animal.id} path={`/home/animals/dogs/${animal.id}`} title={animal.name} />
                     ))}
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
     );
 }

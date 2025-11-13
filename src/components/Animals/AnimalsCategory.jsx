@@ -1,7 +1,6 @@
 // Import Modules
-import { Link } from "react-router-dom";
 import styles from "./AnimalsCategory.module.css";
-import { types } from "../../enums/animals/types";
+import Card from "../Navigation/Card";
 
 // Component Function
 function AnimalsCategory() {
@@ -11,14 +10,12 @@ function AnimalsCategory() {
             <div>
                 <h2 className={styles.header}>Animals</h2>
                 <div className={styles.links}>
-                    {types.map((type) => (
-                        <Link
-                            key={type.navigation}
-                            to={`/home/animals/${type.navigation}`}
-                        >
-                            {type.plural}
-                        </Link>
-                    ))}
+                    <Card path={"/home/animals/dogs"} title={"Dogs"} />
+                    <Card path={"/home/animals/cats"} title={"Cats"} />
+                    <Card path={"/home/animals/horses"} title={"Horses"} />
+                    <Card path={"/home/animals/livestock"} title={"Livestock"} />
+                    <Card path={"/home/animals/small-pets"} title={"Small Pets"} />
+                    <Card path={"/home/animals/other"} title={"Other"} />
                 </div>
             </div>
         </div>
