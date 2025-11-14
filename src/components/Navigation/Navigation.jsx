@@ -22,7 +22,7 @@ function Navigation() {
         <nav className={styles.navigation}>
             <div className={styles.navigationContainer}>
                 <div className={styles.navigationLogo}>
-                    <Link to="/home/dashboard">
+                    <Link to="/home">
                         <img
                             className={styles.navigationLogo}
                             src={logo}
