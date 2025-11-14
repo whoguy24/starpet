@@ -6,14 +6,14 @@ import styles from "./AnimalsGallery.module.css";
 import { types } from "../../enums/animals/types";
 import { categories } from "../../enums/animals/categories";
 import Card from "../Navigation/Card";
+import AnimalForm from "../Forms/AnimalForm";
 
-
+// MUI
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 
 // Component Function
 function AnimalsGallery() {
@@ -44,7 +44,7 @@ function AnimalsGallery() {
                 contact_ID: "weod4ofF1WzsdChzCPFX",
                 name: "Kipling",
                 enum_type: "dog",
-                enum_category: "toy",
+                enum_category: "terrier",
                 enum_breed: "australian_terrier",
                 enum_flag: "green",
                 enum_sex: "male",
@@ -70,11 +70,6 @@ function AnimalsGallery() {
         setOpen(false);
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        handleClose();
-    };
-
     // Render DOM
     return (
         <div className={styles.container}>
@@ -89,42 +84,10 @@ function AnimalsGallery() {
                     ))}
                 </div>
             </div>
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={open} onClose={handleClose} >
                 <DialogTitle>Add Dog</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        autoFocus
-                        required
-                        margin="dense"
-                        id="name"
-                        name="email"
-                        label="Name"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-                    <TextField
-                        autoFocus
-                        required
-                        margin="dense"
-                        id="name"
-                        name="email"
-                        label="Breed"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
-                    <TextField
-                        autoFocus
-                        required
-                        margin="dense"
-                        id="name"
-                        name="email"
-                        label="Color"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                    />
+                <DialogContent sx={{ width: 1200 }}>
+                    <AnimalForm />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
