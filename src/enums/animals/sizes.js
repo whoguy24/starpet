@@ -1,8 +1,9 @@
 // Animal Sizes Module
 export const sizes = [
-    { key: "extra_small", label: "Extra-Small" },
-    { key: "small", label: "Small" },
-    { key: "medium", label: "Medium" },
-    { key: "large", label: "Large" },
-    { key: "extra_large", label: "Extra-Large" },
+    { key: "xs", label: "XS" },
+    { key: "s", label: "S" },
+    { key: "m", label: "M" },
+    { key: "l", label: "L" },
+    { key: "xl", label: "XL" },
+    { key: "xxl", label: "XXL" },
 ];

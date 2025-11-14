@@ -10,10 +10,11 @@ import Navigation from "../components/Navigation/Navigation";
 import Breadcrumb from "../components/Navigation/Breadcrumb";
 import NotFound from "../components/Navigation/NotFound";
 import Footer from "../components/Navigation/Footer";
-import Animals from "../components/Animals/Animals";
 import AnimalsGallery from "../components/Animals/AnimalsGallery";
 import AnimalsDetail from "../components/Animals/AnimalsDetail";
 import Contacts from "../components/Contacts/Contacts";
+import AnimalsType from "../components/Animals/AnimalsType";
+import AnimalsCategory from "../components/Animals/AnimalsCategory";
 
 // Import CSS
 import "./App.css";
@@ -44,9 +45,10 @@ function App() {
 
                         <Route element={<ProtectedRoute />}>
                             <Route path="/home" element={<Home />} />
-                            <Route path="/home/animals" element={<Animals />} />
-                            <Route path="/home/animals/:type" element={<AnimalsGallery />} />
-                            <Route path="/home/animals/:type/:id" element={<AnimalsDetail />} />
+                            <Route path="/home/animals" element={<AnimalsType />} />
+                            <Route path="/home/animals/:type" element={<AnimalsCategory />} />
+                            <Route path="/home/animals/:type/:category" element={<AnimalsGallery />} />
+                            <Route path="/home/animals/:type/:category/:id" element={<AnimalsDetail />} />
                             <Route path="/home/contacts" element={<Contacts />} />
                             <Route path="/home/projects" element={<UnderConstruction />} />
                         </Route>

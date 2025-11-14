@@ -1,9 +1,10 @@
 // Import Modules
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./AnimalsGallery.module.css";
 import { types } from "../../enums/animals/types";
+import { categories } from "../../enums/animals/categories";
 import Card from "../Navigation/Card";
 
 // Component Function
@@ -14,17 +15,18 @@ function AnimalsGallery() {
     const dispatch = useDispatch();
 
     // Filter Animals Based on Type From URL
-    const { type } = useParams();
+    const { type, category } = useParams();
 
-    const key = types.find((types) => types.route === type)?.key;
+    const typeKey = types.find((types) => types.route === type)?.key;
+    const categoryKey = categories[typeKey].find((categories) => categories.route === category)?.key;
     const title = types.find((types) => types.route === type)?.plural;
 
     // Define Local State
     const [animalsTable, setAnimalsTable] = useState([]);
 
     useEffect(() => {
-        setAnimalsTable(animals.filter((animal) => animal.enum_type === key));
-    }, [animals, key]);
+        setAnimalsTable(animals.filter((animal) => animal.enum_type === typeKey && animal.enum_category === categoryKey ));
+    }, [animals, typeKey]);
 
     // function debug() {
     //     dispatch({
@@ -61,7 +63,7 @@ function AnimalsGallery() {
                 {/* <button onClick={debug}>Add</button> */}
                 <div className={styles.links}>
                     {animalsTable.map((animal) => (
-                        <Card key={animal.id} path={`/home/animals/dogs/${animal.id}`} title={animal.name} />
+                        <Card key={animal.id} path={`/home/animals/${type}/${category}/${animal.id}`} title={animal.name} />
                     ))}
                 </div>
             </div>
