@@ -2,21 +2,21 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styles from "./AnimalsGallery.module.css";
+import styles from "./AnimalsBreed.module.css";
 import { types } from "../../enums/animals/types";
 import { categories } from "../../enums/animals/categories";
 import Card from "../Navigation/Card";
 import AnimalForm from "../Forms/AnimalForm";
 
 // MUI
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import Button from '@mui/material/Button';
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
 
 // Component Function
-function AnimalsGallery() {
+function AnimalsBreed() {
     // Define Redux State
     const animals = useSelector((state) => state.animals);
 
@@ -34,7 +34,9 @@ function AnimalsGallery() {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        setAnimalsTable(animals.filter((animal) => animal.enum_type === typeKey && animal.enum_category === categoryKey ));
+        setAnimalsTable(
+            animals.filter((animal) => animal.enum_type === typeKey && animal.enum_category === categoryKey),
+        );
     }, [animals, typeKey]);
 
     function debug() {
@@ -80,11 +82,15 @@ function AnimalsGallery() {
                 <Button onClick={handleClickOpen}>Add a Dog</Button>
                 <div className={styles.links}>
                     {animalsTable.map((animal) => (
-                        <Card key={animal.id} path={`/home/animals/${type}/${category}/${animal.id}`} title={animal.name} />
+                        <Card
+                            key={animal.id}
+                            path={`/home/animals/${type}/${category}/${animal.id}`}
+                            title={animal.name}
+                        />
                     ))}
                 </div>
             </div>
-            <Dialog open={open} onClose={handleClose} >
+            <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Add Dog</DialogTitle>
                 <DialogContent sx={{ width: 1200 }}>
                     <AnimalForm />
@@ -99,4 +105,4 @@ function AnimalsGallery() {
 }
 
 // Export Component Function
-export default AnimalsGallery;
+export default AnimalsBreed;
