@@ -25,6 +25,7 @@ body {
     background-color: var(--color-background);
     color: var(--color-text);
     line-height: 1.5;
+    margin-top: 50px;
 }
 
 img {

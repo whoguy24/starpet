@@ -1,7 +1,12 @@
 // Import Modules
-import styles from "./Breadcrumb.module.css";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { getAnimalType } from "../../enums/animal.types";
+import { getAnimalCategory } from "../../enums/animal.categories";
+import { getAnimalBreed } from "../../enums/animal.breeds";
+import { getRoute, getKey } from "../../utils/slugify";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import styles from "./Breadcrumb.module.css";
 
 // Component Function
 function Breadcrumb() {
@@ -13,43 +18,61 @@ function Breadcrumb() {
     const contacts = useSelector((state) => state.contacts);
 
     // Initialize Path Array
-    const pathArray = pathname.split("/").filter(Boolean);
+    const linkArray = pathname.split("/").filter(Boolean);
+    let absolutePath = "";
 
     // Transform Each Object in Path Array
-    const breadcrumbs = pathArray.map((segment, index) => {
-        // Store Absolute Path
-        let path = "/" + pathArray.slice(0, index + 1).join("/");
+    const breadcrumbs = linkArray.map((route, index) => {
+        let label = "";
 
-        // Human Readable Label
-        let label = segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+        // Interrogate Lookup Tables for Matching Keys
+        const animalType = getAnimalType(getKey(route));
+        const animalCategory = getAnimalCategory(getKey(route), getKey(linkArray[2]));
+        const animalBreed = getAnimalBreed(getKey(route), getKey(linkArray[2]), getKey(linkArray[3]));
 
-        // If Path Object is Firestore ID, Find Name From Redux Store
-        if (/^[A-Za-z0-9]{20,}$/.test(segment)) {
-            let table = pathArray[1];
-            let record;
-            if (table === "animals") {
-                record = animals.find((document) => document.id === segment);
-                label = record?.name;
-            } else if (table === "contacts") {
-                record = contacts.find((document) => document.id === segment);
-                label = `${record?.first_name} ${record?.last_name}`;
+        // If Lookup Match Found, Fetch Label
+        // If Firestore ID Found, Fetch Matching Record From Redux
+        // Otherwise, Just Transform Route into Label
+        // Finally, Append Path to Absolute Path
+        if (animalType) {
+            absolutePath += "/" + getRoute(animalType.key);
+            label = animalType.plural;
+        } else if (animalCategory) {
+            absolutePath += "/" + getRoute(animalCategory.key);
+            label = animalCategory.plural;
+        } else if (animalBreed) {
+            absolutePath += "/" + getRoute(animalBreed.key);
+            label = animalBreed.plural;
+        } else if (/^[A-Za-z0-9]{20,}$/.test(route)) {
+            if (linkArray[1] === "animals") {
+                let animal = animals.find((animal) => animal.id === route);
+                absolutePath += "/" + route;
+                label = animal?.name;
+            } else if (linkArray[1] === "contacts") {
+                let contact = contacts.find((contact) => contact.id === route);
+                absolutePath += "/" + route;
+                label = `${contact?.first_name} ${contact?.last_name}`;
             }
+        } else {
+            absolutePath += "/" + route;
+            label = route.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
         }
-        return { label, path };
+
+        // Return Breadcrumb Object
+        return { label, path: absolutePath };
     });
 
     // Render DOM
     return (
         <>
             {pathname !== "/home" && (
-                <>
-                    {breadcrumbs.map((breadcrumb, idx) => (
-                        <span key={breadcrumb.path}>
-                            {idx > 0 && <span>/</span>}
-                            <Link to={breadcrumb.path}>{breadcrumb.label}</Link>
-                        </span>
+                <Breadcrumbs className={styles.container} separator="›" aria-label="breadcrumb">
+                    {breadcrumbs.map((breadcrumb, index) => (
+                        <Link className={styles.link} key={index} to={breadcrumb.path}>
+                            {breadcrumb.label}
+                        </Link>
                     ))}
-                </>
+                </Breadcrumbs>
             )}
         </>
     );
