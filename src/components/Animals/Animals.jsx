@@ -1,25 +1,25 @@
 // Import Modules
 import styles from "./Animals.module.css";
 import Card from "../Navigation/Card";
-import { getEnum } from "../../scripts/getEnum";
+import { getAnimalTypes } from "../../enums/animal.types";
+import { getRoute } from "../../utils/slugify";
 
 // Component Function
 function Animals() {
-    const enumTypes = getEnum("types");
+    const animalTypes = getAnimalTypes();
     // Render DOM
     return (
         <div className={styles.container}>
             <div>
                 <h2 className={styles.header}>Animals</h2>
                 <div className={styles.links}>
-                    {enumTypes.map((type, id) => (
+                    {animalTypes.map((animalType) => (
                         <Card
-                            key={id}
-                            path={`/home/animals/${getEnum("types", "key", type.key).route}`}
-                            title={type.plural}
+                            key={animalType.key}
+                            path={`/home/animals/${getRoute(animalType.key)}`}
+                            title={animalType.plural}
                         />
                     ))}
-                    {/* <Card path={"/home/animals/other"} title="Other" /> */}
                 </div>
             </div>
         </div>

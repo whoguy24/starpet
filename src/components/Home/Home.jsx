@@ -1,5 +1,4 @@
 //Import Modules
-import { Link } from "react-router-dom";
 import Card from "../Navigation/Card";
 import styles from "./Home.module.css";
 

@@ -1,33 +1,33 @@
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./AnimalForm.module.css";
 
-import Autocomplete from '@mui/material/Autocomplete';
+import Autocomplete from "@mui/material/Autocomplete";
 
-import { categories } from "../../enums/animals/categories";
-import { breeds } from "../../enums/animals/breeds";
+// import { categories } from "../../enums/animals/categories";
+// import { breeds } from "../../enums/animals/breeds";
 
 // Component Function
 function AnimalForm() {
-
-  // Define Local State
+    // Define Local State
     const [category, setCategory] = useState(null);
     const [breed, setBreed] = useState(null);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Submit")
-  };  
+    //   const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     console.log("Submit")
+    //   };
 
-  function handleInput() {
+    //   function handleInput() {
 
-  }
+    //   }
 
-  // Render DOM
-  return <div>
-    <form className={styles.container} onSubmit={handleSubmit}>
+    // Render DOM
+    return (
+        <div>
+            {/* <form className={styles.container} onSubmit={handleSubmit}>
       <Autocomplete
         disablePortal
         options={categories.dog}
@@ -49,8 +49,9 @@ function AnimalForm() {
           <TextField {...params} label="Breed" />
         )}
       />
-    </form>
-  </div>;
+    </form> */}
+        </div>
+    );
 }
 
 // Export Component Function
