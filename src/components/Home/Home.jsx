@@ -13,9 +13,9 @@ function Home() {
                 </div>
 
                 <div className={styles.cardContainer}>
-                    <Card path="/home/animals" imagePath="/assets/cards/animals.png" title="ANIMALS" />
-                    <Card path="/home/contacts" imagePath="/assets/cards/contacts.png" title="CONTACTS" />
-                    <Card path="/home/projects" imagePath="/assets/cards/projects.png" title="PROJECTS" />
+                    <Card path="/home/animals" imagePath="/assets/cards/home/animals.png" title="ANIMALS" />
+                    <Card path="/home/contacts" imagePath="/assets/cards/home/contacts.png" title="CONTACTS" />
+                    <Card path="/home/projects" imagePath="/assets/cards/home/projects.png" title="PROJECTS" />
                 </div>
             </div>
         </div>

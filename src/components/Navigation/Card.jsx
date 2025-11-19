@@ -7,7 +7,14 @@ function Card({ path, imagePath, title }) {
     // Render DOM
     return (
         <Link to={path} className={styles.container}>
-            <img className={styles.cardImage} src={imagePath} alt="StarPet Logo" />
+            <img
+                className={styles.cardImage}
+                src={imagePath}
+                onError={(event) => {
+                    event.currentTarget.src = "/assets/cards/placeholder.png";
+                }}
+                alt="StarPet Logo"
+            />
             <h3 className={styles.cardTitle}>{title}</h3>
         </Link>
     );

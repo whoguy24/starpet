@@ -17,7 +17,7 @@ function Animals() {
                         <Card
                             key={animalType.key}
                             path={`/home/animals/${getRoute(animalType.key)}`}
-                            imagePath={`/assets/cards/${animalType.key}.png`}
+                            imagePath={`/assets/cards/animals/types/${animalType.key}.png`}
                             title={animalType.plural}
                         />
                     ))}

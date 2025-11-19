@@ -16,7 +16,6 @@ function AnimalsCategory() {
 
     const animalType = getAnimalType(getKey(type));
     const animalCategory = getAnimalCategory(getKey(category), getKey(type));
-
     const animalBreeds = getAnimalBreeds(animalType.key, animalCategory.key);
 
     // Render DOM
@@ -29,6 +28,7 @@ function AnimalsCategory() {
                         <Card
                             key={breed.key}
                             path={`/home/animals/${type}/${category}/${getRoute(breed.key)}`}
+                            imagePath={`/assets/cards/animals/categories/${breed.key}.png`}
                             title={breed.label}
                         />
                     ))}
