@@ -92,6 +92,7 @@ function AnimalsBreed() {
                         <Card
                             key={animal.id}
                             path={`/home/animals/${type}/${category}/${breed}/${animal.id}`}
+                            imagePath={`/debug/${animal.id}.jpg`}
                             title={animal.name}
                         />
                     ))}
