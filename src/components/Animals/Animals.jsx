@@ -11,12 +11,13 @@ function Animals() {
     return (
         <div className={styles.container}>
             <div>
-                <h2 className={styles.header}>Animals</h2>
+                <h2 className={styles.header}>ANIMALS</h2>
                 <div className={styles.links}>
                     {animalTypes.map((animalType) => (
                         <Card
                             key={animalType.key}
                             path={`/home/animals/${getRoute(animalType.key)}`}
+                            imagePath={`/assets/cards/${animalType.key}.png`}
                             title={animalType.plural}
                         />
                     ))}

@@ -9,14 +9,13 @@ function Home() {
         <div className={styles.container}>
             <div>
                 <div className={styles.header}>
-                    <h2>Welcome to StarPet!</h2>
-                    <p>Click one of the links below to begin:</p>
+                    <h2>WELCOME TO STAR PET</h2>
                 </div>
 
                 <div className={styles.cardContainer}>
-                    <Card path="/home/animals" title="Animals" />
-                    <Card path="/home/contacts" title="Contacts" />
-                    <Card path="/home/projects" title="Projects" />
+                    <Card path="/home/animals" imagePath="/assets/cards/animals.png" title="ANIMALS" />
+                    <Card path="/home/contacts" imagePath="/assets/cards/contacts.png" title="CONTACTS" />
+                    <Card path="/home/projects" imagePath="/assets/cards/projects.png" title="PROJECTS" />
                 </div>
             </div>
         </div>

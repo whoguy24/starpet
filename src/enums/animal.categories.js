@@ -19,7 +19,7 @@ const animalCategories = [
     { key: "hound", type: "dog", label: "Hound", plural: "Hounds" },
     { key: "working", type: "dog", label: "Working", plural: "Working" },
     { key: "terrier", type: "dog", label: "Terrier", plural: "Terriers" },
-    { key: "toy", type: "dog", label: "Toy", plural: "Toys" },
+    // { key: "toy", type: "dog", label: "Toy", plural: "Toys" },
     { key: "non_sporting", type: "dog", label: "Non-Sporting", plural: "Non-Sporting" },
     { key: "herding", type: "dog", label: "Herding", plural: "Herding" },
     { key: "short_hair", type: "cat", label: "Short Hair", plural: "Short Hair" },

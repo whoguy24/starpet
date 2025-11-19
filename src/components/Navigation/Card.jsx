@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
 
 // Component Function
-function Card({ path, title }) {
+function Card({ path, imagePath, title }) {
     // Render DOM
     return (
-        <Link to={path} className={styles.card}>
-            <h3>{title}</h3>
+        <Link to={path} className={styles.container}>
+            <img className={styles.cardImage} src={imagePath} alt="StarPet Logo" />
+            <h3 className={styles.cardTitle}>{title}</h3>
         </Link>
     );
 }

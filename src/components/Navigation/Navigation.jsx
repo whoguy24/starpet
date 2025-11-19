@@ -2,7 +2,6 @@
 import styles from "./Navigation.module.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import logo from "../../assets/logos/navigation.png";
 import IconButton from "@mui/material/IconButton";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Breadcrumb from "./Breadcrumb";
@@ -24,7 +23,7 @@ function Navigation() {
     return (
         <nav className={styles.container}>
             <Link to="/home">
-                <img className={styles.logo} src={logo} alt="StarPet Logo" />
+                <img className={styles.logo} src="/assets/logos/navigation.png" alt="StarPet Logo" />
             </Link>
             <div className={styles.navigationBar}>
                 {status === "AUTHENTICATED" && (

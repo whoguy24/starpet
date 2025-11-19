@@ -25,6 +25,7 @@ function AnimalsType() {
                         <Card
                             key={category.key}
                             path={`/home/animals/${type}/${getRoute(category.key)}`}
+                            imagePath={`/assets/cards/${category.key}.png`}
                             title={category.label}
                         />
                     ))}
