@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import IconButton from "@mui/material/IconButton";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ToggleView from "./ToggleView";
 import Breadcrumb from "./Breadcrumb";
+import { useLocation } from "react-router-dom";
 
 // Component Function
 function Navigation() {
     // Initialize Hooks
     const dispatch = useDispatch();
+    const { pathname } = useLocation();
 
     // Initialize Global State
     const { status } = useSelector((state) => state.auth);
@@ -25,10 +28,10 @@ function Navigation() {
             <Link to="/home">
                 <img className={styles.logo} src="/assets/logos/navigation.png" alt="StarPet Logo" />
             </Link>
-            <div className={styles.navigationBar}>
+            <div className={styles.navigationTop}>
                 {status === "AUTHENTICATED" && (
                     <>
-                        <div className={styles.navigationPages}>
+                        <div className={styles.navigationTopContainer}>
                             <Link to="/home" className={styles.navigationLink}>
                                 Home
                             </Link>
@@ -53,7 +56,12 @@ function Navigation() {
                     </>
                 )}
             </div>
-            <Breadcrumb />
+            {pathname !== "/home" && (
+                <div className={styles.navigationBottom}>
+                    <Breadcrumb />
+                    <ToggleView />
+                </div>
+            )}
         </nav>
     );
 }

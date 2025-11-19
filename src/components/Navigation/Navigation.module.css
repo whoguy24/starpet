@@ -5,34 +5,27 @@
     top: 0;
 }
 
-.navigationBar {
+.navigationTop {
     height: 50px;
     background-color: #8bc0da;
     display: flex;
     align-items: center;
 }
 
+.navigationTopContainer {
+    display: flex;
+    flex-grow: 1;
+    gap: 1rem;
+    margin-left: 100px;
+}
+
 .navigationBottom {
     display: flex;
-    flex-direction: column;
-    height: 50px;
-}
-
-.pageBar {
-    height: 50px;
-}
-
-.contextBar {
-    display: flex;
-    height: 50px;
-    background-color: red;
-    top: 0;
-    align-items: center;
-}
-
-.contextBarContainer {
+    flex-direction: row;
+    justify-content: space-between;
     height: 30px;
-    background-color: green;
+    border-bottom: 0.5px solid #e8e8e8;
+    background-color: white;
 }
 
 .logo {
@@ -40,13 +33,6 @@
     position: absolute;
     top: 0;
     z-index: 1000
-}
-
-.navigationPages {
-    display: flex;
-    flex-grow: 1;
-    gap: 1rem;
-    margin-left: 100px;
 }
 
 .navigationLink {
