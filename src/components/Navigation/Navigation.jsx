@@ -2,7 +2,10 @@
 import styles from "./Navigation.module.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import logo from "../../assets/logos/logo_nav.svg";
+import logo from "../../assets/logos/navigation.png";
+import IconButton from "@mui/material/IconButton";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Breadcrumb from "./Breadcrumb";
 
 // Component Function
 function Navigation() {
@@ -19,48 +22,39 @@ function Navigation() {
 
     // Render DOM
     return (
-        <nav className={styles.navigation}>
-            <div className={styles.navigationContainer}>
-                <div className={styles.navigationLogo}>
-                    <Link to="/home">
-                        <img
-                            className={styles.navigationLogo}
-                            src={logo}
-                            alt="StarPet Logo"
-                        />
-                    </Link>
-                </div>
+        <nav className={styles.container}>
+            <Link to="/home">
+                <img className={styles.logo} src={logo} alt="StarPet Logo" />
+            </Link>
+            <div className={styles.navigationBar}>
                 {status === "AUTHENTICATED" && (
                     <>
-                        <div className={styles.navigationMenuPages}>
+                        <div className={styles.navigationPages}>
                             <Link to="/home" className={styles.navigationLink}>
                                 Home
                             </Link>
-                            <Link
-                                to="/home/animals"
-                                className={styles.navigationLink}
-                            >
+                            <Link to="/home/animals" className={styles.navigationLink}>
                                 Animals
                             </Link>
-                            <Link
-                                to="/home/contacts"
-                                className={styles.navigationLink}
-                            >
+                            <Link to="/home/contacts" className={styles.navigationLink}>
                                 Contacts
                             </Link>
-                            <Link
-                                to="/home/projects"
-                                className={styles.navigationLink}
-                            >
+                            <Link to="/home/projects" className={styles.navigationLink}>
                                 Projects
                             </Link>
                         </div>
-                        <div className={styles.navigationMenuAccount}>
-                            <button onClick={handleLogout}>Log Out</button>
+                        <div>
+                            <input className={styles.searchBar} type="search" placeholder="Search" />
+                        </div>
+                        <div>
+                            <IconButton aria-label="delete">
+                                <AccountCircleIcon className={styles.navigationProfileButton} />
+                            </IconButton>
                         </div>
                     </>
                 )}
             </div>
+            <Breadcrumb />
         </nav>
     );
 }

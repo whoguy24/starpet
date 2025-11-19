@@ -28,7 +28,7 @@ function App() {
             <div className="app">
                 <header>
                     <Navigation />
-                    <Breadcrumb />
+                    {/* <Breadcrumb /> */}
                 </header>
                 <main className="app-content">
                     <Routes>
