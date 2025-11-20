@@ -65,13 +65,15 @@ function Breadcrumb() {
     // Render DOM
     return (
         <>
-            <Breadcrumbs className={styles.container} separator="›" aria-label="breadcrumb">
-                {breadcrumbs.map((breadcrumb, index) => (
-                    <Link className={styles.link} key={index} to={breadcrumb.path}>
-                        {breadcrumb.label}
-                    </Link>
-                ))}
-            </Breadcrumbs>
+            {pathname != "/home" && (
+                <Breadcrumbs className={styles.container} separator="›" aria-label="breadcrumb">
+                    {breadcrumbs.map((breadcrumb, index) => (
+                        <Link className={styles.link} key={index} to={breadcrumb.path}>
+                            {breadcrumb.label}
+                        </Link>
+                    ))}
+                </Breadcrumbs>
+            )}
         </>
     );
 }

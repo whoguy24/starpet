@@ -45,9 +45,9 @@ function Navigation() {
                                 Projects
                             </Link>
                         </div>
-                        <div>
+                        {/* <div>
                             <input className={styles.searchBar} type="search" placeholder="Search" />
-                        </div>
+                        </div> */}
                         <div>
                             <IconButton aria-label="delete">
                                 <AccountCircleIcon className={styles.navigationProfileButton} />
@@ -56,12 +56,10 @@ function Navigation() {
                     </>
                 )}
             </div>
-            {pathname !== "/home" && (
-                <div className={styles.navigationBottom}>
-                    <Breadcrumb />
-                    <ToggleView />
-                </div>
-            )}
+            <div className={styles.navigationBottom}>
+                <Breadcrumb />
+                {/* <ToggleView /> */}
+            </div>
         </nav>
     );
 }

@@ -7,7 +7,7 @@ import UserLogin from "../components/User/UserLogin";
 import UserRegistration from "../components/User/UserRegistration";
 import UserResetPassword from "../components/User/UserResetPassword";
 import Navigation from "../components/Navigation/Navigation";
-import Breadcrumb from "../components/Navigation/Breadcrumb";
+import SideBar from "../components/Navigation/SideBar";
 import NotFound from "../components/Navigation/NotFound";
 import Footer from "../components/Navigation/Footer";
 import AnimalsBreed from "../components/Animals/AnimalsBreed";
@@ -16,45 +16,45 @@ import Contacts from "../components/Contacts/Contacts";
 import Animals from "../components/Animals/Animals";
 import AnimalsType from "../components/Animals/AnimalsType";
 import AnimalsCategory from "../components/Animals/AnimalsCategory";
-
-// Import CSS
 import "./App.css";
+import { useSelector } from "react-redux";
 
-// Component Function
 function App() {
-    // Render DOM
+    const { status } = useSelector((state) => state.auth);
     return (
         <>
             <div className="app">
                 <header>
                     <Navigation />
-                    {/* <Breadcrumb /> */}
                 </header>
                 <main className="app-content">
-                    <Routes>
-                        {/* Redirects */}
-                        <Route path="/" element={<Navigate to="/home" replace />} />
-                        <Route path="*" element={<Navigate to="/404" replace />} />
+                    {status === "AUTHENTICATED" && (
+                        <div className="navigation-panel">
+                            <SideBar />
+                        </div>
+                    )}
 
-                        {/* Public Routes */}
-                        <Route path="/login" element={<UserLogin />} />
-                        <Route path="/register" element={<UserRegistration />} />
-                        <Route path="/forgot_password" element={<UserResetPassword />} />
-                        <Route path="/404" element={<NotFound />} />
+                    <div className="content-panel">
+                        <Routes>
+                            <Route path="/" element={<Navigate to="/home" replace />} />
+                            <Route path="*" element={<Navigate to="/404" replace />} />
+                            <Route path="/login" element={<UserLogin />} />
+                            <Route path="/register" element={<UserRegistration />} />
+                            <Route path="/forgot_password" element={<UserResetPassword />} />
+                            <Route path="/404" element={<NotFound />} />
 
-                        {/* Protected Routes */}
-
-                        <Route element={<ProtectedRoute />}>
-                            <Route path="/home" element={<Home />} />
-                            <Route path="/home/animals" element={<Animals />} />
-                            <Route path="/home/animals/:type" element={<AnimalsType />} />
-                            <Route path="/home/animals/:type/:category" element={<AnimalsCategory />} />
-                            <Route path="/home/animals/:type/:category/:breed" element={<AnimalsBreed />} />
-                            <Route path="/home/animals/:type/:category/:breed/:id" element={<AnimalsDetail />} />
-                            <Route path="/home/contacts" element={<Contacts />} />
-                            <Route path="/home/projects" element={<UnderConstruction />} />
-                        </Route>
-                    </Routes>
+                            <Route element={<ProtectedRoute />}>
+                                <Route path="/home" element={<Home />} />
+                                <Route path="/home/animals" element={<Animals />} />
+                                <Route path="/home/animals/:type" element={<AnimalsType />} />
+                                <Route path="/home/animals/:type/:category" element={<AnimalsCategory />} />
+                                <Route path="/home/animals/:type/:category/:breed" element={<AnimalsBreed />} />
+                                <Route path="/home/animals/:type/:category/:breed/:id" element={<AnimalsDetail />} />
+                                <Route path="/home/contacts" element={<Contacts />} />
+                                <Route path="/home/projects" element={<UnderConstruction />} />
+                            </Route>
+                        </Routes>
+                    </div>
                 </main>
                 <footer>
                     <Footer />
