@@ -51,6 +51,8 @@ function App() {
                                 <Route path="/home/animals/:type/:category/:breed" element={<AnimalsBreed />} />
                                 <Route path="/home/animals/:type/:category/:breed/:id" element={<AnimalsDetail />} />
                                 <Route path="/home/contacts" element={<Contacts />} />
+                                <Route path="/home/contacts/owner" element={<UnderConstruction />} />
+                                <Route path="/home/contacts/crew" element={<UnderConstruction />} />
                                 <Route path="/home/projects" element={<UnderConstruction />} />
                             </Route>
                         </Routes>
