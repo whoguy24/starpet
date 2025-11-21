@@ -58,7 +58,7 @@ function Navigation() {
             </div>
             <div className={styles.navigationBottom}>
                 <Breadcrumb />
-                {/* <ToggleView /> */}
+                <ToggleView />
             </div>
         </nav>
     );
