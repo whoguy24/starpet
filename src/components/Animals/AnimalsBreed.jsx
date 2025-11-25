@@ -1,24 +1,15 @@
-// Import Modules
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./AnimalsBreed.module.css";
-import Card from "../Navigation/Card";
-import AnimalForm from "../Forms/AnimalForm";
 
-// MUI
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
-
-import { getRoute, getKey } from "../../utils/slugify";
+import { getKey } from "../../utils/slugify";
 import { getAnimalType } from "../../enums/animal.types";
 import { getAnimalCategory } from "../../enums/animal.categories";
 import { getAnimalBreed } from "../../enums/animal.breeds";
 
 import CategoryHeader from "../Layout/CategoryHeader";
+import AnimalCard from "./AnimalCard";
 
 // Component Function
 function AnimalsBreed() {
@@ -36,7 +27,6 @@ function AnimalsBreed() {
 
     // Define Local State
     const [animalsTable, setAnimalsTable] = useState([]);
-    // const [open, setOpen] = useState(false);
 
     useEffect(() => {
         setAnimalsTable(
@@ -52,6 +42,27 @@ function AnimalsBreed() {
     // TODO - New Button
     function handleOnNew() {
         console.log("NEW");
+        // dispatch({
+        //     type: "CREATE_ANIMAL",
+        //     payload: {
+        //         contact_ID: "weod4ofF1WzsdChzCPFX",
+        //         name: "Max",
+        //         enum_type: "dog",
+        //         enum_category: "herding",
+        //         enum_breed: "border_collie",
+        //         enum_flag: "green",
+        //         enum_sex: "male",
+        //         enum_size: "medium",
+        //         description: "Border Collie",
+        //         color: "Black",
+        //         skills: {
+        //             down_stay: true,
+        //             sit_stay: true,
+        //             stand_stay: true,
+        //         },
+        //         active: true,
+        //     },
+        // });
     }
 
     // TODO - Actions Button
@@ -69,40 +80,6 @@ function AnimalsBreed() {
         console.log("FILTER");
     }
 
-    // function debug() {
-    //     dispatch({
-    //         type: "CREATE_ANIMAL",
-    //         payload: {
-    //             contact_ID: "weod4ofF1WzsdChzCPFX",
-    //             name: "Kipling",
-    //             enum_type: "dog",
-    //             enum_category: "terrier",
-    //             enum_breed: "australian_terrier",
-    //             enum_flag: "green",
-    //             enum_sex: "male",
-    //             enum_size: "small",
-    //             description: "Australian Terrier",
-    //             color: "Brown",
-    //             skills: {
-    //                 down_stay: true,
-    //                 sit_stay: true,
-    //                 stand_stay: true,
-    //             },
-    //             notes: "Good Boy.",
-    //             active: true,
-    //         },
-    //     });
-    // }
-
-    // const handleClickOpen = () => {
-    //     setOpen(true);
-    // };
-
-    // const handleClose = () => {
-    //     setOpen(false);
-    // };
-
-    // Render DOM
     return (
         <div className={styles.container}>
             <CategoryHeader
@@ -114,29 +91,13 @@ function AnimalsBreed() {
                 onFilter={handleOnFilter}
             />
 
-            {/* <div>
-                <div className={styles.links}>
-                    {animalsTable.map((animal) => (
-                        <Card
-                            key={animal.id}
-                            path={`/home/animals/${type}/${category}/${breed}/${animal.id}`}
-                            imagePath={`/debug/${animal.id}.jpg`}
-                            title={animal.name}
-                        />
-                    ))}
-                </div>
-            </div> */}
-            {/* <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Add Dog</DialogTitle>
-                <DialogContent sx={{ width: 1200 }}></DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={debug}>Add Dog</Button>
-                </DialogActions>
-            </Dialog> */}
+            <div className={styles.galleryGrid}>
+                {animalsTable.map((animal) => (
+                    <AnimalCard key={animal.id} animal={animal} />
+                ))}
+            </div>
         </div>
     );
 }
 
-// Export Component Function
 export default AnimalsBreed;

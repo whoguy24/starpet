@@ -17,7 +17,7 @@ function CategoryHeader({ title, imageURL, onNew, onAction, onSort, onFilter }) 
     };
     const menuButtonStyle = {
         fontWeight: "regular",
-        backgroundColor: "white",
+        backgroundColor: "none",
         color: "black",
         height: "24px",
         fontSize: "14px",
@@ -28,7 +28,7 @@ function CategoryHeader({ title, imageURL, onNew, onAction, onSort, onFilter }) 
             color: "var(--color-primary-hover)",
         },
         "&:active": {
-            backgroundColor: "white",
+            backgroundColor: "none",
         },
     };
     return (
