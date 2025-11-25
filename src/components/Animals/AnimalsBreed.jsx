@@ -18,6 +18,8 @@ import { getAnimalType } from "../../enums/animal.types";
 import { getAnimalCategory } from "../../enums/animal.categories";
 import { getAnimalBreed } from "../../enums/animal.breeds";
 
+import CategoryHeader from "../Layout/CategoryHeader";
+
 // Component Function
 function AnimalsBreed() {
     // Define Redux State
@@ -46,6 +48,26 @@ function AnimalsBreed() {
             ),
         );
     }, [animals]);
+
+    // TODO - New Button
+    function handleOnNew() {
+        console.log("NEW");
+    }
+
+    // TODO - Actions Button
+    function handleOnAction() {
+        console.log("ACTIONS");
+    }
+
+    // TODO - Sort Button
+    function handleOnSort() {
+        console.log("SORT");
+    }
+
+    // TODO - Filter Button
+    function handleOnFilter() {
+        console.log("FILTER");
+    }
 
     // function debug() {
     //     dispatch({
@@ -83,6 +105,15 @@ function AnimalsBreed() {
     // Render DOM
     return (
         <div className={styles.container}>
+            <CategoryHeader
+                title={animalBreed.label}
+                imageURL={`/assets/cards/animals/breeds/${animalBreed.key}.png`}
+                onNew={handleOnNew}
+                onAction={handleOnAction}
+                onSort={handleOnSort}
+                onFilter={handleOnFilter}
+            />
+
             {/* <div>
                 <div className={styles.links}>
                     {animalsTable.map((animal) => (
