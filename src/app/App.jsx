@@ -54,10 +54,11 @@ function App() {
                                 <Route path="/home/contacts/owner" element={<UnderConstruction />} />
                                 <Route path="/home/contacts/crew" element={<UnderConstruction />} />
                                 <Route path="/home/projects" element={<UnderConstruction />} />
-                                <Route path="/home/projects/active" element={<UnderConstruction />} />
-                                <Route path="/home/projects/archived" element={<UnderConstruction />} />
+                                <Route path="/home/projects/ac" element={<UnderConstruction />} />
+                                <Route path="/home/projects/bobp" element={<UnderConstruction />} />
+                                <Route path="/home/projects/tet" element={<UnderConstruction />} />
                                 <Route path="/home/organizations" element={<UnderConstruction />} />
-                                <Route path="/home/organizations/shelter" element={<UnderConstruction />} />
+                                <Route path="/home/organizations/rescue" element={<UnderConstruction />} />
                                 <Route path="/home/organizations/client" element={<UnderConstruction />} />
                                 <Route path="/home/organizations/service" element={<UnderConstruction />} />
                             </Route>

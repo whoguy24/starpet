@@ -13,14 +13,15 @@ function SideBar() {
     ];
 
     const organizations = [
-        { key: "shelter", label: "Shelter", plural: "Shelters" },
+        { key: "rescue", label: "Rescue", plural: "Rescues" },
         { key: "client", label: "Client", plural: "Clients" },
         { key: "service", label: "Service", plural: "Services" },
     ];
 
     const projects = [
-        { key: "active", label: "Active", plural: "Active" },
-        { key: "archived", label: "Archived", plural: "Archived" },
+        { key: "ac", label: "AC", plural: "AC" },
+        { key: "bobp", label: "BOBP", plural: "BOBP" },
+        { key: "tet", label: "TET", plural: "TET" },
     ];
 
     return (
