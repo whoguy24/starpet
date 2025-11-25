@@ -1,14 +1,12 @@
-// Import Modules
 import LoginForm from "./LoginForm";
+import styles from "./UserLogin.module.css";
 
-// Component Function
 function UserLogin() {
-  return (
-    <>
-      <h2>Welcome to StarPet!</h2>
-      <LoginForm />
-    </>
-  );
+    return (
+        <div className={styles.container}>
+            <LoginForm />
+        </div>
+    );
 }
 
 export default UserLogin;

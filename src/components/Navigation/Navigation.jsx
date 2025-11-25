@@ -49,7 +49,7 @@ function Navigation() {
                             <input className={styles.searchBar} type="search" placeholder="Search" />
                         </div> */}
                         <div>
-                            <IconButton aria-label="delete">
+                            <IconButton onClick={handleLogout}>
                                 <AccountCircleIcon className={styles.navigationProfileButton} />
                             </IconButton>
                         </div>
