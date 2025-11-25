@@ -83,10 +83,7 @@ function AnimalsBreed() {
     // Render DOM
     return (
         <div className={styles.container}>
-            <div>
-                <div className={styles.header}>
-                    <h2>{animalBreed.plural}</h2>
-                </div>
+            {/* <div>
                 <div className={styles.links}>
                     {animalsTable.map((animal) => (
                         <Card
@@ -97,7 +94,7 @@ function AnimalsBreed() {
                         />
                     ))}
                 </div>
-            </div>
+            </div> */}
             {/* <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Add Dog</DialogTitle>
                 <DialogContent sx={{ width: 1200 }}></DialogContent>
