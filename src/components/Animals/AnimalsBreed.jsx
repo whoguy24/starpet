@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "./AnimalsBreed.module.css";
 
 import { getKey } from "../../utils/slugify";
-import { getAnimalType } from "../../enums/animal.types";
-import { getAnimalCategory } from "../../enums/animal.categories";
-import { getAnimalBreed } from "../../enums/animal.breeds";
+import { getAnimalTypes } from "../../enums/animal.types";
+import { getAnimalCategories } from "../../enums/animal.categories";
+import { getAnimalBreeds } from "../../enums/animal.breeds";
 
 import CategoryHeader from "../Layout/CategoryHeader";
 import AnimalCard from "./AnimalCard";
@@ -21,23 +21,23 @@ function AnimalsBreed() {
     // Filter Animals Based on Type From URL
     const { type, category, breed } = useParams();
 
-    const animalType = getAnimalType(getKey(type));
-    const animalCategory = getAnimalCategory(getKey(category), getKey(type));
-    const animalBreed = getAnimalBreed(getKey(breed), getKey(type), getKey(category));
+    // const animalType = getAnimalType(getKey(type));
+    // const animalCategory = getAnimalCategory(getKey(category), getKey(type));
+    // const animalBreed = getAnimalBreed(getKey(breed), getKey(type), getKey(category));
 
     // Define Local State
     const [animalsTable, setAnimalsTable] = useState([]);
 
-    useEffect(() => {
-        setAnimalsTable(
-            animals.filter(
-                (animal) =>
-                    animal.enum_type === animalType.key &&
-                    animal.enum_category === animalCategory.key &&
-                    animal.enum_breed === animalBreed.key,
-            ),
-        );
-    }, [animals]);
+    // useEffect(() => {
+    //     setAnimalsTable(
+    //         animals.filter(
+    //             (animal) =>
+    //                 animal.enum_type === animalType.key &&
+    //                 animal.enum_category === animalCategory.key &&
+    //                 animal.enum_breed === animalBreed.key,
+    //         ),
+    //     );
+    // }, [animals]);
 
     // TODO - New Button
     function handleOnNew() {
@@ -82,7 +82,7 @@ function AnimalsBreed() {
 
     return (
         <div className={styles.container}>
-            <CategoryHeader
+            {/* <CategoryHeader
                 title={animalBreed.label}
                 imageURL={`/assets/cards/animals/breeds/${animalBreed.key}.png`}
                 onNew={handleOnNew}
@@ -95,7 +95,7 @@ function AnimalsBreed() {
                 {animalsTable.map((animal) => (
                     <AnimalCard key={animal.id} animal={animal} />
                 ))}
-            </div>
+            </div> */}
         </div>
     );
 }

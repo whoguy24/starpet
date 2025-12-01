@@ -1,68 +1,56 @@
 // Import Modules
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getAnimalType } from "../../enums/animal.types";
-import { getAnimalCategory } from "../../enums/animal.categories";
-import { getAnimalBreed } from "../../enums/animal.breeds";
-import { getRoute, getKey } from "../../utils/slugify";
+import { getAnimalTypes } from "../../enums/animal.types";
+import { getAnimalCategories } from "../../enums/animal.categories";
+import { getAnimalBreeds } from "../../enums/animal.breeds";
+import { getKey } from "../../utils/slugify";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import styles from "./Breadcrumb.module.css";
 
-// Component Function
 function Breadcrumb() {
-    // Define Hooks
     const { pathname } = useLocation();
 
-    // Define Redux State
     const animals = useSelector((state) => state.animals);
-    const contacts = useSelector((state) => state.contacts);
 
-    // Initialize Path Array
-    const linkArray = pathname.split("/").filter(Boolean);
+    const routeArray = pathname.split("/").filter(Boolean);
+    const keyArray = routeArray.map((route) => getKey(route));
+
     let absolutePath = "";
 
-    // Transform Each Object in Path Array
-    const breadcrumbs = linkArray.map((route, index) => {
+    const breadcrumbs = keyArray.map((breadcrumb, index) => {
         let label = "";
 
-        // Interrogate Lookup Tables for Matching Keys
-        const animalType = getAnimalType(getKey(route));
-        const animalCategory = getAnimalCategory(getKey(route), getKey(linkArray[2]));
-        const animalBreed = getAnimalBreed(getKey(route), getKey(linkArray[2]), getKey(linkArray[3]));
-
-        // If Lookup Match Found, Fetch Label
-        // If Firestore ID Found, Fetch Matching Record From Redux
-        // Otherwise, Just Transform Route into Label
-        // Finally, Append Path to Absolute Path
-        if (animalType) {
-            absolutePath += "/" + getRoute(animalType.key);
-            label = animalType.plural;
-        } else if (animalCategory) {
-            absolutePath += "/" + getRoute(animalCategory.key);
-            label = animalCategory.plural;
-        } else if (animalBreed) {
-            absolutePath += "/" + getRoute(animalBreed.key);
-            label = animalBreed.plural;
-        } else if (/^[A-Za-z0-9]{20,}$/.test(route)) {
-            if (linkArray[1] === "animals") {
-                let animal = animals.find((animal) => animal.id === route);
-                absolutePath += "/" + route;
-                label = animal?.name;
-            } else if (linkArray[1] === "contacts") {
-                let contact = contacts.find((contact) => contact.id === route);
-                absolutePath += "/" + route;
-                label = `${contact?.first_name} ${contact?.last_name}`;
-            }
+        if (index === 0 || index === 1) {
+            absolutePath += "/" + breadcrumb;
+            label = breadcrumb.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
         } else {
-            absolutePath += "/" + route;
-            label = route.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+            if (keyArray[1] === "animals") {
+                if (index === 2) {
+                    const animalType = getAnimalTypes({ key: breadcrumb });
+                    absolutePath += "/" + animalType.key;
+                    label = animalType.plural;
+                } else if (index === 3) {
+                    const animalCategory = getAnimalCategories({ key: breadcrumb });
+                    absolutePath += "/" + animalCategory.key;
+                    label = animalCategory.plural;
+                } else if (index === 4) {
+                    const animalBreed = getAnimalBreeds({ key: breadcrumb });
+                    absolutePath += "/" + animalBreed.key;
+                    label = animalBreed.plural;
+                } else if (index === 5) {
+                    const animal = animals.find((animal) => animal.id === breadcrumb);
+                    absolutePath += "/" + breadcrumb;
+                    label = animal?.name;
+                }
+            } else if (keyArray[1] === "contacts") {
+                // TODO
+            }
         }
 
-        // Return Breadcrumb Object
         return { label, path: absolutePath };
     });
 
-    // Render DOM
     return (
         <>
             {pathname != "/home" && (
@@ -78,5 +66,4 @@ function Breadcrumb() {
     );
 }
 
-// Export Component Function
 export default Breadcrumb;

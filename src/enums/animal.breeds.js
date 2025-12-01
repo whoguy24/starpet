@@ -1,19 +1,11 @@
-// Fetch Category by Type if Type is Provided
-// Otherwise, Fetch All Categories
-export function getAnimalBreeds(type, category) {
-    if (type && category) {
-        return animalBreeds.filter((breed) => breed.type === type && breed.category === category);
-    } else {
-        return animalBreeds;
-    }
+export function getAnimalBreeds({ type, category, key } = {}) {
+    const matchingBreeds = animalBreeds.filter(
+        (breed) =>
+            (!type || breed.type === type) && (!category || breed.category === category) && (!key || breed.key === key),
+    );
+    return key ? matchingBreeds[0] : matchingBreeds;
 }
 
-// Fetch Specific Breed
-export function getAnimalBreed(key, type, category) {
-    return animalBreeds.find((breed) => breed.key === key && breed.type === type && breed.category === category);
-}
-
-// Define Breeds
 const animalBreeds = [
     {
         key: "american_water_spaniel",

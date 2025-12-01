@@ -1,4 +1,3 @@
-// Animal Sizes Module
 export const sizes = [
     { key: "xs", label: "XS" },
     { key: "s", label: "S" },

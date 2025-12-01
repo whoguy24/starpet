@@ -1,19 +1,10 @@
-// Fetch Category by Type if Type is Provided
-// Otherwise, Fetch All Categories
-export function getAnimalCategories(type) {
-    if (type) {
-        return animalCategories.filter((category) => category.type === type);
-    } else {
-        return animalCategories;
-    }
+export function getAnimalCategories({ type, key } = {}) {
+    const matchingCategories = animalCategories.filter(
+        (category) => (!type || category.type === type) && (!key || category.key === key),
+    );
+    return key ? matchingCategories[0] : matchingCategories;
 }
 
-// Fetch Specific Enum
-export function getAnimalCategory(key, type) {
-    return animalCategories.find((category) => category.key === key && category.type === type);
-}
-
-// Define Enum
 const animalCategories = [
     { key: "sporting", type: "dog", label: "Sporting", plural: "Sporting" },
     { key: "hound", type: "dog", label: "Hound", plural: "Hounds" },

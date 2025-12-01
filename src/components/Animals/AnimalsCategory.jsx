@@ -4,8 +4,8 @@ import Card from "../Navigation/Card";
 import { useParams } from "react-router-dom";
 
 import { getRoute, getKey } from "../../utils/slugify";
-import { getAnimalType } from "../../enums/animal.types";
-import { getAnimalCategory } from "../../enums/animal.categories";
+import { getAnimalTypes } from "../../enums/animal.types";
+import { getAnimalCategories } from "../../enums/animal.categories";
 
 import { getAnimalBreeds } from "../../enums/animal.breeds";
 
@@ -14,14 +14,14 @@ function AnimalsCategory() {
     // Filter Animals Based on Type From URL
     const { type, category } = useParams();
 
-    const animalType = getAnimalType(getKey(type));
-    const animalCategory = getAnimalCategory(getKey(category), getKey(type));
-    const animalBreeds = getAnimalBreeds(animalType.key, animalCategory.key);
+    // const animalType = getAnimalTypes({ key: getKey(type) });
+    // const animalCategory = getAnimalCategories({ key: getKey(category), type: getKey(type) });
+    // const animalBreeds = getAnimalBreeds({ type: animalType.key, category: animalCategory.key });
 
     // Render DOM
     return (
         <div className={styles.container}>
-            <div>
+            {/* <div>
                 <h2 className={styles.header}>{animalCategory.plural}</h2>
                 <div className={styles.links}>
                     {animalBreeds.map((breed) => (
@@ -33,7 +33,7 @@ function AnimalsCategory() {
                         />
                     ))}
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

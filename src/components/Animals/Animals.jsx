@@ -1,16 +1,14 @@
-// Import Modules
 import styles from "./Animals.module.css";
 import Card from "../Navigation/Card";
 import { getAnimalTypes } from "../../enums/animal.types";
 import { getRoute } from "../../utils/slugify";
 
-// Component Function
 function Animals() {
-    const animalTypes = getAnimalTypes();
-    // Render DOM
+    // const animalTypes = getAnimalTypes();
+
     return (
         <div className={styles.container}>
-            <div>
+            {/* <div>
                 <h2 className={styles.header}>ANIMALS</h2>
                 <div className={styles.links}>
                     {animalTypes.map((animalType) => (
@@ -22,10 +20,9 @@ function Animals() {
                         />
                     ))}
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }
 
-// Export Component Function
 export default Animals;

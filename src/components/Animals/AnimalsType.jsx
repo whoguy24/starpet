@@ -4,7 +4,7 @@ import Card from "../Navigation/Card";
 import { useParams } from "react-router-dom";
 
 import { getRoute, getKey } from "../../utils/slugify";
-import { getAnimalType } from "../../enums/animal.types";
+import { getAnimalTypes } from "../../enums/animal.types";
 import { getAnimalCategories } from "../../enums/animal.categories";
 
 // Component Function
@@ -12,13 +12,13 @@ function AnimalsType() {
     // Filter Animals Based on Type From URL
     const { type } = useParams();
 
-    const animalType = getAnimalType(getKey(type));
-    const animalCategories = getAnimalCategories(getKey(type));
+    // const animalType = getAnimalTypes({ key: getKey(type) });
+    // const animalCategories = getAnimalCategories({ type: getKey(type) });
 
     // Render DOM
     return (
         <div className={styles.container}>
-            <div>
+            {/* <div>
                 <h2 className={styles.header}>{animalType.plural}</h2>
                 <div className={styles.links}>
                     {animalCategories.map((category) => (
@@ -30,7 +30,7 @@ function AnimalsType() {
                         />
                     ))}
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

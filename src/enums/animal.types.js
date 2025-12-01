@@ -1,14 +1,8 @@
-// Fetch All Enums
-export function getAnimalTypes() {
-    return animalTypes;
+export function getAnimalTypes({ key } = {}) {
+    const matchingTypes = animalTypes.filter((type) => !key || type.key === key);
+    return key ? matchingTypes[0] : matchingTypes;
 }
 
-// Fetch Specific Enum
-export function getAnimalType(key) {
-    return animalTypes.find((type) => type.key === key);
-}
-
-// Define Enum
 const animalTypes = [
     { key: "dog", label: "Dog", plural: "Dogs" },
     { key: "cat", label: "Cat", plural: "Cats" },

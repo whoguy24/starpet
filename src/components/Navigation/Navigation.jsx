@@ -1,4 +1,3 @@
-// Import Modules
 import styles from "./Navigation.module.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,21 +7,20 @@ import ToggleView from "./ToggleView";
 import Breadcrumb from "./Breadcrumb";
 import { useLocation } from "react-router-dom";
 
-// Component Function
+// import { getAnimalBreeds } from "../../enums/animal.breeds";
+
 function Navigation() {
-    // Initialize Hooks
     const dispatch = useDispatch();
     const { pathname } = useLocation();
-
-    // Initialize Global State
     const { status } = useSelector((state) => state.auth);
-
-    // Log Out Button Handler
     function handleLogout() {
         dispatch({ type: "AUTH_LOGOUT" });
     }
 
-    // Render DOM
+    // function handleDebug() {
+    //     console.log(getAnimalBreeds());
+    // }
+
     return (
         <nav className={styles.container}>
             <Link to="/home">
@@ -48,6 +46,9 @@ function Navigation() {
                         {/* <div>
                             <input className={styles.searchBar} type="search" placeholder="Search" />
                         </div> */}
+                        {/* <div>
+                            <button onClick={handleDebug}>Debug</button>
+                        </div> */}
                         <div>
                             <IconButton onClick={handleLogout}>
                                 <AccountCircleIcon className={styles.navigationProfileButton} />
@@ -64,5 +65,4 @@ function Navigation() {
     );
 }
 
-// Export Component Function
 export default Navigation;

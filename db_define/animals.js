@@ -21,7 +21,8 @@ export const animals = {
     girth: Int,
     neck: Int,
     notes: String,
-    active: Booleon,
+    active: Boolean,
+    group: Boolean,
     skills: {
         sit_stay: Boolean,
         down_stay: Boolean,
