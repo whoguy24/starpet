@@ -1,24 +1,20 @@
-// Import Modules
 import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
 
-// Component Function
-function Card({ path, imagePath, title }) {
-    // Render DOM
+function Card({ cardData }) {
+    const { title, url, image } = cardData;
     return (
-        <Link to={path} className={styles.container}>
+        <Link to={url} className={styles.container}>
             <img
                 className={styles.cardImage}
-                src={imagePath}
+                src={image}
                 onError={(event) => {
                     event.currentTarget.src = "/assets/cards/placeholder.png";
                 }}
-                alt="StarPet Logo"
             />
             <h3 className={styles.cardTitle}>{title}</h3>
         </Link>
     );
 }
 
-// Export Component Function
 export default Card;

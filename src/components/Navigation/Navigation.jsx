@@ -52,8 +52,12 @@ function Navigation({ view, setView }) {
                 )}
             </div>
             <div className={styles.navigationBottom}>
-                <Breadcrumb />
-                <ToggleView view={view} setView={setView} />
+                {pathname != "/home" && (
+                    <>
+                        <Breadcrumb />
+                        <ToggleView view={view} setView={setView} />
+                    </>
+                )}
             </div>
         </nav>
     );

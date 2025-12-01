@@ -3,15 +3,13 @@ import Card from "../Navigation/Card";
 import { getAnimalTypes } from "../../enums/animal.types";
 import { getRoute } from "../../utils/slugify";
 import { useParams } from "react-router-dom";
-import { getView } from "../../utils/session";
-import { useState, useEffect } from "react";
+
+import AnimalsExplore from "./AnimalsExplore";
 
 function Animals({ view }) {
-    const { type, category, breed, id } = useParams();
-
     return (
         <div className={styles.container}>
-            {view === "explore" && <p>EXPLORE</p>}
+            {view === "explore" && <AnimalsExplore />}
             {view === "gallery" && <p>GALLERY</p>}
             {view === "list" && <p>LIST</p>}
 

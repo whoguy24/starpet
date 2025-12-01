@@ -13,9 +13,27 @@ function Home() {
                 </div>
 
                 <div className={styles.cardContainer}>
-                    <Card path="/home/animals" imagePath="/assets/cards/home/animals.png" title="ANIMALS" />
-                    <Card path="/home/contacts" imagePath="/assets/cards/home/contacts.png" title="CONTACTS" />
-                    <Card path="/home/projects" imagePath="/assets/cards/home/projects.png" title="PROJECTS" />
+                    <Card
+                        cardData={{
+                            url: "/home/animals",
+                            image: "/assets/cards/home/animals.png",
+                            title: "ANIMALS",
+                        }}
+                    />
+                    <Card
+                        cardData={{
+                            url: "/home/contacts",
+                            image: "/assets/cards/home/contacts.png",
+                            title: "CONTACTS",
+                        }}
+                    />
+                    <Card
+                        cardData={{
+                            url: "/home/projects",
+                            image: "/assets/cards/home/projects.png",
+                            title: "PROJECTS",
+                        }}
+                    />
                 </div>
             </div>
         </div>
