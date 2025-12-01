@@ -52,7 +52,7 @@ function SideBarCategory({ title, menu, route }) {
                 }}
             >
                 <Divider variant="fullWidth" />
-                {menu.map((menuItem) => (
+                {/* {menu.map((menuItem) => (
                     <ListItemButton
                         key={menuItem.key}
                         component={Link}
@@ -81,7 +81,7 @@ function SideBarCategory({ title, menu, route }) {
                     >
                         {menuItem.plural}
                     </ListItemButton>
-                ))}
+                ))} */}
             </List>
         </div>
     );

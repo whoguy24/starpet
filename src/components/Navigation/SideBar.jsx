@@ -15,10 +15,10 @@ function SideBar() {
 
     return (
         <div className={styles.container}>
-            {/* <SideBarCategory title="ANIMALS" route="/home/animals" menu={animals} />
+            <SideBarCategory title="ANIMALS" route="/home/animals" menu={animals} />
             <SideBarCategory title="CONTACTS" route="/home/contacts" menu={contacts} />
             <SideBarCategory title="ORGANIZATIONS" route="/home/organizations" menu={organizations} />
-            <SideBarCategory title="PROJECTS" route="/home/projects" menu={projects} /> */}
+            <SideBarCategory title="PROJECTS" route="/home/projects" menu={projects} />
         </div>
     );
 }
