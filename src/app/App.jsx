@@ -14,14 +14,24 @@ import Contacts from "../components/Contacts/Contacts";
 import Animals from "../components/Animals/Animals";
 import "./App.css";
 import { useSelector } from "react-redux";
+import { getView, saveView } from "../utils/session";
+
+import { useState, useEffect } from "react";
 
 function App() {
     const { status } = useSelector((state) => state.auth);
+
+    const [view, setView] = useState(getView() || "explore");
+
+    useEffect(() => {
+        saveView(view);
+    }, [view]);
+
     return (
         <>
             <div className="app">
                 <header>
-                    <Navigation />
+                    <Navigation view={view} setView={setView} />
                 </header>
                 <main className="app-content">
                     {status === "AUTHENTICATED" && (
@@ -41,7 +51,10 @@ function App() {
 
                             <Route element={<ProtectedRoute />}>
                                 <Route path="/home" element={<Home />} />
-                                <Route path="/home/animals/:type?/:category?/:breed?/:id?" element={<Animals />} />
+                                <Route
+                                    path="/home/animals/:type?/:category?/:breed?/:id?"
+                                    element={<Animals view={view} />}
+                                />
                                 <Route path="/home/contacts" element={<Contacts />} />
                                 <Route path="/home/contacts/owner" element={<UnderConstruction />} />
                                 <Route path="/home/contacts/crew" element={<UnderConstruction />} />

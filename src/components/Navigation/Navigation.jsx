@@ -7,19 +7,13 @@ import ToggleView from "./ToggleView";
 import Breadcrumb from "./Breadcrumb";
 import { useLocation } from "react-router-dom";
 
-// import { getAnimalBreeds } from "../../enums/animal.breeds";
-
-function Navigation() {
+function Navigation({ view, setView }) {
     const dispatch = useDispatch();
     const { pathname } = useLocation();
     const { status } = useSelector((state) => state.auth);
     function handleLogout() {
         dispatch({ type: "AUTH_LOGOUT" });
     }
-
-    // function handleDebug() {
-    //     console.log(getAnimalBreeds());
-    // }
 
     return (
         <nav className={styles.container}>
@@ -59,7 +53,7 @@ function Navigation() {
             </div>
             <div className={styles.navigationBottom}>
                 <Breadcrumb />
-                {/* <ToggleView /> */}
+                <ToggleView view={view} setView={setView} />
             </div>
         </nav>
     );

@@ -1,20 +1,15 @@
-import { useState } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import ListIcon from "@mui/icons-material/List";
-import CollectionsIcon from "@mui/icons-material/Collections";
 import styles from "./ToggleView.module.css";
 
-function ToggleView() {
-    const [view, setView] = useState("gallery");
-
+function ToggleView({ view, setView }) {
     return (
         <div className={styles.containerToggle}>
             <ToggleButtonGroup
                 className={styles.toggleGroup}
                 value={view}
+                onChange={(event, value) => setView(value)}
                 exclusive
-                onChange={(e, newView) => setView(newView)}
                 aria-label="Toggle View"
                 sx={{
                     height: 30,
@@ -36,12 +31,13 @@ function ToggleView() {
                     },
                 }}
             >
+                <ToggleButton value="explore">
+                    <span style={{ fontSize: 10 }}>Explore</span>
+                </ToggleButton>
                 <ToggleButton value="gallery">
-                    <CollectionsIcon />
                     <span style={{ fontSize: 10 }}>Gallery</span>
                 </ToggleButton>
                 <ToggleButton value="list">
-                    <ListIcon />
                     <span style={{ fontSize: 10 }}>List</span>
                 </ToggleButton>
             </ToggleButtonGroup>
