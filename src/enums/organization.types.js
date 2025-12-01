@@ -1,9 +1,6 @@
-export function getOrganizationTypes() {
-    return organizationTypes;
-}
-
-export function getOrganizationType(key) {
-    return organizationTypes.find((type) => type.key === key);
+export function getOrganizationTypes({ key } = {}) {
+    const matchingTypes = organizationTypes.filter((type) => !key || type.key === key);
+    return key ? matchingTypes[0] : matchingTypes;
 }
 
 const organizationTypes = [

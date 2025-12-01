@@ -1,9 +1,6 @@
-export function getProjectTypes() {
-    return projectTypes;
-}
-
-export function getProjectType(key) {
-    return projectTypes.find((type) => type.key === key);
+export function getProjectTypes({ key } = {}) {
+    const matchingTypes = projectTypes.filter((type) => !key || type.key === key);
+    return key ? matchingTypes[0] : matchingTypes;
 }
 
 const projectTypes = [

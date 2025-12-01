@@ -2,9 +2,10 @@ import styles from "./Animals.module.css";
 import Card from "../Navigation/Card";
 import { getAnimalTypes } from "../../enums/animal.types";
 import { getRoute } from "../../utils/slugify";
+import { useParams } from "react-router-dom";
 
 function Animals() {
-    // const animalTypes = getAnimalTypes();
+    const { type, category, breed, id } = useParams();
 
     return (
         <div className={styles.container}>

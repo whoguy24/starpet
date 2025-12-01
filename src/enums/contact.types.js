@@ -1,9 +1,6 @@
-export function getContactTypes() {
-    return contactTypes;
-}
-
-export function getContactType(key) {
-    return contactTypes.find((type) => type.key === key);
+export function getContactTypes({ key } = {}) {
+    const matchingTypes = contactTypes.filter((type) => !key || type.key === key);
+    return key ? matchingTypes[0] : matchingTypes;
 }
 
 const contactTypes = [

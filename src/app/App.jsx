@@ -10,12 +10,8 @@ import Navigation from "../components/Navigation/Navigation";
 import SideBar from "../components/Navigation/SideBar";
 import NotFound from "../components/Navigation/NotFound";
 import Footer from "../components/Navigation/Footer";
-import AnimalsBreed from "../components/Animals/AnimalsBreed";
-import AnimalsDetail from "../components/Animals/AnimalsDetail";
 import Contacts from "../components/Contacts/Contacts";
 import Animals from "../components/Animals/Animals";
-import AnimalsType from "../components/Animals/AnimalsType";
-import AnimalsCategory from "../components/Animals/AnimalsCategory";
 import "./App.css";
 import { useSelector } from "react-redux";
 
@@ -45,11 +41,7 @@ function App() {
 
                             <Route element={<ProtectedRoute />}>
                                 <Route path="/home" element={<Home />} />
-                                <Route path="/home/animals" element={<Animals />} />
-                                <Route path="/home/animals/:type" element={<AnimalsType />} />
-                                <Route path="/home/animals/:type/:category" element={<AnimalsCategory />} />
-                                <Route path="/home/animals/:type/:category/:breed" element={<AnimalsBreed />} />
-                                <Route path="/home/animals/:type/:category/:breed/:id" element={<AnimalsDetail />} />
+                                <Route path="/home/animals/:type?/:category?/:breed?/:id?" element={<Animals />} />
                                 <Route path="/home/contacts" element={<Contacts />} />
                                 <Route path="/home/contacts/owner" element={<UnderConstruction />} />
                                 <Route path="/home/contacts/crew" element={<UnderConstruction />} />
