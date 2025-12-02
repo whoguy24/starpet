@@ -13,8 +13,6 @@ import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import HomeIcon from "@mui/icons-material/Home";
-
 import styles from "./SideBar.module.css";
 
 function SideBar() {
@@ -22,64 +20,17 @@ function SideBar() {
 
     const navigate = useNavigate();
 
-    // function handleSelection(event, item) {
-    //     console.log(item.key);
-    // }
-
-    // const treeNavigation = [
-    //     {
-    //         id: "home",
-    //         label: "Home",
-    //         url: "/home",
-    //     },
-    //     {
-    //         id: "animals",
-    //         label: "Animals",
-    //         children: getAnimalTypes().map((animalType) => ({
-    //             id: String(animalType.key),
-    //             label: animalType.plural,
-    //             url: "/home",
-    //             children: getAnimalCategories({ type: animalType.key }).map((animalCategory) => ({
-    //                 id: `${animalType.key}_${String(animalCategory.key)}`,
-    //                 label: animalCategory.plural,
-    //                 children: getAnimalBreeds({ category: animalCategory.key }).map((animalBreed) => ({
-    //                     id: `${animalCategory.key}_${String(animalBreed.key)}`,
-    //                     label: animalBreed.plural,
-    //                 })),
-    //             })),
-    //         })),
-    //     },
-    //     {
-    //         id: "contacts",
-    //         label: "Contacts",
-    //         children: contactTypes.map((contactType) => ({
-    //             id: String(contactType.key),
-    //             label: contactType.plural,
-    //         })),
-    //     },
-    //     {
-    //         id: "organizations",
-    //         label: "Organizations",
-    //         children: organizationTypes.map((organizationType) => ({
-    //             id: String(organizationType.key),
-    //             label: organizationType.plural,
-    //         })),
-    //     },
-    //     {
-    //         id: "projects",
-    //         label: "Projects",
-    //         children: projectTypes.map((projectType) => ({
-    //             id: String(projectType.key),
-    //             label: projectType.plural,
-    //         })),
-    //     },
-    // ];
-
-    // onClick={() => handleItemClick(`/home/animals/${animalType.key}`)}
-
     return (
         <div className={styles.container}>
-            <SimpleTreeView defaultExpandedItems={["animals"]}>
+            <SimpleTreeView defaultExpandedItems={["animals", "contacts", "organizations", "projects"]}>
+                <TreeItem
+                    itemId="home"
+                    label="Home"
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        navigate(`/home`);
+                    }}
+                />
                 <TreeItem
                     itemId="animals"
                     label="Animals"
@@ -132,18 +83,67 @@ function SideBar() {
                         </TreeItem>
                     ))}
                 </TreeItem>
-                <TreeItem itemId="contacts" label="Contacts"></TreeItem>
-                <TreeItem itemId="organizations" label="Organizations"></TreeItem>
-                <TreeItem itemId="projects" label="Projects"></TreeItem>
+                <TreeItem
+                    itemId="contacts"
+                    label="Contacts"
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        navigate(`/home/contacts`);
+                    }}
+                >
+                    {getContactTypes().map((contactType) => (
+                        <TreeItem
+                            key={contactType.key}
+                            itemId={contactType.key}
+                            label={contactType.plural}
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                navigate(`/home/contacts/${getRoute(contactType.key)}`);
+                            }}
+                        />
+                    ))}
+                </TreeItem>
+                <TreeItem
+                    itemId="organizations"
+                    label="Organizations"
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        navigate(`/home/organizations`);
+                    }}
+                >
+                    {getOrganizationTypes().map((organizationType) => (
+                        <TreeItem
+                            key={organizationType.key}
+                            itemId={organizationType.key}
+                            label={organizationType.plural}
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                navigate(`/home/organizations/${getRoute(organizationType.key)}`);
+                            }}
+                        />
+                    ))}
+                </TreeItem>
+                <TreeItem
+                    itemId="projects"
+                    label="Projects"
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        navigate(`/home/projects`);
+                    }}
+                >
+                    {getProjectTypes().map((projectType) => (
+                        <TreeItem
+                            key={projectType.key}
+                            itemId={projectType.key}
+                            label={projectType.plural}
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                navigate(`/home/projects/${getRoute(projectType.key)}`);
+                            }}
+                        />
+                    ))}
+                </TreeItem>
             </SimpleTreeView>
-            {/* <RichTreeView
-                items={treeNavigation}
-                expandedItems={treeState}
-                onExpandedItemsChange={(event, newTree) => setTreeState(newTree)}
-                onItemSelectionToggle={(event, item) => {
-                    console.log(item);
-                }}
-            /> */}
         </div>
     );
 }

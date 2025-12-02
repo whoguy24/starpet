@@ -31,9 +31,6 @@ function ToggleView({ view, setView }) {
                     },
                 }}
             >
-                <ToggleButton value="explore">
-                    <span style={{ fontSize: 10 }}>Explore</span>
-                </ToggleButton>
                 <ToggleButton value="gallery">
                     <span style={{ fontSize: 10 }}>Gallery</span>
                 </ToggleButton>

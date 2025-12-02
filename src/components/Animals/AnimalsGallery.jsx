@@ -5,9 +5,9 @@ import { getAnimalCategories } from "../../enums/animal.categories";
 import { getAnimalBreeds } from "../../enums/animal.breeds";
 import Card from "../Navigation/Card";
 
-import styles from "./AnimalsExplore.module.css";
+import styles from "./AnimalsGallery.module.css";
 
-function AnimalsExplore() {
+function AnimalsGallery() {
     const { type, category, breed, id } = useParams();
 
     let title = "";
@@ -58,4 +58,4 @@ function AnimalsExplore() {
     );
 }
 
-export default AnimalsExplore;
+export default AnimalsGallery;
