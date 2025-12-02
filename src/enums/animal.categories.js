@@ -38,5 +38,4 @@ const animalCategories = [
     { key: "rat", type: "small_pet", label: "Rat", plural: "Rats" },
     { key: "wildlife", type: "other", label: "Wildlife", plural: "Wildlife" },
     { key: "exotic", type: "other", label: "Exotic", plural: "Exotic" },
-    { key: "other", type: "other", label: "Other", plural: "Other" },
 ];

@@ -1168,6 +1168,6 @@ const animalBreeds = [
     { key: "sable_ferret", type: "small_pet", category: "ferret", label: "Sable Ferret", plural: "Sable Ferrets" },
     { key: "silver_ferret", type: "small_pet", category: "ferret", label: "Silver Ferret", plural: "Silver Ferrets" },
 
-    { key: "wildlife", type: "other", category: "wildlife", label: "Wildlife", plural: "Wildlife" },
-    { key: "exotic", type: "other", category: "exotic", label: "Exotic", plural: "Exotics" },
+    { key: "breed_wildlife", type: "other", category: "wildlife", label: "Wildlife", plural: "Wildlife" },
+    { key: "breed_exotic", type: "other", category: "exotic", label: "Exotic", plural: "Exotics" },
 ];
