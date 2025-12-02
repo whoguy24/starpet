@@ -19,6 +19,7 @@
     "@mui/icons-material": "^7.3.5",
     "@mui/material": "^7.3.5",
     "@mui/x-date-pickers": "^8.18.0",
+    "@mui/x-tree-view": "^8.19.0",
     "@reduxjs/toolkit": "^2.9.2",
     "firebase": "^12.4.0",
     "node": "^22.21.0",

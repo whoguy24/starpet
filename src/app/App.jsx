@@ -21,7 +21,7 @@ import { useState, useEffect } from "react";
 function App() {
     const { status } = useSelector((state) => state.auth);
 
-    const [view, setView] = useState(getView() || "explore");
+    const [view, setView] = useState(getView() || "gallery");
 
     useEffect(() => {
         saveView(view);

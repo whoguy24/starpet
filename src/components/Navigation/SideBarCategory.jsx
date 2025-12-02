@@ -4,6 +4,7 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import Divider from "@mui/material/Divider";
 import { Link, useLocation } from "react-router-dom";
+import { RichTreeView } from "@mui/x-tree-view/RichTreeView";
 
 function SideBarCategory({ title, menu, route }) {
     const { pathname } = useLocation();
@@ -13,7 +14,9 @@ function SideBarCategory({ title, menu, route }) {
 
     return (
         <div className={styles.container}>
-            <List
+            <RichTreeView items={MUI_X_PRODUCTS} />
+
+            {/* <List
                 subheader={
                     <Link className={styles.link} to={route}>
                         <ListSubheader
@@ -49,10 +52,10 @@ function SideBarCategory({ title, menu, route }) {
                             bgcolor: "var(--color-tertiary)",
                         },
                     },
-                }}
-            >
-                <Divider variant="fullWidth" />
-                {/* {menu.map((menuItem) => (
+                }} */}
+            {/* > */}
+            {/* <Divider variant="fullWidth" /> */}
+            {/* {menu.map((menuItem) => (
                     <ListItemButton
                         key={menuItem.key}
                         component={Link}
@@ -82,7 +85,7 @@ function SideBarCategory({ title, menu, route }) {
                         {menuItem.plural}
                     </ListItemButton>
                 ))} */}
-            </List>
+            {/* </List> */}
         </div>
     );
 }
