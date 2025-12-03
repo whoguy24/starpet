@@ -1,13 +1,12 @@
 .container {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    /* position: fixed; */
     width: 100%;
     top: 0;
 }
 
 .navigationTop {
     height: 50px;
-    background-color: #8bc0da;
+    background-color: var(--color-primary);
     display: flex;
     align-items: center;
 }
