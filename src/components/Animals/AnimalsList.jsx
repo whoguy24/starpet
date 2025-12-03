@@ -1,12 +1,17 @@
 import styles from "./AnimalsList.module.css";
 
+import { useState } from "react";
+
 import { useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
 
 import TableHeader from "../Layout/TableHeader";
+import AnimalsNew from "./AnimalsNew";
 
 function AnimalsList() {
     const animals = useSelector((state) => state.animals);
+
+    const [newDialog, setNewDialog] = useState(false);
 
     const columns = [
         {
@@ -48,7 +53,11 @@ function AnimalsList() {
     ];
 
     function handleOnNew() {
-        console.log("NEW");
+        setNewDialog(true);
+    }
+
+    function handleDialogClose() {
+        setNewDialog(false);
     }
 
     return (
@@ -68,6 +77,7 @@ function AnimalsList() {
                 checkboxSelection
                 disableRowSelectionOnClick
             />
+            <AnimalsNew open={newDialog} onClose={setNewDialog} />
         </div>
     );
 }
