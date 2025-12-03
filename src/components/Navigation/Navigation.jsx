@@ -25,16 +25,19 @@ function Navigation({ view, setView }) {
                     <>
                         <div className={styles.navigationTopContainer}>
                             <Link to="/home" className={styles.navigationLink}>
-                                Home
+                                HOME
                             </Link>
                             <Link to="/home/animals" className={styles.navigationLink}>
-                                Animals
+                                ANIMALS
                             </Link>
                             <Link to="/home/contacts" className={styles.navigationLink}>
-                                Contacts
+                                CONTACTS
                             </Link>
                             <Link to="/home/projects" className={styles.navigationLink}>
-                                Projects
+                                PROJECTS
+                            </Link>
+                            <Link to="/home/organizations" className={styles.navigationLink}>
+                                ORGANIZATIONS
                             </Link>
                         </div>
                         {/* <div>

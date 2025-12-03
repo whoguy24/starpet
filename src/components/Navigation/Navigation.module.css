@@ -15,7 +15,7 @@
     display: flex;
     flex-grow: 1;
     gap: 1rem;
-    margin-left: 100px;
+    margin-left: 84px;
 }
 
 .navigationBottom {
@@ -28,10 +28,10 @@
 }
 
 .logo {
-    height: 100px;
+    height: 74px;
     position: absolute;
     top: 0;
-    z-index: 1000
+    margin-left: 6px;
 }
 
 .navigationLink {
@@ -50,6 +50,7 @@
 
 .navigationProfileButton {
     color: white;
+    margin-right: 6px;
 }
 
 .searchBar {
