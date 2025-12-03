@@ -1,5 +1,38 @@
-.container {
+.dialogHeaderContainer {
     display: flex;
-    background-color: white;
-    width: 80%;
+    flex-direction: row;
+    height: 100px;
+    margin-bottom: 30px;
+}
+
+.dialogHeader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.headerImage {
+    height: 100%
+}
+
+.dialogHeaderTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 60%;
+}
+
+.dialogHeaderTitle {
+    font-size: 30px;
+}
+
+.dialogButtonsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
