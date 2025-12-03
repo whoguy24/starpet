@@ -49,6 +49,20 @@ function SideBar() {
                 expandedItems={expandedItems}
                 onSelectedItemsChange={handleSelectedItemsChange}
                 onExpandedItemsChange={handleExpandedItemsChange}
+                sx={{
+                    "& .MuiTreeItem-content.Mui-selected": {
+                        backgroundColor: "var(--color-primary)",
+                        color: "white",
+                        borderRadius: 0,
+                        fontWeight: "bold",
+                    },
+                    "& .MuiTreeItem-content:hover": {
+                        backgroundColor: "var(--color-tertiary)",
+                    },
+                    "& .MuiTreeItem-content.Mui-selected:hover": {
+                        backgroundColor: "var(--color-primary)",
+                    },
+                }}
             >
                 <TreeItem itemId="/home" label="Home" />
                 <TreeItem itemId="/home/animals" label="Animals">

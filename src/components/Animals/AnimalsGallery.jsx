@@ -5,7 +5,8 @@ import { getAnimalCategories } from "../../enums/animal.categories";
 import { getAnimalBreeds } from "../../enums/animal.breeds";
 import Card from "../Navigation/Card";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+
+import CategoryHeader from "../Layout/CategoryHeader";
 
 import styles from "./AnimalsGallery.module.css";
 
@@ -64,10 +65,41 @@ function AnimalsGallery() {
         }));
     }
 
+    // TODO - Add Button
+    function handleOnNew() {
+        console.log("ADD");
+    }
+
+    // TODO - Actions Button
+    function handleOnAction() {
+        console.log("ACTIONS");
+    }
+
+    // TODO - Sort Button
+    function handleOnSort() {
+        console.log("SORT");
+    }
+
+    // TODO - Filter Button
+    function handleOnFilter() {
+        console.log("FILTER");
+    }
+
     return (
         <div className={styles.container}>
             <div>
-                <h2 className={styles.header}>{title}</h2>
+                {type && category && breed && !id ? (
+                    <CategoryHeader
+                        title={title}
+                        imageURL={`/assets/cards/animals/breeds/${getKey(breed)}.png`}
+                        onNew={handleOnNew}
+                        onAction={handleOnAction}
+                        onSort={handleOnSort}
+                        onFilter={handleOnFilter}
+                    />
+                ) : (
+                    <h2 className={styles.header}>{title}</h2>
+                )}
                 <div className={styles.links}>
                     {cardArray.map((card) => (
                         <Card key={card.key} cardData={card} />
