@@ -3,6 +3,8 @@ import styles from "./AnimalsList.module.css";
 import { useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
 
+import TableHeader from "../Layout/TableHeader";
+
 function AnimalsList() {
     const animals = useSelector((state) => state.animals);
 
@@ -45,8 +47,13 @@ function AnimalsList() {
         },
     ];
 
+    function handleOnNew() {
+        console.log("NEW");
+    }
+
     return (
         <div className={styles.container}>
+            <TableHeader title={"Animals"} imageURL={"/assets/cards/home/animals.png"} onNew={handleOnNew} />
             <DataGrid
                 rows={animals}
                 columns={columns}

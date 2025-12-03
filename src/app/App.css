@@ -17,9 +17,9 @@
 }
 
 .content-panel {
-    display: flex;
+    display: block;
     flex-direction: row;
     width: 100%;
-    max-width: 1600px;
+    max-width: 1200px;
     padding: 50px;
 }
