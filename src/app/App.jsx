@@ -15,6 +15,7 @@ import Animals from "../components/Animals/Animals";
 import "./App.css";
 import { useSelector } from "react-redux";
 import { getView, saveView } from "../utils/session";
+import Debug from "../components/Debug/Debug"
 
 import { useState, useEffect } from "react";
 
@@ -48,6 +49,7 @@ function App() {
                             <Route path="/register" element={<UserRegistration />} />
                             <Route path="/forgot_password" element={<UserResetPassword />} />
                             <Route path="/404" element={<NotFound />} />
+                            <Route path="/debug" element={<Debug />} />
 
                             <Route element={<ProtectedRoute />}>
                                 <Route path="/home" element={<Home />} />
