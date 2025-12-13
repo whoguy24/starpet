@@ -9,7 +9,7 @@ import { TreeItem } from "@mui/x-tree-view/TreeItem";
 
 import { useState, useEffect } from "react";
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 import { getRoute } from "../../utils/slugify";
 
@@ -19,13 +19,13 @@ function SideBar() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // const [expandedItems, setExpandedItems] = useState([
-    //     "/home/animals",
-    //     "/home/contacts",
-    //     "/home/organizations",
-    //     "/home/projects",
-    // ]);
-    // const [selectedItems, setSelectedItems] = useState(["/home"]);
+    const [expandedItems, setExpandedItems] = useState([
+        "/home/animals",
+        "/home/contacts",
+        "/home/organizations",
+        "/home/projects",
+    ]);
+    const [selectedItems, setSelectedItems] = useState(["/home"]);
 
     // useEffect(() => {
     //     const url = location.pathname;
@@ -34,17 +34,22 @@ function SideBar() {
     //     setExpandedItems(ancestors);
     // }, [location.pathname]);
 
-    // const handleSelectedItemsChange = (event, ids) => {
-    //     navigate(ids);
-    // };
+    const handleSelectedItemsChange = (event, ids) => {
+        navigate(ids);
+    };
 
-    // const handleExpandedItemsChange = (event, itemIds) => {
-    //     setExpandedItems(itemIds);
-    // };
+    const handleExpandedItemsChange = (event, itemIds) => {
+        setExpandedItems(itemIds);
+    };
 
     return (
         <div className={styles.container}>
-            {/* <SimpleTreeView
+            {/* <Link to="/home">Home</Link>
+            <Link to="/home/animals">Animals</Link>
+            <Link to="/home/contacts">Contacts</Link>
+            <Link to="/home/organizations">Organizations</Link>
+            <Link to="/home/projects">Projects</Link> */}
+            <SimpleTreeView
                 selectedItems={location.pathname}
                 expandedItems={expandedItems}
                 onSelectedItemsChange={handleSelectedItemsChange}
@@ -121,7 +126,7 @@ function SideBar() {
                         />
                     ))}
                 </TreeItem>
-            </SimpleTreeView> */}
+            </SimpleTreeView>
         </div>
     );
 }
