@@ -15,21 +15,21 @@ function Home() {
                 <div className={styles.cardContainer}>
                     <Card
                         cardData={{
-                            url: "/home/animals",
+                            url: "/animals",
                             image: "/assets/cards/home/animals.png",
                             title: "ANIMALS",
                         }}
                     />
                     <Card
                         cardData={{
-                            url: "/home/contacts",
+                            url: "/contacts",
                             image: "/assets/cards/home/contacts.png",
                             title: "CONTACTS",
                         }}
                     />
                     <Card
                         cardData={{
-                            url: "/home/projects",
+                            url: "/projects",
                             image: "/assets/cards/home/projects.png",
                             title: "PROJECTS",
                         }}

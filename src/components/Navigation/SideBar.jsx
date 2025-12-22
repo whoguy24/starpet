@@ -19,41 +19,20 @@ function SideBar() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const [expandedItems, setExpandedItems] = useState([
-        "/home/animals",
-        "/home/contacts",
-        "/home/organizations",
-        "/home/projects",
-    ]);
-    const [selectedItems, setSelectedItems] = useState(["/home"]);
+    const routeArray = location.pathname.split("/").filter(Boolean);
 
-    // useEffect(() => {
-    //     const url = location.pathname;
-    //     const parts = url.split("/").filter(Boolean);
-    //     const ancestors = parts.slice(0, -1).map((_, index) => "/" + parts.slice(0, index + 1).join("/"));
-    //     setExpandedItems(ancestors);
-    // }, [location.pathname]);
+    console.log(routeArray);
 
-    const handleSelectedItemsChange = (event, ids) => {
-        navigate(ids);
-    };
-
-    const handleExpandedItemsChange = (event, itemIds) => {
-        setExpandedItems(itemIds);
-    };
+    const [selectedItems, setSelectedItems] = useState([]);
+    const [expandedItems, setExpandedItems] = useState([]);
 
     return (
         <div className={styles.container}>
-            {/* <Link to="/home">Home</Link>
-            <Link to="/home/animals">Animals</Link>
-            <Link to="/home/contacts">Contacts</Link>
-            <Link to="/home/organizations">Organizations</Link>
-            <Link to="/home/projects">Projects</Link> */}
             <SimpleTreeView
-                selectedItems={location.pathname}
+                selectedItems={selectedItems}
                 expandedItems={expandedItems}
-                onSelectedItemsChange={handleSelectedItemsChange}
-                onExpandedItemsChange={handleExpandedItemsChange}
+                // onSelectedItemsChange={handleSelectedItemsChange}
+                // onExpandedItemsChange={handleExpandedItemsChange}
                 sx={{
                     "& .MuiTreeItem-content.Mui-selected": {
                         backgroundColor: "var(--color-primary)",
@@ -69,63 +48,9 @@ function SideBar() {
                     },
                 }}
             >
-                <TreeItem itemId="/home" label="Home" />
-                <TreeItem itemId="/home/animals" label="Animals">
-                    {getAnimalTypes().map((animalType) => (
-                        <TreeItem
-                            key={animalType.key}
-                            itemId={`/home/animals/${getRoute(animalType.key)}`}
-                            label={animalType.plural}
-                        >
-                            {getAnimalCategories({ type: animalType.key }).map((animalCategory) => (
-                                <TreeItem
-                                    key={animalCategory.key}
-                                    itemId={`/home/animals/${getRoute(animalCategory.type)}/${getRoute(
-                                        animalCategory.key,
-                                    )}`}
-                                    label={animalCategory.plural}
-                                >
-                                    {getAnimalBreeds({ category: animalCategory.key }).map((animalBreed) => (
-                                        <TreeItem
-                                            key={animalBreed.key}
-                                            itemId={`/home/animals/${getRoute(animalBreed.type)}/${getRoute(
-                                                animalBreed.category,
-                                            )}/${getRoute(animalBreed.key)}`}
-                                            label={animalBreed.plural}
-                                        />
-                                    ))}
-                                </TreeItem>
-                            ))}
-                        </TreeItem>
-                    ))}
-                </TreeItem>
-                <TreeItem itemId="/home/contacts" label="Contacts">
-                    {getContactTypes().map((contactType) => (
-                        <TreeItem
-                            key={contactType.key}
-                            itemId={`/home/contacts/${getRoute(contactType.key)}`}
-                            label={contactType.plural}
-                        />
-                    ))}
-                </TreeItem>
-                <TreeItem itemId="/home/organizations" label="Organizations">
-                    {getOrganizationTypes().map((organizationType) => (
-                        <TreeItem
-                            key={organizationType.key}
-                            itemId={`/home/organizations/${getRoute(organizationType.key)}`}
-                            label={organizationType.plural}
-                        />
-                    ))}
-                </TreeItem>
-                <TreeItem itemId="/home/projects" label="Projects">
-                    {getProjectTypes().map((projectType) => (
-                        <TreeItem
-                            key={projectType.key}
-                            itemId={`/home/projects/${getRoute(projectType.key)}`}
-                            label={projectType.plural}
-                        />
-                    ))}
-                </TreeItem>
+                <TreeItem itemId="home" label="Owners" />
+                <TreeItem itemId="animals" label="Professional" />
+                <TreeItem itemId="contacts" label="Crew" />
             </SimpleTreeView>
         </div>
     );

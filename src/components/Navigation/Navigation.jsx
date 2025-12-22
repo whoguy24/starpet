@@ -27,17 +27,14 @@ function Navigation({ view, setView }) {
                             <Link to="/home" className={styles.navigationLink}>
                                 HOME
                             </Link>
-                            <Link to="/home/animals" className={styles.navigationLink}>
+                            <Link to="/animals" className={styles.navigationLink}>
                                 ANIMALS
                             </Link>
-                            <Link to="/home/contacts" className={styles.navigationLink}>
+                            <Link to="/contacts" className={styles.navigationLink}>
                                 CONTACTS
                             </Link>
-                            <Link to="/home/projects" className={styles.navigationLink}>
+                            <Link to="/projects" className={styles.navigationLink}>
                                 PROJECTS
-                            </Link>
-                            <Link to="/home/organizations" className={styles.navigationLink}>
-                                ORGANIZATIONS
                             </Link>
                         </div>
                         {/* <div>
@@ -57,8 +54,8 @@ function Navigation({ view, setView }) {
             <div className={styles.navigationBottom}>
                 {pathname != "/home" && (
                     <>
-                        <Breadcrumb />
-                        <ToggleView view={view} setView={setView} />
+                        {/* <Breadcrumb /> */}
+                        {/* <ToggleView view={view} setView={setView} /> */}
                     </>
                 )}
             </div>

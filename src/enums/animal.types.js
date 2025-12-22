@@ -1,5 +1,5 @@
-export function getAnimalTypes({ key } = {}) {
-    const matchingTypes = animalTypes.filter((type) => !key || type.key === key);
+export function getAnimalTypes({ key, page } = {}) {
+    const matchingTypes = animalTypes.filter((type) => !key || (type.key === key && !key) || type.page === page);
     return key ? matchingTypes[0] : matchingTypes;
 }
 
@@ -9,5 +9,5 @@ const animalTypes = [
     { key: "horse", label: "Horse", plural: "Horses" },
     { key: "livestock", label: "Livestock", plural: "Livestock" },
     { key: "small_pet", label: "Small Pet", plural: "Small Pets" },
-    { key: "other", label: "Other", plural: "Other" },
+    { key: "type_other", label: "Other", plural: "Other" },
 ];

@@ -15,7 +15,7 @@ import Animals from "../components/Animals/Animals";
 import "./App.css";
 import { useSelector } from "react-redux";
 import { getView, saveView } from "../utils/session";
-import Debug from "../components/Debug/Debug"
+import Debug from "../components/Debug/Debug";
 
 import { useState, useEffect } from "react";
 
@@ -35,12 +35,6 @@ function App() {
                     <Navigation view={view} setView={setView} />
                 </header>
                 <main className="app-content">
-                    {status === "AUTHENTICATED" && (
-                        <div className="navigation-panel">
-                            <SideBar />
-                        </div>
-                    )}
-
                     <div className="content-panel">
                         <Routes>
                             <Route path="/" element={<Navigate to="/home" replace />} />
@@ -54,20 +48,11 @@ function App() {
                             <Route element={<ProtectedRoute />}>
                                 <Route path="/home" element={<Home />} />
                                 <Route
-                                    path="/home/animals/:type?/:category?/:breed?/:id?"
+                                    path="/animals/:type?/:category?/:breed?/:id?"
                                     element={<Animals view={view} />}
                                 />
-                                <Route path="/home/contacts" element={<Contacts />} />
-                                <Route path="/home/contacts/owner" element={<UnderConstruction />} />
-                                <Route path="/home/contacts/crew" element={<UnderConstruction />} />
-                                <Route path="/home/projects" element={<UnderConstruction />} />
-                                <Route path="/home/projects/ac" element={<UnderConstruction />} />
-                                <Route path="/home/projects/bobp" element={<UnderConstruction />} />
-                                <Route path="/home/projects/tet" element={<UnderConstruction />} />
-                                <Route path="/home/organizations" element={<UnderConstruction />} />
-                                <Route path="/home/organizations/rescue" element={<UnderConstruction />} />
-                                <Route path="/home/organizations/client" element={<UnderConstruction />} />
-                                <Route path="/home/organizations/service" element={<UnderConstruction />} />
+                                <Route path="/contacts" element={<Contacts />} />
+                                <Route path="/projects" element={<UnderConstruction />} />
                             </Route>
                         </Routes>
                     </div>
