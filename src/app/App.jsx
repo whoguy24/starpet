@@ -35,27 +35,21 @@ function App() {
                     <Navigation view={view} setView={setView} />
                 </header>
                 <main className="app-content">
-                    <div className="content-panel">
-                        <Routes>
-                            <Route path="/" element={<Navigate to="/home" replace />} />
-                            <Route path="*" element={<Navigate to="/404" replace />} />
-                            <Route path="/login" element={<UserLogin />} />
-                            <Route path="/register" element={<UserRegistration />} />
-                            <Route path="/forgot_password" element={<UserResetPassword />} />
-                            <Route path="/404" element={<NotFound />} />
-                            <Route path="/debug" element={<Debug />} />
-
-                            <Route element={<ProtectedRoute />}>
-                                <Route path="/home" element={<Home />} />
-                                <Route
-                                    path="/animals/:type?/:category?/:breed?/:id?"
-                                    element={<Animals view={view} />}
-                                />
-                                <Route path="/contacts" element={<Contacts />} />
-                                <Route path="/projects" element={<UnderConstruction />} />
-                            </Route>
-                        </Routes>
-                    </div>
+                    <Routes>
+                        <Route path="/" element={<Navigate to="/home" replace />} />
+                        <Route path="*" element={<Navigate to="/404" replace />} />
+                        <Route path="/login" element={<UserLogin />} />
+                        <Route path="/register" element={<UserRegistration />} />
+                        <Route path="/forgot_password" element={<UserResetPassword />} />
+                        <Route path="/404" element={<NotFound />} />
+                        <Route path="/debug" element={<Debug />} />
+                        <Route element={<ProtectedRoute />}>
+                            <Route path="/home" element={<Home />} />
+                            <Route path="/animals/:type?/:category?/:breed?/:id?" element={<Animals view={view} />} />
+                            <Route path="/contacts" element={<Contacts />} />
+                            <Route path="/projects" element={<UnderConstruction />} />
+                        </Route>
+                    </Routes>
                 </main>
                 <footer>
                     <Footer />

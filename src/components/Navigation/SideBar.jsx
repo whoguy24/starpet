@@ -1,56 +1,71 @@
-import { getAnimalTypes } from "../../enums/animal.types";
-import { getAnimalCategories } from "../../enums/animal.categories";
-import { getAnimalBreeds } from "../../enums/animal.breeds";
-import { getContactTypes } from "../../enums/contact.types";
-import { getOrganizationTypes } from "../../enums/organization.types";
-import { getProjectTypes } from "../../enums/project.types";
 import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
 import { TreeItem } from "@mui/x-tree-view/TreeItem";
-
 import { useState, useEffect } from "react";
-
-import { useNavigate, useLocation, Link } from "react-router-dom";
-
-import { getRoute } from "../../utils/slugify";
-
+import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./SideBar.module.css";
+import { menu, getMenuItem } from "../../db/menu";
+import Divider from "@mui/material/Divider";
 
 function SideBar() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const routeArray = location.pathname.split("/").filter(Boolean);
-
-    console.log(routeArray);
-
     const [selectedItems, setSelectedItems] = useState([]);
     const [expandedItems, setExpandedItems] = useState([]);
+
+    function renderChildren(menuItems) {
+        return menuItems.map((menuItem) => (
+            <TreeItem key={menuItem.id} itemId={menuItem.id} label={menuItem.plural}>
+                {menuItem.children && renderChildren(menuItem.children)}
+            </TreeItem>
+        ));
+    }
+
+    useEffect(() => {
+        const menuItem = getMenuItem({ url: location.pathname });
+        const selectedArray = [menuItem?.id];
+        setSelectedItems(selectedArray);
+        const dynamicallyExpanded = location.pathname.replace(/-/g, "_").split("/").filter(Boolean);
+        const alwaysExpanded = menu.map((item) => item.id);
+        const mergedExpanded = [...new Set([...alwaysExpanded, ...dynamicallyExpanded])];
+        setExpandedItems(mergedExpanded);
+    }, [location.pathname]);
+
+    function handleSelectedItemsChange(e, id) {
+        const navigationItem = getMenuItem({ id: id });
+        navigate(navigationItem.url);
+    }
 
     return (
         <div className={styles.container}>
             <SimpleTreeView
                 selectedItems={selectedItems}
                 expandedItems={expandedItems}
-                // onSelectedItemsChange={handleSelectedItemsChange}
-                // onExpandedItemsChange={handleExpandedItemsChange}
+                onSelectedItemsChange={handleSelectedItemsChange}
                 sx={{
+                    "& .MuiTreeItem-content": {
+                        height: 36,
+                        minHeight: 36,
+                        lineHeight: "36px",
+                        transition: "background-color 0.2s",
+                    },
                     "& .MuiTreeItem-content.Mui-selected": {
                         backgroundColor: "var(--color-primary)",
                         color: "white",
                         borderRadius: 0,
                         fontWeight: "bold",
                     },
-                    "& .MuiTreeItem-content:hover": {
-                        backgroundColor: "var(--color-tertiary)",
-                    },
                     "& .MuiTreeItem-content.Mui-selected:hover": {
                         backgroundColor: "var(--color-primary)",
+                        color: "white",
                     },
                 }}
             >
-                <TreeItem itemId="home" label="Owners" />
-                <TreeItem itemId="animals" label="Professional" />
-                <TreeItem itemId="contacts" label="Crew" />
+                {menu.map((menuItem) => (
+                    <TreeItem key={menuItem.id} itemId={menuItem.id} label={menuItem.label}>
+                        {menuItem.children && renderChildren(menuItem.children)}
+                    </TreeItem>
+                ))}
             </SimpleTreeView>
         </div>
     );

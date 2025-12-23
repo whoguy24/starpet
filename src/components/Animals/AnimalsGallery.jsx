@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { getRoute, getKey } from "../../utils/slugify";
-import { getAnimalTypes } from "../../enums/animal.types";
-import { getAnimalCategories } from "../../enums/animal.categories";
-import { getAnimalBreeds } from "../../enums/animal.breeds";
+import { getAnimalTypes } from "../../db/animal.types";
+import { getAnimalCategories } from "../../db/animal.categories";
+import { getAnimalBreeds } from "../../db/animal.breeds";
 import Card from "../Navigation/Card";
 import { useSelector } from "react-redux";
 

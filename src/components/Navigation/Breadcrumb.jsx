@@ -1,9 +1,9 @@
 // Import Modules
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getAnimalTypes } from "../../enums/animal.types";
-import { getAnimalCategories } from "../../enums/animal.categories";
-import { getAnimalBreeds } from "../../enums/animal.breeds";
+import { getAnimalTypes } from "../../db/animal.types";
+import { getAnimalCategories } from "../../db/animal.categories";
+import { getAnimalBreeds } from "../../db/animal.breeds";
 import { getKey } from "../../utils/slugify";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import styles from "./Breadcrumb.module.css";

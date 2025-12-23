@@ -1,0 +1,11 @@
+.navigationPanel {
+    display: flex;
+    min-width: 300px;
+}
+
+.contentPanel {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 50px;
+}
