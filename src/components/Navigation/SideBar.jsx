@@ -26,9 +26,10 @@ function SideBar() {
         const selectedArray = [menuItem?.id];
         setSelectedItems(selectedArray);
         const dynamicallyExpanded = location.pathname.replace(/-/g, "_").split("/").filter(Boolean);
-        const alwaysExpanded = menu.map((item) => item.id);
-        const mergedExpanded = [...new Set([...alwaysExpanded, ...dynamicallyExpanded])];
-        setExpandedItems(mergedExpanded);
+        // const alwaysExpanded = menu.map((item) => item.id);
+        // const mergedExpanded = [...new Set([...alwaysExpanded, ...dynamicallyExpanded])];
+        // setExpandedItems(mergedExpanded);
+        setExpandedItems(dynamicallyExpanded);
     }, [location.pathname]);
 
     function handleSelectedItemsChange(e, id) {
@@ -48,15 +49,23 @@ function SideBar() {
                         minHeight: 36,
                         lineHeight: "36px",
                         transition: "background-color 0.2s",
+                        borderRadius: 0,
                     },
                     "& .MuiTreeItem-content.Mui-selected": {
                         backgroundColor: "var(--color-primary)",
                         color: "white",
-                        borderRadius: 0,
-                        fontWeight: "bold",
                     },
                     "& .MuiTreeItem-content.Mui-selected:hover": {
                         backgroundColor: "var(--color-primary)",
+                        color: "white",
+                    },
+                    "& .MuiTreeItem-content:hover": {
+                        backgroundColor: "var(--color-tertiary)",
+                    },
+                    "& .MuiTreeItem-content:active": {
+                        backgroundColor: "var(--color-tertiary)",
+                    },
+                    "& .MuiTreeItem-content.Mui-selected .MuiTreeItem-label": {
                         color: "white",
                     },
                 }}
