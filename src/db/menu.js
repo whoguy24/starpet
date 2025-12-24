@@ -29,10 +29,10 @@ export const menu = [
         url: "/animals",
         children: getAnimalTypes().map((animalType) => ({
             ...animalType,
-            url: `/animals/${animalType.id.replace(/_/g, "-")}`,
+            url: animalType.url,
             children: getAnimalCategories({ type: animalType.id }).map((animalCategory) => ({
                 ...animalCategory,
-                url: `/animals/${animalType.id.replace(/_/g, "-")}/${animalCategory.id.replace(/_/g, "-")}`,
+                url: animalCategory.url,
             })),
         })),
     },

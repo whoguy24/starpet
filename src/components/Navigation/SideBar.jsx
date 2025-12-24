@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./SideBar.module.css";
 import { menu, getMenuItem } from "../../db/menu";
-import Divider from "@mui/material/Divider";
 
 function SideBar() {
     const navigate = useNavigate();
@@ -25,14 +24,24 @@ function SideBar() {
         const menuItem = getMenuItem({ url: location.pathname });
         const selectedArray = [menuItem?.id];
         setSelectedItems(selectedArray);
-        const dynamicallyExpanded = location.pathname.replace(/-/g, "_").split("/").filter(Boolean);
-        // const alwaysExpanded = menu.map((item) => item.id);
-        // const mergedExpanded = [...new Set([...alwaysExpanded, ...dynamicallyExpanded])];
-        // setExpandedItems(mergedExpanded);
-        setExpandedItems(dynamicallyExpanded);
+        setExpandedItems(getExpandedItems);
     }, [location.pathname]);
 
-    function handleSelectedItemsChange(e, id) {
+    function getExpandedItems() {
+        const routeArray = location.pathname.split("/").filter(Boolean);
+        const expandedMenuItems = [];
+        let currentPath = "";
+        for (const route of routeArray) {
+            currentPath += `/${route}`;
+            const menuItem = getMenuItem({ url: currentPath });
+            if (menuItem) {
+                expandedMenuItems.push(menuItem.id);
+            }
+        }
+        return expandedMenuItems;
+    }
+
+    function handleSelectedItemsChange(event, id) {
         const navigationItem = getMenuItem({ id: id });
         navigate(navigationItem.url);
     }
@@ -59,8 +68,15 @@ function SideBar() {
                         backgroundColor: "var(--color-primary)",
                         color: "white",
                     },
+                    "& .MuiTreeItem-content.Mui-selected:focused": {
+                        backgroundColor: "var(--color-primary)",
+                        color: "white",
+                    },
                     "& .MuiTreeItem-content:hover": {
                         backgroundColor: "var(--color-tertiary)",
+                    },
+                    "& .MuiTreeItem-content.focus": {
+                        backgroundColor: "var(--color-primary)",
                     },
                     "& .MuiTreeItem-content:active": {
                         backgroundColor: "var(--color-tertiary)",
@@ -71,7 +87,7 @@ function SideBar() {
                 }}
             >
                 {menu.map((menuItem) => (
-                    <TreeItem key={menuItem.id} itemId={menuItem.id} label={menuItem.label}>
+                    <TreeItem key={menuItem.id} itemId={menuItem.id} label={menuItem.plural}>
                         {menuItem.children && renderChildren(menuItem.children)}
                     </TreeItem>
                 ))}
