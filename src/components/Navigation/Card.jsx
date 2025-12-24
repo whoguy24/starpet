@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
 
 function Card({ cardData }) {
-    const { title, url, image } = cardData;
+    const { label, url, image } = cardData;
     return (
         <Link to={url} className={styles.container}>
             <img
@@ -12,7 +12,7 @@ function Card({ cardData }) {
                     event.currentTarget.src = "/assets/cards/placeholder.png";
                 }}
             />
-            <h3 className={styles.cardTitle}>{title}</h3>
+            <h3 className={styles.cardTitle}>{label}</h3>
         </Link>
     );
 }

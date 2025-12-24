@@ -17,21 +17,21 @@ function Home() {
                         cardData={{
                             url: "/animals",
                             image: "/assets/cards/home/animals.png",
-                            title: "ANIMALS",
+                            label: "ANIMALS",
                         }}
                     />
                     <Card
                         cardData={{
                             url: "/contacts",
                             image: "/assets/cards/home/contacts.png",
-                            title: "CONTACTS",
+                            label: "CONTACTS",
                         }}
                     />
                     <Card
                         cardData={{
                             url: "/projects",
                             image: "/assets/cards/home/projects.png",
-                            title: "PROJECTS",
+                            label: "PROJECTS",
                         }}
                     />
                 </div>
