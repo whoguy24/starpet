@@ -6,61 +6,22 @@ import { useSelector } from "react-redux";
 import Card from "../navigation/Card";
 import CategoryHeader from "../Layout/CategoryHeader";
 import { useState, useEffect } from "react";
+import { pages, getPage } from "../../db/pages";
 
 function Animals({ view }) {
-    // const location = useLocation();
-    // const animals = useSelector((state) => state.animals);
-    // const { type, category } = useParams();
+    const { type, id } = useParams();
 
-    // useEffect(() => {
-    //     const uniqueTypes = [...new Set(animals.map((animal) => animal.enum_type))];
-    // }, []);
-
-    // const page = getMenuItem({ url: location.pathname }).id;
-
-    // let title = "";
-    // let cardArray = [];
-    // const menuItem = getMenuItem({ url: location.pathname });
-
-    // if (!type && !category) {
-    //     title = menuItem.plural;
-    //     const animalTypes = getAnimalTypes();
-    //     cardArray = animalTypes.map((animalType) => ({
-    //         id: animalType.id,
-    //         label: animalType.label,
-    //         url: animalType.url,
-    //         image: `/assets/cards/animals/types/${animalType.id}.png`,
-    //     }));
-    // } else if (type && !category) {
-    //     title = menuItem.plural;
-    //     const animalCategories = getAnimalCategories({ type: menuItem.id });
-    //     cardArray = animalCategories.map((category) => ({
-    //         id: category.id,
-    //         label: category.label,
-    //         url: category.url,
-    //         image: `/assets/cards/animals/categories/${category.id}.png`,
-    //     }));
-    // } else if (type && category) {
-    //     title = menuItem.plural;
-    //     const animalCategories = getAnimalCategories({ type: menuItem.id });
-    //     cardArray = animalCategories.map((category) => ({
-    //         id: category.id,
-    //         label: category.label,
-    //         url: category.url,
-    //         image: `/assets/cards/animals/categories/${category.id}.png`,
-    //     }));
-    // }
+    const animals = getPage({ id: "animals" }).children;
 
     return (
         <div className={styles.container}>
-            {/* <div className={styles.title}>
-                <h2>{title}</h2>
-            </div>
-            <div className={styles.links}>
-                {cardArray.map((card) => (
-                    <Card key={card.id} cardData={card} />
-                ))}
-            </div> */}
+            {!type && !id && (
+                <div className={styles.links}>
+                    {animals.map((card) => (
+                        <Card key={card.id} data={card} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
