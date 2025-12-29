@@ -3,7 +3,7 @@ import AnimalsGallery from "./AnimalsGallery";
 import SideBar from "../Navigation/SideBar";
 import { useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { menu, getMenuItem } from "../../db/menu";
+// import { menu, getMenuItem } from "../../db/menu";
 import { getAnimalTypes } from "../../db/animal.types";
 import { getAnimalCategories } from "../../db/animal.categories";
 import Card from "../Navigation/Card";
