@@ -7,7 +7,7 @@ function UnderConstruction() {
     return (
         <div>
             <h2>Page is Under Construction</h2>
-            <Link to="/home">Back to Dashboard</Link>
+            <Link to="/">Back to Dashboard</Link>
         </div>
     );
 }

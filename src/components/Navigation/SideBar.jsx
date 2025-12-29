@@ -21,16 +21,16 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SideBarMenuItem from "./SideBarMenuItem";
 import { pages } from "../../db/pages";
+import ListSubheader from "@mui/material/ListSubheader";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import SideBarCategory from "./SideBarCategory";
 
 function SideBar() {
     return (
         <div className={styles.container}>
-            <List>
-                <Divider />
-                {pages.map((page) => (
-                    <SideBarMenuItem key={page.id} menuItemData={page} />
-                ))}
-            </List>
+            {pages.map((category) => (
+                <SideBarCategory key={category.id} category={category} />
+            ))}
         </div>
     );
 }

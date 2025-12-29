@@ -36,7 +36,7 @@ function App() {
                 </header>
                 <main className="app-content">
                     <Routes>
-                        <Route path="/" element={<Navigate to="/home" replace />} />
+                        <Route path="/" element={<Navigate to="/dashboard" replace />} />
                         <Route path="*" element={<Navigate to="/404" replace />} />
                         <Route path="/login" element={<UserLogin />} />
                         <Route path="/register" element={<UserRegistration />} />
@@ -44,10 +44,10 @@ function App() {
                         <Route path="/404" element={<NotFound />} />
                         <Route path="/debug" element={<Debug />} />
                         <Route element={<ProtectedRoute />}>
-                            <Route path="/home" element={<Home />} />
-                            <Route path="/animals/:type?/:category?/:breed?/:id?" element={<Animals view={view} />} />
-                            <Route path="/contacts" element={<Contacts />} />
-                            <Route path="/projects" element={<UnderConstruction />} />
+                            <Route path="/dashboard" element={<Home />} />
+                            <Route path="/animals/:type?/:id?" element={<Animals view={view} />} />
+                            <Route path="/contacts/:type?/:id?" element={<UnderConstruction />} />
+                            <Route path="/projects/:type?/:id?" element={<UnderConstruction />} />
                         </Route>
                     </Routes>
                 </main>
