@@ -19,7 +19,6 @@ import ConstructionIcon from "@mui/icons-material/Construction";
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import SideBarMenuItem from "./SideBarMenuItem";
 import { pages, getPage } from "../../db/pages";
 import ListSubheader from "@mui/material/ListSubheader";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -33,28 +32,25 @@ function SideBarCategory({ category }) {
 
     function handleSelectedItemsChange(event, itemId) {
         const selectedItem = getPage({ id: itemId });
-        // if (selectedItem.children.length === 0) {
-        //     navigate(selectedItem.url);
-        // }
-        navigate(selectedItem.url);
-    }
-
-    function handleExpandedItemsChange(event, itemIds) {
-        if (true) {
-            setExpandedItems(itemIds);
+        if (location.pathname != selectedItem.url) {
+            navigate(selectedItem.url);
+        } else if (location.pathname === selectedItem.url && selectedItem.children.length > 0) {
+            if (expandedItems.includes(selectedItem.id)) {
+                const updatedExpandedItems = expandedItems.filter((item) => item !== selectedItem.id);
+                setExpandedItems(updatedExpandedItems);
+            } else {
+                const updatedExpandedItems = [...expandedItems, selectedItem.id];
+                setExpandedItems(updatedExpandedItems);
+            }
         }
     }
 
     useEffect(() => {
         const routeArray = location.pathname.split("/").filter(Boolean);
-        routeArray.pop();
         const newItemIds = routeArray.filter((itemId) => !expandedItems.includes(itemId));
         const updatedExpandedItems = [...expandedItems, ...newItemIds];
         setExpandedItems(updatedExpandedItems);
         const activePage = getPage({ url: location.pathname });
-        // if (activePage.children.length === 0) {
-        //     setSelectedItems(activePage.id);
-        // }
         setSelectedItems(activePage.id);
     }, [location.pathname]);
 
@@ -66,7 +62,6 @@ function SideBarCategory({ category }) {
                 selectedItems={selectedItems}
                 expandedItems={expandedItems}
                 onSelectedItemsChange={handleSelectedItemsChange}
-                onExpandedItemsChange={handleExpandedItemsChange}
             >
                 {category.children.map((page) => (
                     <TreeItem key={page.id} itemId={page.id} label={page.label}>

@@ -1,5 +1,5 @@
 //Import Modules
-import Card from "../Navigation/Card";
+import Card from "../components/navigation/Card";
 import styles from "./Home.module.css";
 
 // Component Function
@@ -25,6 +25,20 @@ function Home() {
                             url: "/contacts",
                             image: "/assets/cards/home/contacts.png",
                             label: "CONTACTS",
+                        }}
+                    />
+                    <Card
+                        cardData={{
+                            url: "/projects",
+                            image: "/assets/cards/home/projects.png",
+                            label: "PROJECTS",
+                        }}
+                    />
+                    <Card
+                        cardData={{
+                            url: "/organizations",
+                            image: "/assets/cards/home/projects.png",
+                            label: "PROJECTS",
                         }}
                     />
                     <Card

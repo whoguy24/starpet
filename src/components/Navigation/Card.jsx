@@ -1,18 +1,17 @@
 import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
 
-function Card({ cardData }) {
-    const { label, url, image } = cardData;
+function Card({ data }) {
     return (
-        <Link to={url} className={styles.container}>
+        <Link to={data.url} className={styles.container}>
             <img
                 className={styles.cardImage}
-                src={image}
+                src={data.cardPath}
                 onError={(event) => {
                     event.currentTarget.src = "/assets/cards/placeholder.png";
                 }}
             />
-            <h3 className={styles.cardTitle}>{label}</h3>
+            <h3 className={styles.cardTitle}>{data.label}</h3>
         </Link>
     );
 }

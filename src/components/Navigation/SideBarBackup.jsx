@@ -3,7 +3,7 @@ import { TreeItem } from "@mui/x-tree-view/TreeItem";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./SideBar.module.css";
-import { menu, getMenuItem } from "../../db/pages";
+import { menu, getMenuItem } from "../db/pages";
 import { useSelector } from "react-redux";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";

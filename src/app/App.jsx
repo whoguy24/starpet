@@ -1,21 +1,19 @@
 // Import Modules
 import { Routes, Route, Navigate } from "react-router-dom";
-import ProtectedRoute from "../components/Navigation/ProtectedRoute";
-import Home from "../components/Home/Home";
+import ProtectedRoute from "../components/navigation/ProtectedRoute";
+import Dashboard from "../components/Dashboard/Dashboard";
 import UnderConstruction from "../components/Navigation/UnderConstruction";
 import UserLogin from "../components/User/UserLogin";
-import UserRegistration from "../components/User/UserRegistration";
-import UserResetPassword from "../components/User/UserResetPassword";
-import Navigation from "../components/Navigation/Navigation";
-import SideBar from "../components/Navigation/SideBar";
+import UserRegistration from "../components/user/UserRegistration";
+import UserResetPassword from "../components/user/UserResetPassword";
 import NotFound from "../components/Navigation/NotFound";
-import Footer from "../components/Navigation/Footer";
-import Contacts from "../components/Contacts/Contacts";
-import Animals from "../components/Animals/Animals";
+import Animals from "../components/animals/Animals";
+import Footer from "../components/navigation/Footer";
+import Navigation from "../components/Navigation/Navigation";
+
 import "./App.css";
 import { useSelector } from "react-redux";
 import { getView, saveView } from "../utils/session";
-import Debug from "../components/Debug/Debug";
 
 import { useState, useEffect } from "react";
 
@@ -42,12 +40,14 @@ function App() {
                         <Route path="/register" element={<UserRegistration />} />
                         <Route path="/forgot_password" element={<UserResetPassword />} />
                         <Route path="/404" element={<NotFound />} />
-                        <Route path="/debug" element={<Debug />} />
                         <Route element={<ProtectedRoute />}>
-                            <Route path="/dashboard" element={<Home />} />
+                            <Route path="/dashboard" element={<Dashboard />} />
                             <Route path="/animals/:type?/:id?" element={<Animals view={view} />} />
                             <Route path="/contacts/:type?/:id?" element={<UnderConstruction />} />
                             <Route path="/projects/:type?/:id?" element={<UnderConstruction />} />
+                            <Route path="/organizations/:type?/:id?" element={<UnderConstruction />} />
+                            <Route path="/settings" element={<UnderConstruction />} />
+                            <Route path="/logout" element={<UnderConstruction />} />
                         </Route>
                     </Routes>
                 </main>

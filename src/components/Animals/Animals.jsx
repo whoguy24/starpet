@@ -1,23 +1,20 @@
 import styles from "./Animals.module.css";
 import AnimalsGallery from "./AnimalsGallery";
-import SideBar from "../Navigation/SideBar";
+import SideBar from "../navigation/SideBar";
 import { useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import { menu, getMenuItem } from "../../db/menu";
-import { getAnimalTypes } from "../../db/animal.types";
-import { getAnimalCategories } from "../../db/animal.categories";
-import Card from "../Navigation/Card";
+import Card from "../navigation/Card";
 import CategoryHeader from "../Layout/CategoryHeader";
 import { useState, useEffect } from "react";
 
 function Animals({ view }) {
-    const location = useLocation();
-    const animals = useSelector((state) => state.animals);
-    const { type, category } = useParams();
+    // const location = useLocation();
+    // const animals = useSelector((state) => state.animals);
+    // const { type, category } = useParams();
 
-    useEffect(() => {
-        const uniqueTypes = [...new Set(animals.map((animal) => animal.enum_type))];
-    }, []);
+    // useEffect(() => {
+    //     const uniqueTypes = [...new Set(animals.map((animal) => animal.enum_type))];
+    // }, []);
 
     // const page = getMenuItem({ url: location.pathname }).id;
 

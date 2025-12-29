@@ -22,9 +22,38 @@ export const pages = [
                 children: [],
             },
             {
+                id: "projects",
+                label: "Projects",
+                url: "/projects",
+                cardPath: "/assets/cards/projects.png",
+                iconPath: "/assets/icons/projects.svg",
+                children: [
+                    {
+                        id: "ac",
+                        label: "AC",
+                        url: "/projects/AC",
+                        children: [],
+                    },
+                    {
+                        id: "bobp",
+                        label: "BOBP",
+                        url: "/projects/bobp",
+                        children: [],
+                    },
+                    {
+                        id: "tet",
+                        label: "TET",
+                        url: "/projects/tet",
+                        children: [],
+                    },
+                ],
+            },
+            {
                 id: "animals",
                 label: "Animals",
                 url: "/animals",
+                cardPath: "/assets/cards/animals.png",
+                iconPath: "/assets/icons/animals.svg",
                 children: [
                     {
                         id: "dogs",
@@ -68,6 +97,8 @@ export const pages = [
                 id: "contacts",
                 label: "Contacts",
                 url: "/contacts",
+                cardPath: "/assets/cards/contacts.png",
+                iconPath: "/assets/icons/contacts.svg",
                 children: [
                     {
                         id: "owners",
@@ -90,51 +121,28 @@ export const pages = [
                 ],
             },
             {
-                id: "project",
-                label: "Projects",
-                url: "/projects",
-                children: [
-                    {
-                        id: "ac",
-                        label: "AC",
-                        url: "/projects/AC",
-                        children: [],
-                    },
-                    {
-                        id: "bobp",
-                        label: "BOBP",
-                        url: "/projects/bobp",
-                        children: [],
-                    },
-                    {
-                        id: "tet",
-                        label: "TET",
-                        url: "/projects/tet",
-                        children: [],
-                    },
-                ],
-            },
-            {
                 id: "organizations",
                 label: "Organizations",
                 url: "/organizations",
+                cardPath: "/assets/cards/organizations.png",
+                iconPath: "/assets/icons/organizations.svg",
                 children: [
                     {
                         id: "shelters",
                         label: "Shelters",
-                        url: "/projects/shelters",
+                        url: "/organizations/shelters",
                         children: [],
                     },
                     {
                         id: "clients",
                         label: "Clients",
-                        url: "/projects/tet",
+                        url: "/organizations/clients",
                         children: [],
                     },
                     {
                         id: "services",
                         label: "Services",
-                        url: "/projects/services",
+                        url: "/organizations/services",
                         children: [],
                     },
                 ],
@@ -150,12 +158,16 @@ export const pages = [
                 id: "settings",
                 label: "Settings",
                 url: "/settings",
+                cardPath: "/assets/cards/settings.png",
+                iconPath: "/assets/icons/settings.svg",
                 children: [],
             },
             {
                 id: "logout",
                 label: "Log Out",
                 url: "/logout",
+                cardPath: "/assets/cards/logout.png",
+                iconPath: "/assets/icons/logout.svg",
                 children: [],
             },
         ],
