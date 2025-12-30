@@ -19,6 +19,8 @@ export const pages = [
                 id: "dashboard",
                 label: "Dashboard",
                 url: "/dashboard",
+                cardPath: "/assets/cards/dashboard.png",
+                iconPath: "/assets/icons/dashboard.svg",
                 children: [],
             },
             {

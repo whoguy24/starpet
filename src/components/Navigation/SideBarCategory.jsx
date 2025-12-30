@@ -22,6 +22,9 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { pages, getPage } from "../../db/pages";
 import ListSubheader from "@mui/material/ListSubheader";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { SvgIcon } from "@mui/material";
 
 function SideBarCategory({ category }) {
     const location = useLocation();
@@ -64,7 +67,14 @@ function SideBarCategory({ category }) {
                 onSelectedItemsChange={handleSelectedItemsChange}
             >
                 {category.children.map((page) => (
-                    <TreeItem key={page.id} itemId={page.id} label={page.label}>
+                    <TreeItem
+                        key={page.id}
+                        itemId={page.id}
+                        label={page.label}
+                        slots={{
+                            icon: () => <img src={page.iconPath} alt="icon" className={styles.treeItemIcon} />,
+                        }}
+                    >
                         {page.children.map((subPage) => (
                             <TreeItem key={subPage.id} itemId={subPage.id} label={subPage.label} />
                         ))}
