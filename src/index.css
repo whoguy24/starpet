@@ -1,10 +1,11 @@
 :root {
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: "Roboto", "Inter", "Helvetica", "Arial", sans-serif;
+    color: #303030;
     --color-primary: #05588B;
     --color-primary-hover: #086ead;
     --color-secondary: #8bc0da;
     --color-tertiary: #e7f7ff;
-    --color-text: #313131;
+    --color-text-grey: #606060;
     --color-background: white;
     --spacing-xs: 4px;
     --spacing-sm: 8px;

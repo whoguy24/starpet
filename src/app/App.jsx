@@ -1,14 +1,14 @@
 // Import Modules
 import { Routes, Route, Navigate } from "react-router-dom";
-import ProtectedRoute from "../components/navigation/ProtectedRoute";
+import ProtectedRoute from "../components/Navigation/ProtectedRoute";
 import Dashboard from "../components/Dashboard/Dashboard";
 import UnderConstruction from "../components/Navigation/UnderConstruction";
 import UserLogin from "../components/User/UserLogin";
-import UserRegistration from "../components/user/UserRegistration";
-import UserResetPassword from "../components/user/UserResetPassword";
+import UserRegistration from "../components/User/UserRegistration";
+import UserResetPassword from "../components/User/UserResetPassword";
 import NotFound from "../components/Navigation/NotFound";
-import Animals from "../components/animals/Animals";
-import Footer from "../components/navigation/Footer";
+import Animals from "../components/Animals/Animals";
+import Footer from "../components/Navigation/Footer";
 import Navigation from "../components/Navigation/Navigation";
 
 import "./App.css";

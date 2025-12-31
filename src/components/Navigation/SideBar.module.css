@@ -4,6 +4,7 @@
     width: 100%;
     height: 100%;
     border-right: 0.5px solid #e8e8e8;
-    padding-top: 24px;
+    padding-top: 30px;
     justify-content: flex-start;
+    gap: 40px;
 }

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import Card from "../navigation/Card";
+import Card from "../Navigation/Card";
 import { useSelector } from "react-redux";
 
 import CategoryHeader from "../Layout/CategoryHeader";

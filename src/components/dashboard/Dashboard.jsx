@@ -1,4 +1,4 @@
-import Card from "../navigation/Card";
+import Card from "../Navigation/Card";
 import styles from "./Dashboard.module.css";
 import { pages, getPage } from "../../db/pages";
 
